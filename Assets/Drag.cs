@@ -14,7 +14,6 @@ public class Drag : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("clicked");
         mousePositionOffset = gameObject.transform.position - GetMouseWorldPosition();
     }
 
