@@ -29,6 +29,7 @@ public class SnapIntoPlace : MonoBehaviour
             {
                 this.GetComponent<Drag>().dragIsActive = false;
                 snapIsActive = false;
+                this.SendMessage("ObjectPlaced");
             }
         }
     }

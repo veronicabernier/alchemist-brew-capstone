@@ -25,4 +25,10 @@ public class ScaleController : MonoBehaviour
         curWeight = 0;
         weightDisplay.text = curWeight.ToString("F3") + " g";
     }
+
+    public void AddWeight(float weightAdded)
+    {
+        curWeight += weightAdded;
+        weightDisplay.text = curWeight.ToString("F3") + " g";
+    }
 }
