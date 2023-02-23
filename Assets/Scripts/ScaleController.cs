@@ -31,4 +31,10 @@ public class ScaleController : MonoBehaviour
         curWeight += weightAdded;
         weightDisplay.text = curWeight.ToString("F3") + " g";
     }
+
+    public void RemoveWeight(float weightRemoved)
+    {
+        curWeight -= weightRemoved;
+        weightDisplay.text = curWeight.ToString("F3") + " g";
+    }
 }
