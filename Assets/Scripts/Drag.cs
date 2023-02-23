@@ -6,6 +6,7 @@ public class Drag : MonoBehaviour
 {
 
     Vector3 mousePositionOffset;
+    public bool dragIsActive = true;
 
     private Vector3 GetMouseWorldPosition()
     {
@@ -14,12 +15,18 @@ public class Drag : MonoBehaviour
 
     private void OnMouseDown()
     {
-        mousePositionOffset = gameObject.transform.position - GetMouseWorldPosition();
+        if(dragIsActive)
+        {
+            mousePositionOffset = gameObject.transform.position - GetMouseWorldPosition();
+        }
     }
 
     private void OnMouseDrag()
     {
-        transform.position = GetMouseWorldPosition() + mousePositionOffset;
+        if(dragIsActive)
+        {
+            transform.position = GetMouseWorldPosition() + mousePositionOffset;
+        }
     }
 }
 
