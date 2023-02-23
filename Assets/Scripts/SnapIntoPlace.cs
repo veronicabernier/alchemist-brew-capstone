@@ -9,7 +9,12 @@ public class SnapIntoPlace : MonoBehaviour
     public bool allowDragAfterSnap = false;
 
     bool snapIsActive = true;
+    private Vector2 ogPosition;
 
+    private void Start()
+    {
+        ogPosition = transform.position;
+    }
 
     public void OnMouseUp()
     {
@@ -31,6 +36,11 @@ public class SnapIntoPlace : MonoBehaviour
                 snapIsActive = false;
                 this.SendMessage("ObjectPlaced");
             }
+        }
+        else
+        {
+            Debug.Log("back");
+            transform.position = ogPosition;
         }
     }
 }
