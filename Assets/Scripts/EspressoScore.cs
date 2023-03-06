@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class EspressoScore
 {
-    int weightScore;
-    int weightScoreTotal;
+    public int weightScore;
+    public int weightScoreTotal;
 
-    int reservoirScore;
-    int reservoirScoreTotal;
+    public int reservoirScore;
+    public int reservoirScoreTotal;
 
-    int powerOnScore;
-    int powerOnScoreTotal;
+    public int powerOnScore;
+    public int powerOnScoreTotal;
 
-    int grindScore;
-    int grindScoreTotal;
+    public int grindScore;
+    public int grindScoreTotal;
 
-    int tampScore;
-    int tampScoreTotal;
+    public int tampScore;
+    public int tampScoreTotal;
 
-    int brewScore;
-    int brewScoreTotal;
+    public int brewScore;
+    public int brewScoreTotal;
 
-    int serveScore;
-    int serveScoreTotal;
+    public int serveScore;
+    public int serveScoreTotal;
 }
