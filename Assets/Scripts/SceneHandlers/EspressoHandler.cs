@@ -58,12 +58,12 @@ public class EspressoHandler : MonoBehaviour
         Debug.Log(JsonUtility.ToJson(espressoScore));
 
         //destroy level
-        //Destroy(levels[curLevel].instance);
+        Destroy(levels[curLevel].instance);
 
         //move level
         if(curLevel < levels.Length - 1)
         {
-            //MoveLevel();
+            MoveLevel();
         }
     }
 
@@ -73,7 +73,11 @@ public class EspressoHandler : MonoBehaviour
         {
             espressoScore.weightScore = curScore;
             espressoScore.weightScoreTotal = curTotalScore;
-
+        }
+        else if (levels[curLevel].name == LevelTypes.Reservoir)
+        {
+            espressoScore.reservoirScore = curScore;
+            espressoScore.reservoirScoreTotal = curTotalScore;
         }
     }
 }

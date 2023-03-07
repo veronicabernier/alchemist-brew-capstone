@@ -52,14 +52,14 @@ public class AddLiquid : MonoBehaviour
         {
             float newY = Mathf.Min(curY + ySpeed, yEnd);
             spriteMask.transform.localPosition = new Vector3(spriteMask.transform.localPosition.x, newY);
-            Debug.Log("curY: " + newY.ToString());
-            Debug.Log("correctY: " + correctYMask);
         }
     }
 
     public SingleScore GetCurrentScore()
     {
         float curY = spriteMask.transform.localPosition.y;
+        Debug.Log("curY: " + curY.ToString());
+        Debug.Log("correctY: " + correctYMask);
 
         int curScoreTotal = 10;
         int curScore = (int)(curScoreTotal - System.Math.Abs(correctYMask - curY) * 2);

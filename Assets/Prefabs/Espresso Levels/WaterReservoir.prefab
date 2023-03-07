@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d76b2703d59c94d4c8accfeb1aa1b16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  al: {fileID: 0}
+  al: {fileID: 3760935799073518022}
 --- !u!1 &3760935798094086151
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,7 +749,7 @@ MonoBehaviour:
   lineYMin: -2.14
   lineYMax: 1.4
   yEnd: 1
-  ySpeed: 0.001
+  ySpeed: 0.003
   correctYMask: 0
 --- !u!61 &3760935799073518023
 BoxCollider2D:
