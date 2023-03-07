@@ -7,21 +7,31 @@ public class EspressoHandler : MonoBehaviour
     [System.Serializable]
     public class Level
     {
-        public string name;
+        public LevelTypes name;
+
         public GameObject prefab;
+
         [System.NonSerialized]
         public GameObject instance;
-        [System.NonSerialized]
-        public int score;
-        [System.NonSerialized]
-        public int scoreTotal;
     }
 
-    private EspressoScore espressoScore;
+    public enum LevelTypes
+    {
+        Weighing,
+        Reservoir,
+        PowerOn,
+        Grind,
+        Tamp,
+        Brew,
+        Serve
+    }
+
+    [LabeledArrayAttribute(typeof(LevelTypes))]
+    public Level[] levels = new Level[System.Enum.GetValues(typeof(LevelTypes)).Length];
+
+    private EspressoScore espressoScore = new EspressoScore();
     private int curLevel = -1;
 
-    [LabeledArrayAttribute(new string[] { "Weighing", "Reservoir", "Power On", "Grind", "Tamp", "Brew", "Serve"})]
-    public Level[] levels = new Level[7];
 
     // Start is called before the first frame update
     void Start()
@@ -39,10 +49,9 @@ public class EspressoHandler : MonoBehaviour
     {
         curLevel += 1;
         levels[curLevel].instance = Instantiate(levels[curLevel].prefab);
-        levels[curLevel].score = 10;
-        levels[curLevel].scoreTotal = 15;
-        //Debug.Log(espressoScore.weightScore);
-        //Debug.Log(espressoScore.weightScoreTotal);
+
+        SaveScores(10, 15);
+        Debug.Log(JsonUtility.ToJson(espressoScore));
     }
 
     void StopLevel()
@@ -54,4 +63,13 @@ public class EspressoHandler : MonoBehaviour
         //move level
     }
 
+    void SaveScores(int curScore, int curTotalScore)
+    {
+        if(levels[curLevel].name == LevelTypes.Weighing)
+        {
+            espressoScore.weightScore = curScore;
+            espressoScore.weightScoreTotal = curTotalScore;
+
+        }
+    }
 }
