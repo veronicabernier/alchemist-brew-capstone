@@ -6,7 +6,7 @@ using TMPro;
 public class ScaleController : MonoBehaviour
 {
     public TextMeshProUGUI weightDisplay;
-    double curWeight = 0.040;
+    double curWeightDisplayed = 0.040;
 
     // Start is called before the first frame update
     void Start()
@@ -22,19 +22,19 @@ public class ScaleController : MonoBehaviour
 
     public void Tare()
     {
-        curWeight = 0;
-        weightDisplay.text = curWeight.ToString("F3") + " g";
+        curWeightDisplayed = 0;
+        weightDisplay.text = curWeightDisplayed.ToString("F3") + " g";
     }
 
     public void AddWeight(float weightAdded)
     {
-        curWeight += weightAdded;
-        weightDisplay.text = curWeight.ToString("F3") + " g";
+        curWeightDisplayed += weightAdded;
+        weightDisplay.text = curWeightDisplayed.ToString("F3") + " g";
     }
 
     public void RemoveWeight(float weightRemoved)
     {
-        curWeight -= weightRemoved;
-        weightDisplay.text = curWeight.ToString("F3") + " g";
+        curWeightDisplayed -= weightRemoved;
+        weightDisplay.text = curWeightDisplayed.ToString("F3") + " g";
     }
 }
