@@ -22,4 +22,18 @@ public class WeighingController : MonoBehaviour
     {
         
     }
+
+    public void LevelFinished()
+    {
+        double actualWeight = cc.GetActualBeanWeight();
+
+        //determine score
+        int curScoreTotal = 10;
+        int curScore =  (int)(curScoreTotal - System.Math.Abs(actualWeight - wantedWeight)*2);
+
+        SingleScore myScore = new SingleScore(curScore, curScoreTotal);
+        //Debug.Log(curScore);
+
+        this.SendMessageUpwards("StopLevel", myScore);
+    }
 }

@@ -32,6 +32,12 @@ public class ContainerController : MonoBehaviour
         return numBeans * beanSetWeight;
     }
 
+    public double GetActualBeanWeight()
+    {
+        return curBean * beanSetWeight;
+    }
+
+
     private void PopulateBeanLists()
     {
         foreach (Transform ch in GetComponentsInChildren<Transform>().Skip(1))

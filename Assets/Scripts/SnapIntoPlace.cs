@@ -39,7 +39,6 @@ public class SnapIntoPlace : MonoBehaviour
         }
         else
         {
-            Debug.Log("back");
             transform.position = ogPosition;
         }
     }

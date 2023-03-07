@@ -48,19 +48,23 @@ public class EspressoHandler : MonoBehaviour
     void MoveLevel()
     {
         curLevel += 1;
-        levels[curLevel].instance = Instantiate(levels[curLevel].prefab);
-
-        SaveScores(10, 15);
-        Debug.Log(JsonUtility.ToJson(espressoScore));
+        levels[curLevel].instance = Instantiate(levels[curLevel].prefab, transform);
     }
 
-    void StopLevel()
+    public void StopLevel(SingleScore myScore)
     {
         //save score 
+        SaveScores(myScore.curScore, myScore.curScoreTotal);
+        Debug.Log(JsonUtility.ToJson(espressoScore));
 
         //destroy level
+        //Destroy(levels[curLevel].instance);
 
         //move level
+        if(curLevel < levels.Length - 1)
+        {
+            //MoveLevel();
+        }
     }
 
     void SaveScores(int curScore, int curTotalScore)

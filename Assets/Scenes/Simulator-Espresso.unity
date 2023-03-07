@@ -220,7 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - name: 0
-    prefab: {fileID: 5186774351567331980, guid: 5cdd3b7f02be6e04faa8fc776f70a5d5, type: 3}
+    prefab: {fileID: 1142679862411280473, guid: 5cdd3b7f02be6e04faa8fc776f70a5d5, type: 3}
   - name: 1
     prefab: {fileID: 0}
   - name: 2
