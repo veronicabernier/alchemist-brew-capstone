@@ -16,7 +16,7 @@ public class AddLiquid : MonoBehaviour
     public float ySpeed = 0.001f;
 
 
-    private float correctYMask;
+    public float correctYMask;
     
 
     // Start is called before the first frame update
@@ -28,7 +28,7 @@ public class AddLiquid : MonoBehaviour
 
     private void PositionLine()
     {
-        float positionPercentage = UnityEngine.Random.Range(0.00f, 1.00f);
+        float positionPercentage = UnityEngine.Random.Range(0.10f, 0.90f);
         float lineYPos = lineYMin + (Mathf.Abs(lineYMax - lineYMin) * positionPercentage);
 
         lineGuide.transform.localPosition = new Vector2(lineGuide.transform.localPosition.x, lineYPos);
@@ -57,9 +57,16 @@ public class AddLiquid : MonoBehaviour
         }
     }
 
-    private void OnMouseDown()
+    public SingleScore GetCurrentScore()
     {
+        float curY = spriteMask.transform.localPosition.y;
 
+        int curScoreTotal = 10;
+        int curScore = (int)(curScoreTotal - System.Math.Abs(correctYMask - curY) * 2);
+
+        SingleScore myScore = new SingleScore(curScore, curScoreTotal);
+        //Debug.Log(curScore);
+        return new SingleScore(curScore, curScoreTotal);
     }
 
 }

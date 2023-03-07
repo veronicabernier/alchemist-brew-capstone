@@ -222,7 +222,7 @@ MonoBehaviour:
   - name: 0
     prefab: {fileID: 1142679862411280473, guid: 5cdd3b7f02be6e04faa8fc776f70a5d5, type: 3}
   - name: 1
-    prefab: {fileID: 0}
+    prefab: {fileID: 3760935797988103686, guid: 9593d1e4bc286e14a88a6b2e2bb01774, type: 3}
   - name: 2
     prefab: {fileID: 0}
   - name: 3
