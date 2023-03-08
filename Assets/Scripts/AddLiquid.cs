@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class AddLiquid : MonoBehaviour
 {
@@ -41,7 +42,14 @@ public class AddLiquid : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            FillLiquid();
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
+
+            RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
+            if (hit.collider != null && hit.collider.gameObject.name == gameObject.name)
+            {
+                FillLiquid();
+            }
         }
     }
 
@@ -69,5 +77,4 @@ public class AddLiquid : MonoBehaviour
         //Debug.Log(curScore);
         return new SingleScore(curScore, curScoreTotal);
     }
-
 }
