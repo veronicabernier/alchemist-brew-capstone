@@ -69,8 +69,11 @@ public class AddLiquid : MonoBehaviour
         Debug.Log("curY: " + curY.ToString());
         Debug.Log("correctY: " + correctYMask);
 
+        float yChange = Mathf.Abs(yStart - curY);
+        float correctYChange = Mathf.Abs(yStart - correctYMask);
+
         int curScoreTotal = 10;
-        int errorQuantity = (int)((System.Math.Abs(correctYMask - curY) / correctYMask)*curScoreTotal);
+        int errorQuantity = (int)((System.Math.Abs(correctYChange - yChange) / correctYChange)*curScoreTotal);
         int curScore = curScoreTotal - errorQuantity;
 
         SingleScore myScore = new SingleScore(curScore, curScoreTotal);
