@@ -29,10 +29,11 @@ public class WeighingController : MonoBehaviour
 
         //determine score
         int curScoreTotal = 10;
-        int curScore =  (int)(curScoreTotal - System.Math.Abs(actualWeight - wantedWeight)*2);
+        int errorQuantity = (int) ((System.Math.Abs(actualWeight - wantedWeight) / wantedWeight)*curScoreTotal);
+        int curScore = curScoreTotal - errorQuantity;
 
         SingleScore myScore = new SingleScore(curScore, curScoreTotal);
-        //Debug.Log(curScore);
+
 
         this.SendMessageUpwards("StopLevel", myScore);
     }
