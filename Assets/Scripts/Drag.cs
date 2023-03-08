@@ -6,8 +6,9 @@ public class Drag : MonoBehaviour
 {
 
     Vector3 mousePositionOffset;
+    [System.NonSerialized]
     public bool dragIsActive = true;
-    public bool changeSizeWhileDrag = false;
+
     public bool snapIntoPlaceScript = false;
     public float sizeChangeFactor = 1.0f;
 
@@ -27,10 +28,7 @@ public class Drag : MonoBehaviour
         if(dragIsActive)
         {
             mousePositionOffset = gameObject.transform.position - GetMouseWorldPosition();
-            if (changeSizeWhileDrag)
-            {
-                transform.localScale = ogSize * sizeChangeFactor;
-            }
+            transform.localScale = ogSize * sizeChangeFactor;
         }
     }
 
@@ -44,15 +42,12 @@ public class Drag : MonoBehaviour
 
     public void RevertToOgSize()
     {
-        if (changeSizeWhileDrag)
-        {
-            transform.localScale = ogSize;
-        }
+        transform.localScale = ogSize;
     }
 
     private void OnMouseUp()
     {
-        if (changeSizeWhileDrag && !snapIntoPlaceScript)
+        if (!snapIntoPlaceScript)
         {
             transform.localScale = ogSize;
         }

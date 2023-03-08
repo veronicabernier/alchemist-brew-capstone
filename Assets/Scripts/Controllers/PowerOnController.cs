@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PowerOnController : MonoBehaviour
 {
+
+    public GameObject progressBar;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +18,10 @@ public class PowerOnController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void ObjectPlaced()
+    {
+        progressBar.SetActive(true);
     }
 }
