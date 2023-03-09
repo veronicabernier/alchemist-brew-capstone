@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LeverRotate : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class LeverRotate : MonoBehaviour
     //0: down, 1: middle front, 2: up, 3: middle back
     int curObject = 0;
     public float yOffset;
+    public float fadeSeconds = 0.5f;
 
     private Vector3 mousePositionOffset;
     private bool dragging = false;
@@ -25,6 +27,22 @@ public class LeverRotate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PrepareLeverPositions();
+
+    }
+
+    private void PrepareLeverPositions()
+    {
+        leverPositions[0].SetActive(true);
+        //turn off all opacities except of first object
+        for (int i = 1; i < leverPositions.Length; i++)
+        {
+            leverPositions[i].SetActive(true);
+            foreach (SpriteRenderer sr in leverPositions[i].GetComponentsInChildren<SpriteRenderer>())
+            {
+                sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -44,18 +62,12 @@ public class LeverRotate : MonoBehaviour
     private void OnMouseDown()
     {
         mousePositionOffset = gameObject.transform.position - GetMouseWorldPosition();
+        dragging = true;
     }
 
     private void OnMouseUp()
     {
         dragging = false;
-    }
-
-    private void OnMouseDrag()
-    {
-        dragging = true;
-        //MoveLever();
-
     }
 
     private void MoveLever()
@@ -68,9 +80,15 @@ public class LeverRotate : MonoBehaviour
             if (curOffset.y > yOffset / 2)
             {
                 //middle front
-                leverPositions[curObject].SetActive(false);
+                foreach(SpriteRenderer sr in leverPositions[curObject].GetComponentsInChildren<SpriteRenderer>())
+                {
+                    StartCoroutine(FadeOut(sr));
+                }
                 curObject += 1;
-                leverPositions[curObject].SetActive(true);
+                foreach (SpriteRenderer sr in leverPositions[curObject].GetComponentsInChildren<SpriteRenderer>())
+                {
+                    StartCoroutine(FadeIn(sr));
+                }
             }
         }
         else if (curObject == 1)
@@ -79,9 +97,15 @@ public class LeverRotate : MonoBehaviour
             if (curOffset.y > yOffset)
             {
                 //up
-                leverPositions[curObject].SetActive(false);
+                foreach (SpriteRenderer sr in leverPositions[curObject].GetComponentsInChildren<SpriteRenderer>())
+                {
+                    StartCoroutine(FadeOut(sr));
+                }
                 curObject += 1;
-                leverPositions[curObject].SetActive(true);
+                foreach (SpriteRenderer sr in leverPositions[curObject].GetComponentsInChildren<SpriteRenderer>())
+                {
+                    StartCoroutine(FadeIn(sr));
+                }
             }
         }
         else if (curObject == 2)
@@ -90,9 +114,15 @@ public class LeverRotate : MonoBehaviour
             if (curOffset.y < -yOffset / 2)
             {
                 //middle back
-                leverPositions[curObject].SetActive(false);
+                foreach (SpriteRenderer sr in leverPositions[curObject].GetComponentsInChildren<SpriteRenderer>())
+                {
+                    StartCoroutine(FadeOut(sr));
+                }
                 curObject += 1;
-                leverPositions[curObject].SetActive(true);
+                foreach (SpriteRenderer sr in leverPositions[curObject].GetComponentsInChildren<SpriteRenderer>())
+                {
+                    StartCoroutine(FadeIn(sr));
+                }
             }
         }
         else if (curObject == 3)
@@ -101,10 +131,38 @@ public class LeverRotate : MonoBehaviour
             if (curOffset.y < -yOffset)
             {
                 //down
-                leverPositions[curObject].SetActive(false);
+                foreach (SpriteRenderer sr in leverPositions[curObject].GetComponentsInChildren<SpriteRenderer>())
+                {
+                    StartCoroutine(FadeOut(sr));
+                }
                 curObject = 0;
-                leverPositions[0].SetActive(true);
+                foreach (SpriteRenderer sr in leverPositions[curObject].GetComponentsInChildren<SpriteRenderer>())
+                {
+                    StartCoroutine(FadeIn(sr));
+                }
             }
+        }
+    }
+
+    IEnumerator FadeOut(SpriteRenderer sr)
+    {
+        //float duration = 2f;
+        for (float opacity = 1f; opacity >= -0.05f; opacity -= 0.05f)
+        {
+            //Debug.Log(opacity);
+            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, opacity);
+            yield return new WaitForSeconds(0.05f*fadeSeconds);
+        }
+    }
+
+    IEnumerator FadeIn(SpriteRenderer sr)
+    {
+        //float duration = 2f;
+        for (float opacity = 0f; opacity <= 1.05f; opacity += 0.05f)
+        {
+            //Debug.Log(opacity);
+            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, opacity);
+            yield return new WaitForSeconds(0.05f * fadeSeconds);
         }
     }
 }

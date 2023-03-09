@@ -554,7 +554,8 @@ MonoBehaviour:
   - {fileID: 1757568045}
   - {fileID: 210457456}
   - {fileID: 908185438}
-  yOffset: 0.5
+  yOffset: 1.2
+  fadeSeconds: 0.05
 --- !u!61 &185902600
 BoxCollider2D:
   m_ObjectHideFlags: 0
