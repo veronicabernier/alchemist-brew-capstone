@@ -554,7 +554,7 @@ MonoBehaviour:
   - {fileID: 1757568045}
   - {fileID: 210457456}
   - {fileID: 908185438}
-  yOffset: 2
+  yOffset: 1.5
 --- !u!61 &185902600
 BoxCollider2D:
   m_ObjectHideFlags: 0

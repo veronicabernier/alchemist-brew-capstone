@@ -5,7 +5,17 @@ using UnityEngine;
 
 public class LeverRotate : MonoBehaviour
 {
-    public GameObject[] leverPositions;
+    public enum LeverPositions
+    {
+        Down,
+        MiddleFront,
+        Up,
+        MiddleBack
+    }
+
+    [LabeledArrayAttribute(typeof(LeverPositions))]
+    public GameObject[] leverPositions = new GameObject[4];
+    //0: down, 1: middle front, 2: up, 3: middle back
     int curObject = 0;
     public float yOffset;
 
@@ -36,9 +46,47 @@ public class LeverRotate : MonoBehaviour
     {
         Vector3 curOffset = mousePositionOffset - (gameObject.transform.position - GetMouseWorldPosition());
         //Debug.Log(curOffset);
-        if(curOffset.y > yOffset)
-        {
-            Debug.Log("up");
+        if (curObject == 0) {
+            //is down --> goes middle front
+            if(curOffset.y > yOffset / 2){
+                //middle front
+                leverPositions[curObject].SetActive(false);
+                curObject += 1;
+                leverPositions[curObject].SetActive(true);
+            }
         }
+        else if (curObject == 1){
+            //is middle front --> goes up
+            if (curOffset.y > yOffset){
+                //up
+                leverPositions[curObject].SetActive(false);
+                curObject += 1;
+                leverPositions[curObject].SetActive(true);
+            }
+        }
+        else if (curObject == 2)
+        {
+            //is up --> goes middle back
+            if (curOffset.y < -yOffset / 2)
+            {
+                //middle back
+                leverPositions[curObject].SetActive(false);
+                curObject += 1;
+                leverPositions[curObject].SetActive(true);
+            }
+        }
+        else if (curObject == 3)
+        {
+            //is middle back --> goes down
+            if (curOffset.y < -yOffset)
+            {
+                Debug.Log("down");
+                //down
+                leverPositions[curObject].SetActive(false);
+                curObject = 0;
+                leverPositions[0].SetActive(true);
+            }
+        }
+
     }
 }
