@@ -186,7 +186,7 @@ public class LeverRotate : MonoBehaviour
     {
         if (curBean < beanSets.Count && curBean < groundSets.Count)
         {
-            beanSets[curBean].SetActive(false);
+            beanSets[beanSets.Count - 1 - curBean].SetActive(false);
             groundSets[curBean].SetActive(true);
             curBean += 1;
         }
