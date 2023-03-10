@@ -2505,6 +2505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   decomposeRate: 0.1
+  distributer: {fileID: 436093759}
 --- !u!1 &1981763443
 GameObject:
   m_ObjectHideFlags: 0

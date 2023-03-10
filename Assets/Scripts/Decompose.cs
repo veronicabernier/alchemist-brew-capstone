@@ -19,12 +19,12 @@ public class Decompose : MonoBehaviour
     {
         if(collision.tag == "Distributer")
         {
-            Debug.Log("triggered");
+            //Debug.Log("triggered");
             DecreaseOpacity();
             if (color.a <= 0)
             {
                 dm.textureDecomposed();
-                Debug.Log("finished texture");
+                //Debug.Log("finished texture");
                 gameObject.SetActive(false);
             }
         }
