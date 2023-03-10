@@ -498,6 +498,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b8d068263505c4aba546cad7c99c4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onlyHorizontal: 0
+  minXLimit: 0
+  maxXLimit: 0
   snapIntoPlaceScript: 1
   sizeChangeFactor: 2.5
 --- !u!114 &6555295345906298901
@@ -513,7 +516,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   snapPoint: {fileID: 6555295344953933119}
-  snapRange: 0.5
+  snapRange: 1
   allowDragAfterSnap: 0
   messageUpwards: 1
 --- !u!1 &6555295345961807105

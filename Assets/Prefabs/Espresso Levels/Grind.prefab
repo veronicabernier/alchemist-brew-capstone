@@ -517,7 +517,7 @@ MonoBehaviour:
   beansParend: {fileID: 1800954232886751464}
   groundParent: {fileID: 1800954232608886428}
   yOffset: 1.2
-  fadeSeconds: 0.05
+  fadeSeconds: 0.01
   beansParent: {fileID: 1800954232886751464}
 --- !u!61 &1800954232063398952
 BoxCollider2D:
