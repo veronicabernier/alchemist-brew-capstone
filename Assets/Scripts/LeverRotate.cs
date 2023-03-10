@@ -34,6 +34,7 @@ public class LeverRotate : MonoBehaviour
     private List<GameObject> beanSets = new List<GameObject>();
     private List<GameObject> groundSets = new List<GameObject>();
     private int curBean = 0;
+    private bool groundFinished = false;
 
     // Start is called before the first frame update
     void Start()
@@ -73,7 +74,7 @@ public class LeverRotate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (dragging)
+        if (dragging && !groundFinished)
         {
             MoveLever();
         }
@@ -134,6 +135,10 @@ public class LeverRotate : MonoBehaviour
             {
                 //down
                 MoveLeverActions();
+                if(curBean == groundSets.Count)
+                {
+                    groundFinished = true;
+                }
             }
         }
     }
