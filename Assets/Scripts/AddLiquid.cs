@@ -66,8 +66,8 @@ public class AddLiquid : MonoBehaviour
     public SingleScore GetCurrentScore()
     {
         float curY = spriteMask.transform.localPosition.y;
-        Debug.Log("curY: " + curY.ToString());
-        Debug.Log("correctY: " + correctYMask);
+        //Debug.Log("curY: " + curY.ToString());
+        //Debug.Log("correctY: " + correctYMask);
 
         float yChange = Mathf.Abs(yStart - curY);
         float correctYChange = Mathf.Abs(yStart - correctYMask);

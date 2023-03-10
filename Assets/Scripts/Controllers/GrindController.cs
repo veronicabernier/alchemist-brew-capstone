@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -53,11 +54,21 @@ public class GrindController : MonoBehaviour
             settingTotal = 0;
         }
 
-        int totalBeans = lc.GetBeanCount();
-        int beansGround = lc.GetBeansGrounded();
+        int curScore;
 
-        int errorQuantity = (int)((System.Math.Abs(beansGround - totalBeans) / totalBeans) * curScoreTotal);
-        int curScore = (int) ((curScoreTotal - errorQuantity)*0.5f + (settingTotal*0.5f));
+        if (!lc.enabled)
+        {
+            curScore = (int)(0.5f + (settingTotal * 0.5f));
+        }
+        else
+        {
+            int totalBeans = lc.GetBeanCount();
+            int beansGround = lc.GetBeansGrounded();
+
+            float errorQuantity = ((Mathf.Abs(beansGround - totalBeans) / (float)totalBeans) * curScoreTotal);
+            curScore = (int)((curScoreTotal - errorQuantity) * 0.5f + (settingTotal * 0.5f));
+        }
+
 
         SingleScore myScore = new SingleScore(curScore, curScoreTotal);
 
