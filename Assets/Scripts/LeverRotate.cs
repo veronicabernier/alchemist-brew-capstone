@@ -24,6 +24,7 @@ public class LeverRotate : MonoBehaviour
 
     private Vector3 mousePositionOffset;
     private bool dragging = false;
+    public bool isDirty = false;
 
     // Start is called before the first frame update
     void Start()
@@ -115,6 +116,10 @@ public class LeverRotate : MonoBehaviour
 
     private void MoveLeverActions()
     {
+        if (!isDirty)
+        {
+            isDirty = true;
+        }
         foreach (SpriteRenderer sr in leverPositions[curObject].GetComponentsInChildren<SpriteRenderer>())
         {
             StartCoroutine(FadeOut(sr));

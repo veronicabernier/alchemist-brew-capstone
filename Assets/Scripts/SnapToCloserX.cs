@@ -41,4 +41,14 @@ public class SnapToCloserX : MonoBehaviour
         transform.localPosition = new Vector3(snapPointsX[curMinDistanceIndex], transform.localPosition.y, transform.localPosition.z);
     }
 
+    public void DeactivateSnap()
+    {
+        this.GetComponent<Drag>().dragIsActive = false;
+        snapIsActive = false;
+        foreach (SpriteRenderer sr in gameObject.GetComponentsInChildren<SpriteRenderer>())
+        {
+            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0.4f);
+        }
+    }
+
 }
