@@ -27,5 +27,9 @@ public class ProgressBar : MonoBehaviour
         {
             progressAmount.fillAmount = timer / timeToFill;
         }
+        else
+        {
+            SendMessageUpwards("ProgressDone");
+        }
     }
 }

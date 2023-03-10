@@ -24,4 +24,11 @@ public class PowerOnController : MonoBehaviour
     {
         progressBar.SetActive(true);
     }
+
+    public void ProgressDone()
+    {
+        SingleScore myScore = new SingleScore(10, 10);
+
+        this.SendMessageUpwards("StopLevel", myScore);
+    }
 }

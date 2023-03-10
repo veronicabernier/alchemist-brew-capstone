@@ -79,5 +79,10 @@ public class EspressoHandler : MonoBehaviour
             espressoScore.reservoirScore = curScore;
             espressoScore.reservoirScoreTotal = curTotalScore;
         }
+        else if (levels[curLevel].name == LevelTypes.Grind)
+        {
+            espressoScore.grindScore = curScore;
+            espressoScore.grindScoreTotal = curTotalScore;
+        }
     }
 }

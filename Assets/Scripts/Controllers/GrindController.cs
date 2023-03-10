@@ -9,6 +9,8 @@ public class GrindController : MonoBehaviour
     public LeverRotate lc;
     public SnapToCloserX stcx;
 
+    public SnapToCloserX.SettingType wantedGrindSetting;
+
     bool stcxDeactivated = false;
 
     // Start is called before the first frame update
@@ -32,5 +34,34 @@ public class GrindController : MonoBehaviour
         container.SetActive(false);
         beansToGrindParent.SetActive(true);
         lc.enabled = true;
+    }
+
+    public void LevelFinished()
+    {
+        SnapToCloserX.SettingType grindSettingUsed = stcx.GetSettingUsed();
+
+        //determine score
+        int curScoreTotal = 10;
+
+        int settingTotal;
+        if(grindSettingUsed == wantedGrindSetting)
+        {
+            settingTotal = curScoreTotal;
+        }
+        else
+        {
+            settingTotal = 0;
+        }
+
+        int totalBeans = lc.GetBeanCount();
+        int beansGround = lc.GetBeansGrounded();
+
+        int errorQuantity = (int)((System.Math.Abs(beansGround - totalBeans) / totalBeans) * curScoreTotal);
+        int curScore = (int) ((curScoreTotal - errorQuantity)*0.5f + (settingTotal*0.5f));
+
+        SingleScore myScore = new SingleScore(curScore, curScoreTotal);
+
+
+        this.SendMessageUpwards("StopLevel", myScore);
     }
 }

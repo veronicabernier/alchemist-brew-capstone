@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class SnapToCloserX : MonoBehaviour
 {
-    public float[] snapPointsX;
-    public float snapRange = 0.5f;
-    public bool allowDragAfterSnap = false;
+    public enum SettingType
+    {
+        Small,
+        Medium,
+        Large
+    }
+    [System.Serializable]
+    public class Setting
+    {
+        public SettingType name;
+        public float snapPointX;
+    }
+
+    [LabeledArrayAttribute(typeof(SettingType))]
+    public Setting[] settings = new Setting[3];
 
     private bool snapIsActive = true;
-    private Vector2 ogPosition;
+    private SettingType curSetting = SettingType.Large;
 
-    private void Start()
-    {
-        ogPosition = transform.localPosition;
-    }
 
     public void OnMouseUp()
     {
@@ -28,9 +36,9 @@ public class SnapToCloserX : MonoBehaviour
     {
         float curMinDistance = float.PositiveInfinity;
         int curMinDistanceIndex = 0;
-        for (int i = 0; i < snapPointsX.Length; i++)
+        for (int i = 0; i < settings.Length; i++)
         {
-            float curDistance = Mathf.Abs(transform.localPosition.x - snapPointsX[i]);
+            float curDistance = Mathf.Abs(transform.localPosition.x - settings[i].snapPointX);
 
             if (curDistance < curMinDistance)
             {
@@ -38,7 +46,8 @@ public class SnapToCloserX : MonoBehaviour
                 curMinDistanceIndex = i;
             }
         }
-        transform.localPosition = new Vector3(snapPointsX[curMinDistanceIndex], transform.localPosition.y, transform.localPosition.z);
+        transform.localPosition = new Vector3(settings[curMinDistanceIndex].snapPointX, transform.localPosition.y, transform.localPosition.z);
+        curSetting = settings[curMinDistanceIndex].name;
     }
 
     public void DeactivateSnap()
@@ -49,6 +58,11 @@ public class SnapToCloserX : MonoBehaviour
         {
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0.4f);
         }
+    }
+
+    public SettingType GetSettingUsed()
+    {
+        return curSetting;
     }
 
 }

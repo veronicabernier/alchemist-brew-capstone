@@ -54,6 +54,7 @@ public class LeverRotate : MonoBehaviour
             ch.gameObject.SetActive(false);
             groundSets.Add(ch.gameObject);
         }
+        groundParent.gameObject.SetActive(true);
     }
 
 
@@ -195,5 +196,15 @@ public class LeverRotate : MonoBehaviour
             groundSets[curBean].SetActive(true);
             curBean += 1;
         }
+    }
+
+    public int GetBeanCount()
+    {
+        return Mathf.Min(beanSets.Count, groundSets.Count);
+    }
+
+    public int GetBeansGrounded()
+    {
+        return curBean;
     }
 }
