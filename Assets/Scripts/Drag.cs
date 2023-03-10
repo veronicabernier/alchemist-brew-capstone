@@ -8,6 +8,11 @@ public class Drag : MonoBehaviour
     Vector3 mousePositionOffset;
     [System.NonSerialized]
     public bool dragIsActive = true;
+    public bool onlyHorizontal = false;
+    [ConditionalHide("onlyHorizontal", false)]
+    public float minXLimit;
+    [ConditionalHide("onlyHorizontal", false)]
+    public float maxXLimit;
 
     public bool snapIntoPlaceScript = false;
     public float sizeChangeFactor = 1.0f;
@@ -27,7 +32,7 @@ public class Drag : MonoBehaviour
     {
         if(dragIsActive)
         {
-            mousePositionOffset = gameObject.transform.position - GetMouseWorldPosition();
+            mousePositionOffset = gameObject.transform.localPosition - GetMouseWorldPosition();
             transform.localScale = ogSize * sizeChangeFactor;
         }
     }
@@ -36,7 +41,16 @@ public class Drag : MonoBehaviour
     {
         if(dragIsActive)
         {
-            transform.position = GetMouseWorldPosition() + mousePositionOffset;
+            if (onlyHorizontal)
+            {
+                float newX = (GetMouseWorldPosition() + mousePositionOffset).x;
+                newX = Mathf.Max(Mathf.Min(maxXLimit, newX), minXLimit);
+                transform.localPosition = new Vector3(newX, transform.localPosition.y, transform.localPosition.z);
+            }
+            else
+            {
+                transform.localPosition = GetMouseWorldPosition() + mousePositionOffset;
+            }
         }
     }
 
