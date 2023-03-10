@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class SnapIntoPlace : MonoBehaviour
 {
+    public bool snapToPoint = true;
+    [ConditionalHide("snapToPoint")]
     public Transform snapPoint;
+    [ConditionalHide("snapToPoint")]
     public float snapRange = 0.5f;
+
+    [ConditionalHide("snapToPoint")]
     public bool allowDragAfterSnap = false;
     [Tooltip("Default is messages other script in object when done")]
+    [ConditionalHide("snapToPoint")]
     public bool messageUpwards = false;
 
     bool snapIsActive = true;
@@ -28,22 +34,30 @@ public class SnapIntoPlace : MonoBehaviour
 
     private void OnDragEnded()
     {
-        float currentDistance = Vector2.Distance(transform.position, snapPoint.position);
-        if(currentDistance <= snapRange)
+        if (snapToPoint)
         {
-            transform.position = snapPoint.position;
-            if (!allowDragAfterSnap)
+            float currentDistance = Vector2.Distance(transform.position, snapPoint.position);
+            if (currentDistance <= snapRange)
             {
-                this.GetComponent<Drag>().dragIsActive = false;
-                snapIsActive = false;
-                if (messageUpwards)
+                transform.position = snapPoint.position;
+                if (!allowDragAfterSnap)
                 {
-                    this.SendMessageUpwards("ObjectPlaced");
+                    this.GetComponent<Drag>().dragIsActive = false;
+                    snapIsActive = false;
+                    if (messageUpwards)
+                    {
+                        this.SendMessageUpwards("ObjectPlaced");
+                    }
+                    else
+                    {
+                        this.SendMessage("ObjectPlaced");
+                    }
                 }
-                else
-                {
-                    this.SendMessage("ObjectPlaced");
-                }
+            }
+            else
+            {
+                transform.position = ogPosition;
+                this.GetComponent<Drag>().RevertToOgSize();
             }
         }
         else
@@ -51,5 +65,6 @@ public class SnapIntoPlace : MonoBehaviour
             transform.position = ogPosition;
             this.GetComponent<Drag>().RevertToOgSize();
         }
+
     }
 }
