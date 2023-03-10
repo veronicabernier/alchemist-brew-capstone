@@ -81,16 +81,7 @@ public class LeverRotate : MonoBehaviour
             if (curOffset.y > yOffset / 2)
             {
                 //middle front
-                foreach(SpriteRenderer sr in leverPositions[curObject].GetComponentsInChildren<SpriteRenderer>())
-                {
-                    StartCoroutine(FadeOut(sr));
-                }
-                curObject += 1;
-                foreach (SpriteRenderer sr in leverPositions[curObject].GetComponentsInChildren<SpriteRenderer>())
-                {
-                    StartCoroutine(FadeIn(sr));
-                }
-                beansParent.localScale = new Vector3(beansParent.localScale.x * -1, beansParent.localScale.y, beansParent.localScale.z);
+                MoveLeverActions();
             }
         }
         else if (curObject == 1)
@@ -99,16 +90,7 @@ public class LeverRotate : MonoBehaviour
             if (curOffset.y > yOffset)
             {
                 //up
-                foreach (SpriteRenderer sr in leverPositions[curObject].GetComponentsInChildren<SpriteRenderer>())
-                {
-                    StartCoroutine(FadeOut(sr));
-                }
-                curObject += 1;
-                foreach (SpriteRenderer sr in leverPositions[curObject].GetComponentsInChildren<SpriteRenderer>())
-                {
-                    StartCoroutine(FadeIn(sr));
-                }
-                beansParent.localScale = new Vector3(beansParent.localScale.x * -1, beansParent.localScale.y, beansParent.localScale.z);
+                MoveLeverActions();
             }
         }
         else if (curObject == 2)
@@ -117,16 +99,7 @@ public class LeverRotate : MonoBehaviour
             if (curOffset.y < -yOffset / 2)
             {
                 //middle back
-                foreach (SpriteRenderer sr in leverPositions[curObject].GetComponentsInChildren<SpriteRenderer>())
-                {
-                    StartCoroutine(FadeOut(sr));
-                }
-                curObject += 1;
-                foreach (SpriteRenderer sr in leverPositions[curObject].GetComponentsInChildren<SpriteRenderer>())
-                {
-                    StartCoroutine(FadeIn(sr));
-                }
-                beansParent.localScale = new Vector3(beansParent.localScale.x * -1, beansParent.localScale.y, beansParent.localScale.z);
+                MoveLeverActions();
             }
         }
         else if (curObject == 3)
@@ -135,18 +108,27 @@ public class LeverRotate : MonoBehaviour
             if (curOffset.y < -yOffset)
             {
                 //down
-                foreach (SpriteRenderer sr in leverPositions[curObject].GetComponentsInChildren<SpriteRenderer>())
-                {
-                    StartCoroutine(FadeOut(sr));
-                }
-                curObject = 0;
-                foreach (SpriteRenderer sr in leverPositions[curObject].GetComponentsInChildren<SpriteRenderer>())
-                {
-                    StartCoroutine(FadeIn(sr));
-                }
-                beansParent.localScale = new Vector3(beansParent.localScale.x * -1, beansParent.localScale.y, beansParent.localScale.z);
+                MoveLeverActions();
             }
         }
+    }
+
+    private void MoveLeverActions()
+    {
+        foreach (SpriteRenderer sr in leverPositions[curObject].GetComponentsInChildren<SpriteRenderer>())
+        {
+            StartCoroutine(FadeOut(sr));
+        }
+        curObject += 1;
+        if (curObject > leverPositions.Length - 1)
+        {
+            curObject = 0;
+        }
+        foreach (SpriteRenderer sr in leverPositions[curObject].GetComponentsInChildren<SpriteRenderer>())
+        {
+            StartCoroutine(FadeIn(sr));
+        }
+        beansParent.localScale = new Vector3(beansParent.localScale.x * -1, beansParent.localScale.y, beansParent.localScale.z);
     }
 
     IEnumerator FadeOut(SpriteRenderer sr)
