@@ -17,14 +17,18 @@ public class Decompose : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("triggered");
-        DecreaseOpacity();
-        if(color.a <= 0)
+        if(collision.tag == "Distributer")
         {
-            dm.textureDecomposed();
-            Debug.Log("finished texture");
-            gameObject.SetActive(false);
+            Debug.Log("triggered");
+            DecreaseOpacity();
+            if (color.a <= 0)
+            {
+                dm.textureDecomposed();
+                Debug.Log("finished texture");
+                gameObject.SetActive(false);
+            }
         }
+
     }
 
     private void DecreaseOpacity()
