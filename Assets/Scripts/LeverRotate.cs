@@ -18,20 +18,43 @@ public class LeverRotate : MonoBehaviour
     public GameObject[] leverPositions = new GameObject[4];
     //0: down, 1: middle front, 2: up, 3: middle back
     int curObject = 0;
+
+    public Transform beansParend;
+    public Transform groundParent;
+
     public float yOffset;
     public float fadeSeconds = 0.5f;
     public Transform beansParent;
 
     private Vector3 mousePositionOffset;
     private bool dragging = false;
+    [System.NonSerialized]
     public bool isDirty = false;
+
+    private List<GameObject> beanSets = new List<GameObject>();
+    private List<GameObject> groundSets = new List<GameObject>();
+    private int curBean = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         PrepareLeverPositions();
-
+        PopulateBeanLists();
     }
+
+    private void PopulateBeanLists()
+    {
+        foreach (Transform ch in beansParent.GetComponentsInChildren<Transform>().Skip(1))
+        {
+            beanSets.Add(ch.gameObject);
+        }
+        foreach (Transform ch in groundParent.GetComponentsInChildren<Transform>().Skip(1))
+        {
+            ch.gameObject.SetActive(false);
+            groundSets.Add(ch.gameObject);
+        }
+    }
+
 
     private void PrepareLeverPositions()
     {
@@ -92,6 +115,7 @@ public class LeverRotate : MonoBehaviour
             {
                 //up
                 MoveLeverActions();
+                Grind();
             }
         }
         else if (curObject == 2)
@@ -155,6 +179,16 @@ public class LeverRotate : MonoBehaviour
             //Debug.Log(opacity);
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, opacity);
             yield return new WaitForSeconds(0.05f * fadeSeconds);
+        }
+    }
+
+    private void Grind()
+    {
+        if (curBean < beanSets.Count && curBean < groundSets.Count)
+        {
+            beanSets[curBean].SetActive(false);
+            groundSets[curBean].SetActive(true);
+            curBean += 1;
         }
     }
 }
