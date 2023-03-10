@@ -20,6 +20,7 @@ public class LeverRotate : MonoBehaviour
     int curObject = 0;
     public float yOffset;
     public float fadeSeconds = 0.5f;
+    public Transform beansParent;
 
     private Vector3 mousePositionOffset;
     private bool dragging = false;
@@ -89,6 +90,7 @@ public class LeverRotate : MonoBehaviour
                 {
                     StartCoroutine(FadeIn(sr));
                 }
+                beansParent.localScale = new Vector3(beansParent.localScale.x * -1, beansParent.localScale.y, beansParent.localScale.z);
             }
         }
         else if (curObject == 1)
@@ -106,6 +108,7 @@ public class LeverRotate : MonoBehaviour
                 {
                     StartCoroutine(FadeIn(sr));
                 }
+                beansParent.localScale = new Vector3(beansParent.localScale.x * -1, beansParent.localScale.y, beansParent.localScale.z);
             }
         }
         else if (curObject == 2)
@@ -123,6 +126,7 @@ public class LeverRotate : MonoBehaviour
                 {
                     StartCoroutine(FadeIn(sr));
                 }
+                beansParent.localScale = new Vector3(beansParent.localScale.x * -1, beansParent.localScale.y, beansParent.localScale.z);
             }
         }
         else if (curObject == 3)
@@ -140,6 +144,7 @@ public class LeverRotate : MonoBehaviour
                 {
                     StartCoroutine(FadeIn(sr));
                 }
+                beansParent.localScale = new Vector3(beansParent.localScale.x * -1, beansParent.localScale.y, beansParent.localScale.z);
             }
         }
     }

@@ -556,6 +556,7 @@ MonoBehaviour:
   - {fileID: 908185438}
   yOffset: 1.2
   fadeSeconds: 0.05
+  beansParent: {fileID: 973587144}
 --- !u!61 &185902600
 BoxCollider2D:
   m_ObjectHideFlags: 0
