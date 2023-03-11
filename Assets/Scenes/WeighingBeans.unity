@@ -279,10 +279,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1094845339794897276, guid: 5cdd3b7f02be6e04faa8fc776f70a5d5, type: 3}
-      propertyPath: snapIntoPlaceScript
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1142679862411280473, guid: 5cdd3b7f02be6e04faa8fc776f70a5d5, type: 3}
       propertyPath: m_Name
       value: WeighingLevel
