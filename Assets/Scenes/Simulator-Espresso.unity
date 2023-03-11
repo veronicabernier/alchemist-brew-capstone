@@ -310,7 +310,7 @@ MonoBehaviour:
   - name: 3
     prefab: {fileID: 1800954233005182419, guid: ddcb7f0c0be6c9d44a66dc10d05e4f1c, type: 3}
   - name: 4
-    prefab: {fileID: 592511319446498014, guid: 5e18854a86a558f46878953b646cd670, type: 3}
+    prefab: {fileID: 1726407368221485159, guid: 5e18854a86a558f46878953b646cd670, type: 3}
   - name: 5
     prefab: {fileID: 0}
   - name: 6

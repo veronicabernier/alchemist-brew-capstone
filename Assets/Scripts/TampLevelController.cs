@@ -8,6 +8,10 @@ public class TampLevelController : MonoBehaviour
     public GameObject distributer;
     public GameObject portafilter;
 
+    //distribute, tap, tamp
+    private int totalRequiredParts = 3;
+    private int curCompletedParts = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +28,7 @@ public class TampLevelController : MonoBehaviour
     {
         if(tamper.GetComponent<Press>().pressable == true)
         {
+            curCompletedParts = 3;
             //tamper is done
             tamper.GetComponent<SnapIntoPlace>().RevertToOriginal();
             tamper.GetComponent<SpriteRenderer>().color = new Color(0.55f, 0.55f, 0.55f, 0.8f);
@@ -31,6 +36,7 @@ public class TampLevelController : MonoBehaviour
         }
         else
         {
+            curCompletedParts = 2;
             //portafilter tapping is done
             portafilter.GetComponent<Press>().pressable = false;
             //activate tamper
@@ -41,6 +47,7 @@ public class TampLevelController : MonoBehaviour
 
     public void FinishedDistribution()
     {
+        curCompletedParts = 1;
         distributer.GetComponent<SpriteRenderer>().color = new Color(0.55f, 0.55f, 0.55f, 0.8f);
         distributer.GetComponent<Drag>().dragIsActive = false;
         distributer.GetComponent<SnapIntoPlace>().RevertToOriginal();
@@ -54,5 +61,18 @@ public class TampLevelController : MonoBehaviour
     {
         tamper.GetComponent<Press>().pressable = true;
         tamper.GetComponent<Drag>().dragIsActive = false;
+    }
+
+    public void LevelFinished()
+    {
+        //determine score
+        int curScoreTotal = 10;
+
+        int curScore = (int) (((float) curCompletedParts/ (float) totalRequiredParts) * curScoreTotal);
+
+        SingleScore myScore = new SingleScore(curScore, curScoreTotal);
+
+
+        this.SendMessageUpwards("StopLevel", myScore);
     }
 }
