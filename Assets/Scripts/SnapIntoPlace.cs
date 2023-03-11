@@ -56,15 +56,19 @@ public class SnapIntoPlace : MonoBehaviour
             }
             else
             {
-                transform.position = ogPosition;
-                this.GetComponent<Drag>().RevertToOgSize();
+                RevertToOriginal();
             }
         }
         else
         {
-            transform.position = ogPosition;
-            this.GetComponent<Drag>().RevertToOgSize();
+            RevertToOriginal();
         }
 
+    }
+
+    public void RevertToOriginal()
+    {
+        transform.position = ogPosition;
+        this.GetComponent<Drag>().RevertToOgSize();
     }
 }

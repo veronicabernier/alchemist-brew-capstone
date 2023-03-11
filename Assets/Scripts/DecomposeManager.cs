@@ -5,8 +5,6 @@ using UnityEngine;
 public class DecomposeManager : MonoBehaviour
 {
     public float decomposeRate = 0.1f;
-    public SpriteRenderer distributer;
-
     private int texturesLeft;
 
 
@@ -22,7 +20,7 @@ public class DecomposeManager : MonoBehaviour
         if (texturesLeft == 0)
         {
             //Debug.Log("Done!");
-            distributer.color = new Color(0.55f, 0.55f, 0.55f, 0.8f);
+            SendMessageUpwards("FinishedDistribution");
         }
     }
 }

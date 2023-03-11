@@ -66,5 +66,6 @@ public class Drag : MonoBehaviour
             transform.localScale = ogSize;
         }
     }
+
 }
 
