@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EspressoHandler : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class EspressoHandler : MonoBehaviour
         public LevelTypes name;
 
         public GameObject prefab;
+        public GameObject button;
 
         [System.NonSerialized]
         public GameObject instance;
@@ -28,6 +30,7 @@ public class EspressoHandler : MonoBehaviour
 
     [LabeledArrayAttribute(typeof(LevelTypes))]
     public Level[] levels = new Level[System.Enum.GetValues(typeof(LevelTypes)).Length];
+    public GameObject espressoMenu;
 
     private EspressoScore espressoScore = new EspressoScore();
     private int curLevel = -1;
@@ -36,7 +39,13 @@ public class EspressoHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MoveLevel();
+        //MoveLevel();
+        foreach(Level l in levels)
+        {
+            l.button.GetComponent<Button>().enabled = false;
+            l.button.GetComponent<Image>().color = new Color(0.55f, 0.55f, 0.55f, 0.8f);
+        }
+        UpdateLevelMenu();
     }
 
     // Update is called once per frame
@@ -45,10 +54,25 @@ public class EspressoHandler : MonoBehaviour
         
     }
 
-    void MoveLevel()
+    //to be called by level button
+    public void MoveLevel()
     {
-        curLevel += 1;
+        espressoMenu.SetActive(false);
         levels[curLevel].instance = Instantiate(levels[curLevel].prefab, transform);
+    }
+
+
+    public void UpdateLevelMenu()
+    {
+        if (curLevel > -1)
+        {
+            levels[curLevel].button.GetComponent<Button>().enabled = false;
+            levels[curLevel].button.GetComponent<Image>().color = new Color(0.55f, 0.55f, 0.55f, 0.8f);
+        }
+        curLevel += 1;
+        levels[curLevel].button.GetComponent<Button>().enabled = true;
+        levels[curLevel].button.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
+
     }
 
     public void StopLevel(SingleScore myScore)
@@ -63,7 +87,8 @@ public class EspressoHandler : MonoBehaviour
         //move level
         if(curLevel < levels.Length - 1)
         {
-            MoveLevel();
+            espressoMenu.SetActive(true);
+            UpdateLevelMenu();
         }
     }
 
