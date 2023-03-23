@@ -140,5 +140,10 @@ public class EspressoHandler : MonoBehaviour
             espressoScore.brewScore = curScore;
             espressoScore.brewScoreTotal = curTotalScore;
         }
+        else if (levels[curLevel].name == LevelTypes.Serve)
+        {
+            espressoScore.serveScore = curScore;
+            espressoScore.serveScoreTotal = curTotalScore;
+        }
     }
 }
