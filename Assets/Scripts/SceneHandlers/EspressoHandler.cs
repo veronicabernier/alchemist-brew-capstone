@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,6 +32,9 @@ public class EspressoHandler : MonoBehaviour
     [LabeledArrayAttribute(typeof(LevelTypes))]
     public Level[] levels = new Level[System.Enum.GetValues(typeof(LevelTypes)).Length];
     public GameObject espressoMenu;
+    public TextMeshProUGUI feedbackName;
+    public TextMeshProUGUI feedback;
+    public TextMeshProUGUI menuLabel;
 
     private EspressoScore espressoScore = new EspressoScore();
     private int curLevel = -1;
@@ -45,7 +49,7 @@ public class EspressoHandler : MonoBehaviour
             l.button.GetComponent<Button>().enabled = false;
             l.button.GetComponent<Image>().color = new Color(0.55f, 0.55f, 0.55f, 0.8f);
         }
-        UpdateLevelMenu();
+        UpdateLevelMenu(null);
     }
 
     // Update is called once per frame
@@ -62,12 +66,24 @@ public class EspressoHandler : MonoBehaviour
     }
 
 
-    public void UpdateLevelMenu()
+    public void UpdateLevelMenu(SingleScore myScore)
     {
         if (curLevel > -1)
         {
             levels[curLevel].button.GetComponent<Button>().enabled = false;
             levels[curLevel].button.GetComponent<Image>().color = new Color(0.55f, 0.55f, 0.55f, 0.8f);
+
+            //update feedback
+            feedbackName.text = levels[curLevel].name.ToString() + " Result:";
+            feedback.text = myScore.curScore.ToString() + "/" + myScore.curScoreTotal.ToString();
+            if(curLevel < levels.Length - 1)
+            {
+                menuLabel.text = "Next Level";
+            }
+            else
+            {
+                menuLabel.text = "Done!";
+            }
         }
         curLevel += 1;
         levels[curLevel].button.GetComponent<Button>().enabled = true;
@@ -88,7 +104,7 @@ public class EspressoHandler : MonoBehaviour
         if(curLevel < levels.Length - 1)
         {
             espressoMenu.SetActive(true);
-            UpdateLevelMenu();
+            UpdateLevelMenu(myScore);
         }
     }
 
