@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -16,6 +17,10 @@ public class EspressoHandler : MonoBehaviour
 
         [System.NonSerialized]
         public GameObject instance;
+        [System.NonSerialized]
+        public int curScore;
+        [System.NonSerialized]
+        public int curScoreTotal;
     }
 
     public enum LevelTypes
@@ -35,6 +40,10 @@ public class EspressoHandler : MonoBehaviour
     public TextMeshProUGUI feedbackName;
     public TextMeshProUGUI feedback;
     public TextMeshProUGUI menuLabel;
+
+    public GameObject finalResultsMenu;
+    public GameObject finalScorePefab;
+    public float spaceBetweenScores = 0.5f;
 
     private EspressoScore espressoScore = new EspressoScore();
     private int curLevel = -1;
@@ -106,11 +115,29 @@ public class EspressoHandler : MonoBehaviour
             espressoMenu.SetActive(true);
             UpdateLevelMenu(myScore);
         }
+        else
+        {
+            ShowFinalResults();
+        }
+    }
+
+    private void ShowFinalResults()
+    {
+        finalResultsMenu.SetActive(true);
+        for(int i = 0; i < levels.Length; i++)
+        {
+            GameObject newText = Instantiate(finalScorePefab, finalResultsMenu.transform);
+            newText.transform.localPosition = new Vector3(newText.transform.localPosition.x, newText.transform.localPosition.y - (i*spaceBetweenScores), newText.transform.localPosition.z);
+            newText.GetComponent<TextMeshProUGUI>().text = (i+1).ToString() + ". " + levels[i].name.ToString() + ":    "+ levels[i].curScore.ToString() + "/" + levels[i].curScore.ToString();
+        }
     }
 
     void SaveScores(int curScore, int curTotalScore)
     {
-        if(levels[curLevel].name == LevelTypes.Weighing)
+        levels[curLevel].curScore = curScore;
+        levels[curLevel].curScoreTotal = curTotalScore;
+
+        if (levels[curLevel].name == LevelTypes.Weighing)
         {
             espressoScore.weightScore = curScore;
             espressoScore.weightScoreTotal = curTotalScore;
