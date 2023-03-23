@@ -1025,7 +1025,7 @@ MonoBehaviour:
     prefab: {fileID: 7311601664984754595, guid: b2400844549f4ae4fbb1d51a1478432f, type: 3}
     button: {fileID: 850061777}
   - name: 6
-    prefab: {fileID: 0}
+    prefab: {fileID: 9207528698853244262, guid: 18a99e4a19feed64bb0504a002045c23, type: 3}
     button: {fileID: 347678359}
   espressoMenu: {fileID: 1856905504}
   feedbackName: {fileID: 1872198469}
