@@ -12,6 +12,8 @@ public class SnapIntoPlace : MonoBehaviour
 
     [ConditionalHide("snapToPoint")]
     public bool allowDragAfterSnap = false;
+    [ConditionalHide("snapToPoint")]
+    public bool dissapearAfterSnap = false;
     [Tooltip("Default is messages other script in object when done")]
     [ConditionalHide("snapToPoint")]
     public bool messageUpwards = false;
@@ -51,6 +53,10 @@ public class SnapIntoPlace : MonoBehaviour
                     else
                     {
                         this.SendMessage("ObjectPlaced");
+                    }
+                    if (dissapearAfterSnap)
+                    {
+                        this.gameObject.SetActive(false);
                     }
                 }
             }
