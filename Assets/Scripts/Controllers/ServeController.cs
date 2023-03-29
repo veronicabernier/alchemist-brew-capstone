@@ -31,4 +31,14 @@ public class ServeController : MonoBehaviour
 
         this.SendMessageUpwards("StopLevel", myScore);
     }
+
+    public void LevelFinished()
+    {
+        List<string> comments = new List<string>();
+        comments.Add("Time's Up!");
+
+        SingleScore myScore = new SingleScore(0, 10, comments);
+
+        this.SendMessageUpwards("StopLevel", myScore);
+    }
 }
