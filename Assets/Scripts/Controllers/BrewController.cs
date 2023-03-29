@@ -8,6 +8,7 @@ public class BrewController : MonoBehaviour
 
     public GameObject progressBar;
     public SpriteMask waterMask;
+    public GameObject timer;
 
     private bool filling = false;
     private ProgressBar pb;
@@ -28,6 +29,7 @@ public class BrewController : MonoBehaviour
 
     public void ObjectPlaced()
     {
+        timer.SetActive(false);
         progressBar.SetActive(true);
         pb = progressBar.GetComponent<ProgressBar>();
         filling = true;

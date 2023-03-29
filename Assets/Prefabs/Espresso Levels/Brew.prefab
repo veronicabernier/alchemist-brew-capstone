@@ -770,6 +770,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressBar: {fileID: 7311601665543921153}
   waterMask: {fileID: 770201510}
+  timer: {fileID: 8717822765325806511}
 --- !u!1 &7311601665268942424
 GameObject:
   m_ObjectHideFlags: 0
@@ -1348,6 +1349,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7311601664670749402}
     m_Modifications:
+    - target: {fileID: 5359752953992241437, guid: 2143615664420804c8e676194a85d44c, type: 3}
+      propertyPath: timeToFill
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5359752953992241438, guid: 2143615664420804c8e676194a85d44c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1441,5 +1446,10 @@ PrefabInstance:
 --- !u!224 &8717822765325806510 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5359752953992241438, guid: 2143615664420804c8e676194a85d44c, type: 3}
+  m_PrefabInstance: {fileID: 3646305427630590640}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8717822765325806511 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5359752953992241439, guid: 2143615664420804c8e676194a85d44c, type: 3}
   m_PrefabInstance: {fileID: 3646305427630590640}
   m_PrefabAsset: {fileID: 0}

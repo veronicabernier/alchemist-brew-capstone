@@ -670,6 +670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progressBar: {fileID: 6555295346701869529}
+  timer: {fileID: 8767779228172364032}
 --- !u!1 &6555295346426870144
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,6 +1069,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6555295345961807106}
     m_Modifications:
+    - target: {fileID: 5359752953992241437, guid: 2143615664420804c8e676194a85d44c, type: 3}
+      propertyPath: timeToFill
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5359752953992241438, guid: 2143615664420804c8e676194a85d44c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1158,6 +1163,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2143615664420804c8e676194a85d44c, type: 3}
+--- !u!1 &8767779228172364032 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5359752953992241439, guid: 2143615664420804c8e676194a85d44c, type: 3}
+  m_PrefabInstance: {fileID: 3732571681236830239}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8767779228172364033 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5359752953992241438, guid: 2143615664420804c8e676194a85d44c, type: 3}

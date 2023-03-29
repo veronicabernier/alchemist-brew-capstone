@@ -7,21 +7,12 @@ public class ServeController : MonoBehaviour
 {
 
     public GameObject progressBar;
+    public GameObject timer;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void ObjectPlaced()
     {
+        timer.SetActive(false);
         progressBar.SetActive(true);
     }
 
