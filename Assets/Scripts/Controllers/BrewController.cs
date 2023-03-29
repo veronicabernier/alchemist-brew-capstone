@@ -35,7 +35,7 @@ public class BrewController : MonoBehaviour
 
     public void ProgressDone()
     {
-        SingleScore myScore = new SingleScore(10, 10);
+        SingleScore myScore = new SingleScore(10, 10, new List<string>());
 
         this.SendMessageUpwards("StopLevel", myScore);
     }

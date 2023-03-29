@@ -74,10 +74,24 @@ public class AddLiquid : MonoBehaviour
 
         int curScoreTotal = 10;
         int errorQuantity = (int)((System.Math.Abs(correctYChange - yChange) / correctYChange)*curScoreTotal);
-        int curScore = curScoreTotal - errorQuantity;
+        int curScore = Math.Max(curScoreTotal - errorQuantity, 0);
 
-        SingleScore myScore = new SingleScore(curScore, curScoreTotal);
+        List<string> comments = new List<string>();
+
+        if(curScore != curScoreTotal)
+        {
+            if(yChange < correctYChange)
+            {
+                comments.Add("More water needed");
+            }
+            else
+            {
+                comments.Add("Too much water");
+            }
+        }
+
+        SingleScore myScore = new SingleScore(curScore, curScoreTotal, comments);
         //Debug.Log(curScore);
-        return new SingleScore(curScore, curScoreTotal);
+        return myScore;
     }
 }

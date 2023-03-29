@@ -1564,6 +1564,7 @@ MonoBehaviour:
   snapPoint: {fileID: 1094845341149076174}
   snapRange: 1
   allowDragAfterSnap: 0
+  dissapearAfterSnap: 0
   messageUpwards: 0
 --- !u!114 &1094845339794897272
 MonoBehaviour:
@@ -4161,7 +4162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sc: {fileID: 1094845340407612667}
-  beanSetWeight: 0.2
+  beanSetWeight: 0.327
   plateBeanParent: {fileID: 1094845340764272742}
 --- !u!50 &1094845341020888859
 Rigidbody2D:
