@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -30,9 +31,22 @@ public class WeighingController : MonoBehaviour
         //determine score
         int curScoreTotal = 10;
         int errorQuantity = (int) ((System.Math.Abs(actualWeight - wantedWeight) / wantedWeight)*curScoreTotal);
-        int curScore = curScoreTotal - errorQuantity;
-
-        SingleScore myScore = new SingleScore(curScore, curScoreTotal);
+        int curScore = Math.Max(curScoreTotal - errorQuantity, 0);
+        List<string> comments = new List<string>();
+        if(curScore != curScoreTotal)
+        {
+            if(actualWeight < wantedWeight)
+            {
+                comments.Add("Missing beans :(");
+            }
+            else
+            {
+                comments.Add("To many beans!");
+            }
+           
+        }
+        
+        SingleScore myScore = new SingleScore(curScore, curScoreTotal, comments);
 
 
         this.SendMessageUpwards("StopLevel", myScore);

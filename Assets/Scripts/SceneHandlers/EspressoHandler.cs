@@ -21,6 +21,8 @@ public class EspressoHandler : MonoBehaviour
         public int curScore;
         [System.NonSerialized]
         public int curScoreTotal;
+        [System.NonSerialized]
+        public List<string> comments;
     }
 
     public enum LevelTypes
@@ -83,8 +85,24 @@ public class EspressoHandler : MonoBehaviour
             levels[curLevel].button.GetComponent<Image>().color = new Color(0.55f, 0.55f, 0.55f, 0.8f);
 
             //update feedback
-            feedbackName.text = levels[curLevel].name.ToString() + " Result:";
-            feedback.text = myScore.curScore.ToString() + "/" + myScore.curScoreTotal.ToString();
+            feedbackName.text = levels[curLevel].name.ToString() + " Result:" + myScore.curScore.ToString() + "/" + myScore.curScoreTotal.ToString();
+            String feedbackText = "";
+            if(myScore.comments.Count == 0)
+            {
+                feedbackText += "Perfect!";
+            }
+            else
+            {
+                foreach(string c in myScore.comments)
+                {
+                    if(feedbackText != "")
+                    {
+                        feedbackText += "\n";
+                    }
+                    feedbackText += c;
+                }
+            }
+            feedback.text = feedbackText;
             if(curLevel < levels.Length - 1)
             {
                 menuLabel.text = "Next Level";
@@ -103,7 +121,7 @@ public class EspressoHandler : MonoBehaviour
     public void StopLevel(SingleScore myScore)
     {
         //save score 
-        SaveScores(myScore.curScore, myScore.curScoreTotal);
+        SaveScores(myScore.curScore, myScore.curScoreTotal, myScore.comments);
         Debug.Log(JsonUtility.ToJson(espressoScore));
 
         //destroy level
@@ -128,14 +146,15 @@ public class EspressoHandler : MonoBehaviour
         {
             GameObject newText = Instantiate(finalScorePefab, finalResultsMenu.transform);
             newText.transform.localPosition = new Vector3(newText.transform.localPosition.x, newText.transform.localPosition.y - (i*spaceBetweenScores), newText.transform.localPosition.z);
-            newText.GetComponent<TextMeshProUGUI>().text = (i+1).ToString() + ". " + levels[i].name.ToString() + ":    "+ levels[i].curScore.ToString() + "/" + levels[i].curScore.ToString();
+            newText.GetComponent<TextMeshProUGUI>().text = (i+1).ToString() + ". " + levels[i].name.ToString() + ":    "+ levels[i].curScore.ToString() + "/" + levels[i].curScoreTotal.ToString();
         }
     }
 
-    void SaveScores(int curScore, int curTotalScore)
+    void SaveScores(int curScore, int curTotalScore, List<string> comments)
     {
         levels[curLevel].curScore = curScore;
         levels[curLevel].curScoreTotal = curTotalScore;
+        levels[curLevel].comments = comments;
 
         if (levels[curLevel].name == LevelTypes.Weighing)
         {

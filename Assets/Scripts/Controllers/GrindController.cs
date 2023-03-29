@@ -40,6 +40,7 @@ public class GrindController : MonoBehaviour
     public void LevelFinished()
     {
         SnapToCloserX.SettingType grindSettingUsed = stcx.GetSettingUsed();
+        List<string> comments = new List<string>();
 
         //determine score
         int curScoreTotal = 10;
@@ -52,6 +53,7 @@ public class GrindController : MonoBehaviour
         else
         {
             settingTotal = 0;
+            comments.Add("Wrong grind setting >:(");
         }
 
         int curScore;
@@ -59,6 +61,7 @@ public class GrindController : MonoBehaviour
         if (!lc.enabled)
         {
             curScore = (int)(0.5f + (settingTotal * 0.5f));
+            comments.Add("No grinding done >:(");
         }
         else
         {
@@ -66,11 +69,16 @@ public class GrindController : MonoBehaviour
             int beansGround = lc.GetBeansGrounded();
 
             float errorQuantity = ((Mathf.Abs(beansGround - totalBeans) / (float)totalBeans) * curScoreTotal);
-            curScore = (int)((curScoreTotal - errorQuantity) * 0.5f + (settingTotal * 0.5f));
+            curScore = (int)(Math.Max((curScoreTotal - errorQuantity), 0) * 0.5f + (settingTotal * 0.5f));
+
+            if(beansGround < totalBeans)
+            {
+                comments.Add("You didn't grind all :(");
+            }
         }
 
 
-        SingleScore myScore = new SingleScore(curScore, curScoreTotal);
+        SingleScore myScore = new SingleScore(curScore, curScoreTotal, comments);
 
 
         this.SendMessageUpwards("StopLevel", myScore);

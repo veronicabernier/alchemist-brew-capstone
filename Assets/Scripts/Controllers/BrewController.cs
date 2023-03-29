@@ -8,6 +8,7 @@ public class BrewController : MonoBehaviour
 
     public GameObject progressBar;
     public SpriteMask waterMask;
+    public GameObject timer;
 
     private bool filling = false;
     private ProgressBar pb;
@@ -28,6 +29,7 @@ public class BrewController : MonoBehaviour
 
     public void ObjectPlaced()
     {
+        timer.SetActive(false);
         progressBar.SetActive(true);
         pb = progressBar.GetComponent<ProgressBar>();
         filling = true;
@@ -35,7 +37,17 @@ public class BrewController : MonoBehaviour
 
     public void ProgressDone()
     {
-        SingleScore myScore = new SingleScore(10, 10);
+        SingleScore myScore = new SingleScore(10, 10, new List<string>());
+
+        this.SendMessageUpwards("StopLevel", myScore);
+    }
+
+    public void LevelFinished()
+    {
+        List<string> comments = new List<string>();
+        comments.Add("Time's Up!");
+
+        SingleScore myScore = new SingleScore(0, 10, comments);
 
         this.SendMessageUpwards("StopLevel", myScore);
     }
