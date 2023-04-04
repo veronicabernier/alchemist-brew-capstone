@@ -12,11 +12,11 @@ public class RequestExample : MonoBehaviour
         form.AddField("username", "Rey");
         form.AddField("email", "reinaldo2@upr.edu");
         form.AddField("password", "888");
-        form.AddField("confirm", "888");
-        form.AddField("private_profile", "True");
+        form.AddField("confirm", "888"); // confirm password
+        form.AddField("private_profile", "True"); // no poner en front end
         form.AddField("birth_date", "1998-02-03");
         form.AddField("gender", "Male");
-        form.AddField("location", "Puerto Rico");
+        form.AddField("location", "Puerto Rico"); // verificar si se puede coger location 
 
         StartCoroutine(PostRequest("http://127.0.0.1:5000/signup", form));
     }
