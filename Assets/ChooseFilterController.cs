@@ -18,6 +18,8 @@ public class ChooseFilterController : MonoBehaviour
     public GameObject progressBar;
     public SpriteMask waterMask;
 
+    public GameObject timer;
+
     private string correctFilter = "";
     private string prompt = "";
     private bool choseCorrectly = false;
@@ -79,11 +81,64 @@ public class ChooseFilterController : MonoBehaviour
                 choseCorrectly = (correctFilter == "permanent");
                 paperFilter.SetActive(false);
             }
-            Debug.Log(choseCorrectly);
             progressBar.SetActive(true);
             pb = progressBar.GetComponent<ProgressBar>();
             running = true;
+            timer.SetActive(false);
         }
 
+    }
+
+    public void ProgressDone()
+    {
+        List<string> comments = new List<string>();
+        int totalScore = 10;
+        int curScore = totalScore;
+        if (!choseCorrectly)
+        {
+            comments.Add("Wrong Filter");
+            curScore -= (int)((1.0f / 3.0f) * totalScore);
+        }
+
+        SingleScore myScore = new SingleScore(curScore, totalScore, comments);
+
+        this.SendMessageUpwards("StopLevel", myScore);
+    }
+
+    public void LevelFinished()
+    {
+        List<string> comments = new List<string>();
+        int totalScore = 10;
+        int curScore = totalScore;
+        if (!filters.activeSelf)
+        {
+            //didnt place reservoir
+            comments.Add("Missing Reservoir");
+            comments.Add("No Filter");
+            comments.Add("Time's Up!");
+            curScore = 0;
+        }
+        else 
+        {
+            if (!running)
+            {
+                comments.Add("No filter");
+                comments.Add("Time's Up!");
+                curScore -= (int)((2.0f / 3.0f) * totalScore);
+            }
+            else
+            {
+                if (!choseCorrectly)
+                {
+                    comments.Add("Wrong Filter");
+                    curScore -= (int)((1.0f / 3.0f) * totalScore);
+                }
+            }
+        }
+
+
+        SingleScore myScore = new SingleScore(curScore, totalScore, comments);
+
+        this.SendMessageUpwards("StopLevel", myScore);
     }
 }
