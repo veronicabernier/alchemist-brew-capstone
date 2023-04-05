@@ -15,10 +15,15 @@ public class ChooseFilterController : MonoBehaviour
     public GameObject permanentFilter;
 
     public TextMeshProUGUI filterPrompt;
+    public GameObject progressBar;
+    public SpriteMask waterMask;
 
     private string correctFilter = "";
     private string prompt = "";
     private bool choseCorrectly = false;
+
+    private ProgressBar pb;
+    private bool running = false;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +50,10 @@ public class ChooseFilterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (running)
+        {
+            waterMask.transform.localPosition = new Vector3(waterMask.transform.localPosition.x, pb.progressAmount.fillAmount, waterMask.transform.localPosition.z);
+        }
     }
 
     public void ObjectPlaced()
@@ -72,6 +80,9 @@ public class ChooseFilterController : MonoBehaviour
                 paperFilter.SetActive(false);
             }
             Debug.Log(choseCorrectly);
+            progressBar.SetActive(true);
+            pb = progressBar.GetComponent<ProgressBar>();
+            running = true;
         }
 
     }
