@@ -46,6 +46,10 @@ public class SnapIntoPlace : MonoBehaviour
                 {
                     this.GetComponent<Drag>().dragIsActive = false;
                     snapIsActive = false;
+                    if (dissapearAfterSnap)
+                    {
+                        this.gameObject.SetActive(false);
+                    }
                     if (messageUpwards)
                     {
                         this.SendMessageUpwards("ObjectPlaced");
@@ -53,10 +57,6 @@ public class SnapIntoPlace : MonoBehaviour
                     else
                     {
                         this.SendMessage("ObjectPlaced");
-                    }
-                    if (dissapearAfterSnap)
-                    {
-                        this.gameObject.SetActive(false);
                     }
                 }
             }
