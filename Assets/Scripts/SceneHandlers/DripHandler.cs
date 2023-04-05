@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EspressoHandler : MonoBehaviour
+public class DripHandler : MonoBehaviour
 {
     [System.Serializable]
     public class Level
@@ -29,9 +29,8 @@ public class EspressoHandler : MonoBehaviour
     {
         Weighing,
         Reservoir,
-        PowerOn,
         Grind,
-        Tamp,
+        ChooseFilter,
         Brew,
         Serve
     }
@@ -47,7 +46,7 @@ public class EspressoHandler : MonoBehaviour
     public GameObject finalScorePefab;
     public float spaceBetweenScores = 0.5f;
 
-    private EspressoScore espressoScore = new EspressoScore();
+    private DripScore dripScore = new DripScore();
     private int curLevel = -1;
 
 
@@ -74,10 +73,10 @@ public class EspressoHandler : MonoBehaviour
     {
         levelsMenu.SetActive(false);
         levels[curLevel].instance = Instantiate(levels[curLevel].prefab, transform);
-        if (levels[curLevel].name == LevelTypes.Grind)
+        if(levels[curLevel].name == LevelTypes.Grind)
         {
             GrindController gc = levels[curLevel].instance.GetComponent<GrindController>();
-            gc.wantedGrindSetting = SnapToCloserX.SettingType.Small;
+            gc.wantedGrindSetting = SnapToCloserX.SettingType.Medium;
         }
     }
 
@@ -127,7 +126,7 @@ public class EspressoHandler : MonoBehaviour
     {
         //save score 
         SaveScores(myScore.curScore, myScore.curScoreTotal, myScore.comments);
-        Debug.Log(JsonUtility.ToJson(espressoScore));
+        Debug.Log(JsonUtility.ToJson(dripScore));
 
         //destroy level
         Destroy(levels[curLevel].instance);
@@ -163,38 +162,33 @@ public class EspressoHandler : MonoBehaviour
 
         if (levels[curLevel].name == LevelTypes.Weighing)
         {
-            espressoScore.weightScore = curScore;
-            espressoScore.weightScoreTotal = curTotalScore;
+            dripScore.weightScore = curScore;
+            dripScore.weightScoreTotal = curTotalScore;
         }
         else if (levels[curLevel].name == LevelTypes.Reservoir)
         {
-            espressoScore.reservoirScore = curScore;
-            espressoScore.reservoirScoreTotal = curTotalScore;
-        }
-        else if (levels[curLevel].name == LevelTypes.PowerOn)
-        {
-            espressoScore.powerOnScore = curScore;
-            espressoScore.powerOnScoreTotal = curTotalScore;
+            dripScore.reservoirScore = curScore;
+            dripScore.reservoirScoreTotal = curTotalScore;
         }
         else if (levels[curLevel].name == LevelTypes.Grind)
         {
-            espressoScore.grindScore = curScore;
-            espressoScore.grindScoreTotal = curTotalScore;
+            dripScore.grindScore = curScore;
+            dripScore.grindScoreTotal = curTotalScore;
         }
-        else if (levels[curLevel].name == LevelTypes.Tamp)
+        else if (levels[curLevel].name == LevelTypes.ChooseFilter)
         {
-            espressoScore.tampScore = curScore;
-            espressoScore.tampScoreTotal = curTotalScore;
+            dripScore.chooseFilterScore = curScore;
+            dripScore.chooseFilterScoreTotal = curTotalScore;
         }
         else if (levels[curLevel].name == LevelTypes.Brew)
         {
-            espressoScore.brewScore = curScore;
-            espressoScore.brewScoreTotal = curTotalScore;
+            dripScore.brewScore = curScore;
+            dripScore.brewScoreTotal = curTotalScore;
         }
         else if (levels[curLevel].name == LevelTypes.Serve)
         {
-            espressoScore.serveScore = curScore;
-            espressoScore.serveScoreTotal = curTotalScore;
+            dripScore.serveScore = curScore;
+            dripScore.serveScoreTotal = curTotalScore;
         }
     }
 }
