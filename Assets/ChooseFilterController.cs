@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ChooseFilterController : MonoBehaviour
@@ -12,11 +14,32 @@ public class ChooseFilterController : MonoBehaviour
     public GameObject paperFilter;
     public GameObject permanentFilter;
 
+    public TextMeshProUGUI filterPrompt;
+
+    private string correctFilter = "";
+    private string prompt = "";
+    private bool choseCorrectly = false;
 
     // Start is called before the first frame update
     void Start()
     {
         
+    }
+
+    private void GenerateCorrectFilter()
+    {
+        int i = UnityEngine.Random.Range(0, 2);
+        if(i == 0)
+        {
+            correctFilter = "paper";
+            prompt = "Clear coffee";
+        }
+        else
+        {
+            correctFilter = "permanent";
+            prompt = "Strong coffee";
+        }
+        filterPrompt.text = prompt;
     }
 
     // Update is called once per frame
@@ -30,8 +53,8 @@ public class ChooseFilterController : MonoBehaviour
         if(filters.activeSelf == false)
         {
             //reservoir placed
-            Debug.Log("reservoir");
             filters.SetActive(true);
+            GenerateCorrectFilter();
         }
         else
         {
@@ -39,15 +62,16 @@ public class ChooseFilterController : MonoBehaviour
             if (paperFilter.activeInHierarchy == false)
             {
                 //paper chosen
-                Debug.Log("paper");
+                choseCorrectly = (correctFilter == "paper");
                 permanentFilter.SetActive(false);
             }
             else
             {
                 //permanent chosen
-                Debug.Log("permanent");
+                choseCorrectly = (correctFilter == "permanent");
                 paperFilter.SetActive(false);
             }
+            Debug.Log(choseCorrectly);
         }
 
     }
