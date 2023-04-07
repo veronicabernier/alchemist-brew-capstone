@@ -1,6 +1,7 @@
 import datetime
 import bcrypt
-from sqlalchemy import create_engine, ForeignKey, Column, Text, Integer, Boolean, Date, Float, DateTime, String, DateTime
+from sqlalchemy import create_engine, ForeignKey, Column, Text, Integer, Boolean, Date, Float, DateTime, String, \
+    DateTime, update, Null, null
 from sqlalchemy_utils import database_exists, create_database
 from sqlalchemy.orm import sessionmaker, declarative_base
 from BackEnd.config.dbconfig import pg_config as settings
@@ -108,23 +109,41 @@ class recipes(Base):
 class brews(Base):
     __tablename__ = "brews"
     brewid = Column("brewid", Integer, autoincrement=True, primary_key=True)
+    recipeid = Column("recipeid", Integer, ForeignKey("recipes.recipeid"), nullable=False)
+    # brew_method = Column("brew_method", String)
+    # grind_setting = Column("grind_setting", Float)
+    # brand = Column("brand", String)
+    # roast = Column("roast", String)
+    # bean_type = Column("bean_type", String)
+    # coffee_weight = Column("coffee_weight", Float)
+    # userid = Column("userid", Integer, nullable=False)
+    # recipe_visibility = Column("recipe_visibility", Boolean)
     ext_time = Column("ext_time", Integer)
     ext_weight = Column("ext_weight", Float)
     flavor = Column("flavor", String)
     date = Column("date", DateTime)
-    recipeid = Column("recipeid", Integer, ForeignKey("recipes.recipeid"), nullable=False)
     brew_visibility = Column("brew_visibility", Boolean)
 
-    def __init__(self, ext_time, ext_weight, flavor, date, recipeid, brew_visibility):
+    def __init__(self, recipeid, ext_time, ext_weight, flavor, date, brew_visibility):
+        self.recipeid = recipeid
+        # self.brew_method = brew_method
+        # self.grind_setting = grind_setting
+        # self.brand = brand
+        # self.roast = roast
+        # self.bean_type = bean_type
+        # self.coffee_weight = coffee_weight
+        # self.userid = userid
+        # self.recipe_visibility = recipe_visibility
         self.ext_time = ext_time
         self.ext_weight = ext_weight
         self.flavor = flavor
         self.date = date
-        self.recipeid = recipeid
         self.brew_visibility = brew_visibility
 
     def __repr__(self):
-        return f"({self.ext_time} {self.ext_weight} {self.flavor} {self.date} {self.recipeid} {self.brew_visibility})"
+        return f"({self.recipeid} {self.brew_method} {self.grind_setting} {self.brand}" \
+               f" {self.roast} {self.bean_type} {self.coffee_weight} {self.userid} {self.recipe_visibility} " \
+               f"{self.ext_time} {self.ext_weight} {self.flavor} {self.date} {self.brew_visibility})"
 
 Base.metadata.create_all(engine)
 # Session = get_session()
@@ -210,13 +229,18 @@ def encoder_brews(brew):
     if isinstance(brew, brews):
         return {'brewid': brew.brewid, 'ext_time': brew.ext_time, 'ext_weight': brew.ext_weight, 'flavor': brew.flavor,
             'date': brew.date, 'recipeid': brew.recipeid, 'brew_visibility': brew.brew_visibility}
+        # result = {'recipeid': brew.recipeid, 'brew_method': brew.brew_method, 'grind_setting': brew.grind_setting,
+        #           'brand': brew.brand, 'roast': brew.roast, 'bean_type': brew.bean_type, 'coffee_weight': brew.coffee_weight,
+        #           'userid': brew.userid, 'recipe_visibility': brew.recipe_visibility, 'brewid': brew.brewid,
+        #           'ext_time': brew.ext_time, 'ext_weight': brew.ext_weight, 'flavor': brew.flavor, 'date': brew.date,
+        #           'brew_visibility': brew.brew_visibility}
     raise TypeError(f'Object{brew} is not of type recipes.')
 
 @app.route("/<userid>/recipe list", methods=["POST", "GET"])
 def get_all_recipes(userid):
     result_list = []
     if request.method == "GET":
-        prebrew = Session.query(recipes).filter_by(userid=userid).all()
+        prebrew = Session.query(recipes).filter_by(userid=userid, recipe_visibility=True).all()
 
         for i in prebrew:
             result=encoder_recipes(i)
@@ -226,22 +250,51 @@ def get_all_recipes(userid):
 def get_recipe(userid, recipeid):
     result_list = []
     if request.method == "GET":
-        prebrew = Session.query(recipes).filter_by(userid=userid, recipeid=recipeid).all()
+        prebrew = Session.query(recipes).filter_by(userid=userid, recipeid=recipeid, recipe_visibility=True).all()
 
         for i in prebrew:
-            result=encoder_recipes(i)
+            result = encoder_recipes(i)
             result_list.append(result)
         return jsonify(Recipe=result_list), 200
-@app.route("/<userid>/recipe list/<recipeid>", methods=["POST", "GET"])
+@app.route("/<userid>/<recipeid>/edit", methods=["PUT"])
 def edit_recipe(userid, recipeid):
     result_list = []
-    if request.method == "GET":
+    new_brew_method = request.form.get('brew_method')
+    new_grind_setting = request.form.get('grind_setting')
+    new_brand = request.form.get('brand')
+    new_roast = request.form.get('roast')
+    new_bean_type = request.form.get('bean_type')
+    new_coffee_weight = request.form.get('coffee_weight')
+    if request.method == "PUT":
         prebrew = Session.query(recipes).filter_by(userid=userid, recipeid=recipeid).all()
 
         for i in prebrew:
             result=encoder_recipes(i)
             result_list.append(result)
-        return jsonify(Recipe=result_list), 200
+            print(result.get('brew_method'))
+        if(new_brew_method == None):
+            new_brew_method = result_list[0].get('brew_method')
+        if (new_grind_setting == None):
+            new_grind_setting = result_list[0].get('grind_setting')
+        if(new_brand == None):
+            new_brand = result_list[0].get('brand')
+        if(new_roast == None):
+            new_roast = result_list[0].get('roast')
+        if(new_bean_type == None):
+            new_bean_type = result_list[0].get('bean_type')
+        if(new_coffee_weight == None):
+            new_coffee_weight = result_list[0].get('coffee_weight')
+
+        Session.execute(update(recipes).filter_by(recipeid=recipeid).values(recipe_visibility=False))
+        # Session.commit()
+
+        Session.add(
+            recipes(brew_method=new_brew_method, grind_setting=new_grind_setting, brand=new_brand, roast=new_roast,
+                    bean_type=new_bean_type, coffee_weight=new_coffee_weight, userid=userid, recipe_visibility=True))
+        Session.commit()
+        Session.flush()
+
+        return jsonify(Edited=result_list), 200
 
 @app.route("/<userid>/recipe list/add", methods=["POST", "GET"])
 def add_recipe(userid):
@@ -285,10 +338,12 @@ def get_brew_attempt(userid):
         #[1} indicate values from the brews table
         for i in attempt:
             result = {'recipeid': i[0].recipeid, 'brew_method': i[0].brew_method, 'grind_setting': i[0].grind_setting,
-            'brand': i[0].brand, 'roast': i[0].roast, 'bean_type': i[0].bean_type, 'coffee_weight': i[0].coffee_weight,
-            'userid': i[0].userid, 'recipe_visibility': i[0].recipe_visibility, 'brewid': i[1].brewid,
-            'ext_time': i[1].ext_time, 'ext_weight': i[1].ext_weight, 'flavor': i[1].flavor, 'date': i[1].date,
-            'brew_visibility': i[1].brew_visibility}
+                      'brand': i[0].brand, 'roast': i[0].roast, 'bean_type': i[0].bean_type,
+                      'coffee_weight': i[0].coffee_weight,
+                      'userid': i[0].userid, 'recipe_visibility': i[0].recipe_visibility, 'brewid': i[1].brewid,
+                      'ext_time': i[1].ext_time, 'ext_weight': i[1].ext_weight, 'flavor': i[1].flavor,
+                      'date': i[1].date,
+                      'brew_visibility': i[1].brew_visibility}
             result_list.append(result)
         return jsonify(Attempts=result_list), 200
 
