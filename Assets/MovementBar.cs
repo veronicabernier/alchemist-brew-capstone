@@ -17,11 +17,14 @@ public class MovementBar : MonoBehaviour
     //position -> not necessary for now
     //acceleration
     //range of error
-    public float saveZoneAmount = 0.4f;
+    
     //speed of change
     //range of change
 
     public bool interacting = false;
+
+    private float saveZoneMinY;
+    private float saveZoneMaxY;
 
     private float ogZRotation;
     private Vector3 minPosition;
@@ -31,9 +34,12 @@ public class MovementBar : MonoBehaviour
     void Start()
     {
         ogZRotation = objectToChange.transform.rotation.eulerAngles.z;
-        saveZone.GetComponent<Image>().fillAmount = saveZoneAmount;
-        maxPosition = new Vector3(position.transform.localPosition.x, saveZone.GetComponent<RectTransform>().sizeDelta.y / 2 - position.GetComponent<RectTransform>().sizeDelta.y / 2, position.transform.localPosition.z);
-        minPosition = new Vector3(position.transform.localPosition.x, (-saveZone.GetComponent<RectTransform>().sizeDelta.y / 2) + position.GetComponent<RectTransform>().sizeDelta.y / 2, position.transform.localPosition.z);
+
+        saveZoneMinY = saveZone.transform.localPosition.y - (saveZone.GetComponent<RectTransform>().sizeDelta.y/2);
+        saveZoneMaxY = saveZone.transform.localPosition.y + (saveZone.GetComponent<RectTransform>().sizeDelta.y / 2);
+
+        maxPosition = new Vector3(position.transform.localPosition.x, bar.GetComponent<RectTransform>().sizeDelta.y / 2 - position.GetComponent<RectTransform>().sizeDelta.y / 2 - 0.05f, position.transform.localPosition.z);
+        minPosition = new Vector3(position.transform.localPosition.x, (-bar.GetComponent<RectTransform>().sizeDelta.y / 2) + position.GetComponent<RectTransform>().sizeDelta.y / 2 + 0.05f, position.transform.localPosition.z);
         position.transform.localPosition = minPosition;
     }
 
@@ -44,6 +50,15 @@ public class MovementBar : MonoBehaviour
         {
             BarUnactions();
         }
+        if(position.transform.localPosition.y < saveZoneMaxY && position.transform.localPosition.y > saveZoneMinY)
+        {
+            Debug.Log("safe");
+        }
+        else
+        {
+            Debug.Log("danger");
+        }
+
     }
 
     public void BarActions()

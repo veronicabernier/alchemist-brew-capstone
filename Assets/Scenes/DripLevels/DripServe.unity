@@ -157,8 +157,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0.45, y: 3.45}
+  m_AnchoredPosition: {x: 0, y: 0.35}
+  m_SizeDelta: {x: 0.45, y: 0.57}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &229376209
 MonoBehaviour:
@@ -181,11 +181,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 0ae2b74b1edd14bb18dd7b65ae916a54, type: 3}
-  m_Type: 3
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 0.244
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -762,7 +762,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.42}
+  m_AnchoredPosition: {x: 0, y: -0.539}
   m_SizeDelta: {x: 0.45, y: 0.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1424173593
@@ -936,9 +936,8 @@ MonoBehaviour:
   saveZone: {fileID: 229376207}
   position: {fileID: 1424173591}
   rotationZSpeed: 0.5
-  rotationZMax: 120
+  rotationZMax: 140
   objectToChange: {fileID: 1329137796}
-  saveZoneAmount: 0.4
   interacting: 0
 --- !u!1 &1951028485
 GameObject:
