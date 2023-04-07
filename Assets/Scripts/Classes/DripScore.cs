@@ -16,6 +16,9 @@ public class DripScore
     public int chooseFilterScore;
     public int chooseFilterScoreTotal;
 
+    public int refillReservoirScore;
+    public int refillReservoirScoreTotal;
+
     public int brewScore;
     public int brewScoreTotal;
 

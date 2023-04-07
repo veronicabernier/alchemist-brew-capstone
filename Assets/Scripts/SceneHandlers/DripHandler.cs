@@ -31,6 +31,7 @@ public class DripHandler : MonoBehaviour
         Reservoir,
         Grind,
         ChooseFilter,
+        RefillReservoir,
         Brew,
         Serve
     }
@@ -179,6 +180,11 @@ public class DripHandler : MonoBehaviour
         {
             dripScore.chooseFilterScore = curScore;
             dripScore.chooseFilterScoreTotal = curTotalScore;
+        }
+        else if (levels[curLevel].name == LevelTypes.RefillReservoir)
+        {
+                dripScore.refillReservoirScore = curScore;
+                dripScore.refillReservoirScoreTotal = curTotalScore;
         }
         else if (levels[curLevel].name == LevelTypes.Brew)
         {
