@@ -935,10 +935,10 @@ MonoBehaviour:
   bar: {fileID: 2136854749}
   saveZone: {fileID: 229376207}
   position: {fileID: 1424173591}
-  rotationSpeed: {x: 0, y: 0, z: 0.5}
-  rotationMax: {x: 0, y: 0, z: 120}
+  rotationZSpeed: 0.5
+  rotationZMax: 120
   objectToChange: {fileID: 1329137796}
-  saveZoneHeight: 0.4
+  saveZoneAmount: 0.4
   interacting: 0
 --- !u!1 &1951028485
 GameObject:

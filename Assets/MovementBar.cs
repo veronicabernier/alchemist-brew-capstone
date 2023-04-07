@@ -10,9 +10,9 @@ public class MovementBar : MonoBehaviour
     public GameObject bar;
     public GameObject saveZone;
     public GameObject position;
-    //rotation change speed
-    public Vector3 rotationSpeed;
-    public Vector3 rotationMax;
+    //rotation change speed (works with z axis to connect with bar right now)
+    public float rotationZSpeed;
+    public float rotationZMax;
     public GameObject objectToChange;
     //position -> not necessary for now
     //acceleration
@@ -23,14 +23,14 @@ public class MovementBar : MonoBehaviour
 
     public bool interacting = false;
 
-    private Vector3 ogRotation;
+    private float ogZRotation;
     private Vector3 minPosition;
     private Vector3 maxPosition;
 
     // Start is called before the first frame update
     void Start()
     {
-        ogRotation = objectToChange.transform.rotation.eulerAngles;
+        ogZRotation = objectToChange.transform.rotation.eulerAngles.z;
         saveZone.GetComponent<Image>().fillAmount = saveZoneAmount;
         maxPosition = new Vector3(position.transform.localPosition.x, saveZone.GetComponent<RectTransform>().sizeDelta.y / 2 - position.GetComponent<RectTransform>().sizeDelta.y / 2, position.transform.localPosition.z);
         minPosition = new Vector3(position.transform.localPosition.x, (-saveZone.GetComponent<RectTransform>().sizeDelta.y / 2) + position.GetComponent<RectTransform>().sizeDelta.y / 2, position.transform.localPosition.z);
@@ -49,14 +49,20 @@ public class MovementBar : MonoBehaviour
     public void BarActions()
     {
         Vector3 curAngles = objectToChange.transform.rotation.eulerAngles;
-        Vector3 newAngles = new Vector3(Mathf.Min(curAngles.x + rotationSpeed.x, rotationMax.x), Mathf.Min(curAngles.y + rotationSpeed.y, rotationMax.y), Mathf.Min(curAngles.z + rotationSpeed.z, rotationMax.z));
+        Vector3 newAngles = new Vector3(curAngles.x, curAngles.y, Mathf.Min(curAngles.z + rotationZSpeed, rotationZMax));
         objectToChange.transform.eulerAngles = newAngles;
+
+        float changeRatio = Math.Abs(newAngles.z - ogZRotation) / Math.Abs(rotationZMax - ogZRotation);
+        position.transform.localPosition = minPosition + new Vector3(0, changeRatio * Math.Abs(minPosition.y - maxPosition.y), 0);
     }
 
     public void BarUnactions()
     {
         Vector3 curAngles = objectToChange.transform.rotation.eulerAngles;
-        Vector3 newAngles = new Vector3(Mathf.Max(curAngles.x - rotationSpeed.x, ogRotation.x), Mathf.Max(curAngles.y - rotationSpeed.y, ogRotation.y), Mathf.Max(curAngles.z - rotationSpeed.z, ogRotation.z));
+        Vector3 newAngles = new Vector3(curAngles.x, curAngles.y, Mathf.Max(curAngles.z - rotationZSpeed, ogZRotation));
         objectToChange.transform.eulerAngles = newAngles;
+
+        float changeRatio = Math.Abs(newAngles.z - ogZRotation) / Math.Abs(rotationZMax - ogZRotation);
+        position.transform.localPosition = minPosition + new Vector3(0, changeRatio * Math.Abs(minPosition.y - maxPosition.y), 0);
     }
 }
