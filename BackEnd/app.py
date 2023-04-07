@@ -229,11 +229,6 @@ def encoder_brews(brew):
     if isinstance(brew, brews):
         return {'brewid': brew.brewid, 'ext_time': brew.ext_time, 'ext_weight': brew.ext_weight, 'flavor': brew.flavor,
             'date': brew.date, 'recipeid': brew.recipeid, 'brew_visibility': brew.brew_visibility}
-        # result = {'recipeid': brew.recipeid, 'brew_method': brew.brew_method, 'grind_setting': brew.grind_setting,
-        #           'brand': brew.brand, 'roast': brew.roast, 'bean_type': brew.bean_type, 'coffee_weight': brew.coffee_weight,
-        #           'userid': brew.userid, 'recipe_visibility': brew.recipe_visibility, 'brewid': brew.brewid,
-        #           'ext_time': brew.ext_time, 'ext_weight': brew.ext_weight, 'flavor': brew.flavor, 'date': brew.date,
-        #           'brew_visibility': brew.brew_visibility}
     raise TypeError(f'Object{brew} is not of type recipes.')
 
 @app.route("/<userid>/recipe list", methods=["POST", "GET"])
@@ -305,6 +300,22 @@ def add_recipe(userid):
         roast = request.form.get('roast')
         bean_type = request.form.get('bean_type')
         coffee_weight = request.form.get('coffee_weight')
+
+        if (brew_method == None or len(brew_method) == 0):
+            return jsonify(Error="Please enter brew method")
+        if(brand == None or len(brand)==0):
+            return jsonify(Error="Please enter coffee brand")
+        if (grind_setting == None or len(grind_setting) == 0):
+            return jsonify(Error="Please enter coffee grind setting")
+        if (not grind_setting.isnumeric()):
+            return jsonify(Error="Please enter a number for the coffee grind setting")
+        if(roast == None or len(roast)==0):
+            roast = 'Not specified'
+        if (bean_type == None or len(bean_type) == 0):
+            bean_type = 'Not specified'
+        if (coffee_weight == None or len(coffee_weight) == 0):
+            return jsonify(Error="Please enter coffee weight")
+
 
         Session.add(
             recipes(brew_method=brew_method, grind_setting=grind_setting, brand=brand, roast=roast,
