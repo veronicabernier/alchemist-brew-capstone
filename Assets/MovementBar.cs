@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class MovementBar : MonoBehaviour
 {
     //bar
+    public GameObject bar;
     public GameObject saveZone;
     public GameObject position;
     //rotation change speed
@@ -16,19 +17,24 @@ public class MovementBar : MonoBehaviour
     //position -> not necessary for now
     //acceleration
     //range of error
-    public float saveZoneHeight = 0.4f;
+    public float saveZoneAmount = 0.4f;
     //speed of change
     //range of change
 
     public bool interacting = false;
 
     private Vector3 ogRotation;
+    private Vector3 minPosition;
+    private Vector3 maxPosition;
 
     // Start is called before the first frame update
     void Start()
     {
         ogRotation = objectToChange.transform.rotation.eulerAngles;
-        saveZone.GetComponent<Image>().fillAmount = saveZoneHeight;
+        saveZone.GetComponent<Image>().fillAmount = saveZoneAmount;
+        maxPosition = new Vector3(position.transform.localPosition.x, saveZone.GetComponent<RectTransform>().sizeDelta.y / 2 - position.GetComponent<RectTransform>().sizeDelta.y / 2, position.transform.localPosition.z);
+        minPosition = new Vector3(position.transform.localPosition.x, (-saveZone.GetComponent<RectTransform>().sizeDelta.y / 2) + position.GetComponent<RectTransform>().sizeDelta.y / 2, position.transform.localPosition.z);
+        position.transform.localPosition = minPosition;
     }
 
     // Update is called once per frame
