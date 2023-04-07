@@ -10,6 +10,9 @@ public class MovementBar : MonoBehaviour
     public GameObject bar;
     public GameObject saveZone;
     public GameObject position;
+    //fill bar
+    public Image fillProgress;
+    public float fillSpeed = 0.01f;
     //rotation change speed (works with z axis to connect with bar right now)
     public float rotationZSpeed;
     public float rotationZMax;
@@ -53,6 +56,7 @@ public class MovementBar : MonoBehaviour
         if(position.transform.localPosition.y < saveZoneMaxY && position.transform.localPosition.y > saveZoneMinY)
         {
             Debug.Log("safe");
+            fillProgress.fillAmount += fillSpeed;
         }
         else
         {
