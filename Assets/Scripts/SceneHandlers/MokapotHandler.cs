@@ -29,8 +29,10 @@ public class MokapotHandler : MonoBehaviour
     {
         Weighing,
         Grind,
-        WetGrounds,
-        AddWater,
+        ChooseWater,
+        AddCoffee,
+        PutTogether,
+        Stove,
         Serve
     }
 
@@ -161,28 +163,38 @@ public class MokapotHandler : MonoBehaviour
 
         if (levels[curLevel].name == LevelTypes.Weighing)
         {
-            mokapotScore.weightScore = curScore;
-            mokapotScore.weightScoreTotal = curTotalScore;
+           mokapotScore.weightScore = curScore;
+           mokapotScore.weightScoreTotal = curTotalScore;
         }
         else if (levels[curLevel].name == LevelTypes.Grind)
         {
-            mokapotScore.grindScore = curScore;
-            mokapotScore.grindScoreTotal = curTotalScore;
+           mokapotScore.grindScore = curScore;
+           mokapotScore.grindScoreTotal = curTotalScore;
         }
-        else if (levels[curLevel].name == LevelTypes.WetGrounds)
+        else if (levels[curLevel].name == LevelTypes.ChooseWater)
         {
-            mokapotScore.wetGroundsScore = curScore;
-            mokapotScore.wetGroundsScoreTotal = curTotalScore;
+           mokapotScore.chooseWaterScore = curScore;
+           mokapotScore.chooseWaterScoreTotal = curTotalScore;
         }
-        else if (levels[curLevel].name == LevelTypes.AddWater)
+        else if (levels[curLevel].name == LevelTypes.AddCoffee)
         {
-            mokapotScore.addWaterScore = curScore;
-            mokapotScore.addWaterScoreTotal = curTotalScore;
+           mokapotScore.addCoffeeScore = curScore;
+           mokapotScore.addCoffeeScoreTotal = curTotalScore;
+        }
+        else if (levels[curLevel].name == LevelTypes.PutTogether)
+        {
+           mokapotScore.putTogetherScore = curScore;
+           mokapotScore.putTogetherScoreTotal = curTotalScore;
+        }
+        else if (levels[curLevel].name == LevelTypes.Stove)
+        {
+           mokapotScore.stoveScore = curScore;
+           mokapotScore.stoveScoreTotal = curTotalScore;
         }
         else if (levels[curLevel].name == LevelTypes.Serve)
         {
-            mokapotScore.serveScore = curScore;
-            mokapotScore.serveScoreTotal = curTotalScore;
+           mokapotScore.serveScore = curScore;
+           mokapotScore.serveScoreTotal = curTotalScore;
         }
     }
 }

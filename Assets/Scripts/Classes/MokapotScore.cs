@@ -10,11 +10,17 @@ public class MokapotScore
     public int grindScore;
     public int grindScoreTotal;
 
-    public int wetGroundsScore;
-    public int wetGroundsScoreTotal;
+    public int chooseWaterScore;
+    public int chooseWaterScoreTotal;
 
-    public int addWaterScore;
-    public int addWaterScoreTotal;
+    public int addCoffeeScore;
+    public int addCoffeeScoreTotal;
+
+    public int putTogetherScore;
+    public int putTogetherScoreTotal;
+
+    public int stoveScore;
+    public int stoveScoreTotal;
 
     public int serveScore;
     public int serveScoreTotal;

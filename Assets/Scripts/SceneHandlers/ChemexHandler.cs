@@ -29,10 +29,8 @@ public class ChemexHandler : MonoBehaviour
     {
         Weighing,
         Grind,
-        ChooseWater,
-        AddCoffee,
-        PutTogether,
-        Stove,
+        WetGrounds,
+        AddWater,
         Serve
     }
 
@@ -171,25 +169,15 @@ public class ChemexHandler : MonoBehaviour
             chemexScore.grindScore = curScore;
             chemexScore.grindScoreTotal = curTotalScore;
         }
-        else if (levels[curLevel].name == LevelTypes.ChooseWater)
+        else if (levels[curLevel].name == LevelTypes.WetGrounds)
         {
-            chemexScore.chooseWaterScore = curScore;
-            chemexScore.chooseWaterScoreTotal = curTotalScore;
+            chemexScore.wetGroundsScore = curScore;
+            chemexScore.wetGroundsScoreTotal = curTotalScore;
         }
-        else if (levels[curLevel].name == LevelTypes.AddCoffee)
+        else if (levels[curLevel].name == LevelTypes.AddWater)
         {
-            chemexScore.addCoffeeScore = curScore;
-            chemexScore.addCoffeeScoreTotal = curTotalScore;
-        }
-        else if (levels[curLevel].name == LevelTypes.PutTogether)
-        {
-            chemexScore.putTogetherScore = curScore;
-            chemexScore.putTogetherScoreTotal = curTotalScore;
-        }
-        else if (levels[curLevel].name == LevelTypes.Stove)
-        {
-            chemexScore.stoveScore = curScore;
-            chemexScore.stoveScoreTotal = curTotalScore;
+            chemexScore.addWaterScore = curScore;
+            chemexScore.addWaterScoreTotal = curTotalScore;
         }
         else if (levels[curLevel].name == LevelTypes.Serve)
         {

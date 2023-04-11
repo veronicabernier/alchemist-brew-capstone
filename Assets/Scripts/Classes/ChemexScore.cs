@@ -10,17 +10,11 @@ public class ChemexScore
     public int grindScore;
     public int grindScoreTotal;
 
-    public int chooseWaterScore;
-    public int chooseWaterScoreTotal;
+    public int wetGroundsScore;
+    public int wetGroundsScoreTotal;
 
-    public int addCoffeeScore;
-    public int addCoffeeScoreTotal;
-
-    public int putTogetherScore;
-    public int putTogetherScoreTotal;
-
-    public int stoveScore;
-    public int stoveScoreTotal;
+    public int addWaterScore;
+    public int addWaterScoreTotal;
 
     public int serveScore;
     public int serveScoreTotal;
