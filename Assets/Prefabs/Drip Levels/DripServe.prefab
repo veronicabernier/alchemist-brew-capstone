@@ -607,7 +607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bar: {fileID: 4541897597537306451}
-  saveZone: {fileID: 4541897599385900865}
+  safeZone: {fileID: 4541897599385900865}
   position: {fileID: 4541897597896867225}
   fillProgress: {fileID: 4541897598539262083}
   fillSpeed: 0.003

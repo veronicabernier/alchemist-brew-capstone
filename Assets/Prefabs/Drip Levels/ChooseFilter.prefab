@@ -1432,7 +1432,7 @@ MonoBehaviour:
   filterPrompt: {fileID: 5305989984291386849}
   progressBar: {fileID: 5305989985050674542}
   waterMask: {fileID: 5305989984239665924}
-  timer: {fileID: 0}
+  timer: {fileID: 3381929647439237272}
 --- !u!1 &5305989985050674542
 GameObject:
   m_ObjectHideFlags: 0
@@ -1661,5 +1661,10 @@ PrefabInstance:
 --- !u!224 &3381929647439237273 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5359752953992241438, guid: 2143615664420804c8e676194a85d44c, type: 3}
+  m_PrefabInstance: {fileID: 7245920107534528903}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3381929647439237272 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5359752953992241439, guid: 2143615664420804c8e676194a85d44c, type: 3}
   m_PrefabInstance: {fileID: 7245920107534528903}
   m_PrefabAsset: {fileID: 0}

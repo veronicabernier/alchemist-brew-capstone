@@ -1155,7 +1155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progressBar: {fileID: 2138732114424543495}
-  timer: {fileID: 0}
+  timer: {fileID: 312844360397109802}
   coffeeMask: {fileID: 2138732113653647611}
 --- !u!1 &2138732115223273822
 GameObject:
@@ -1475,5 +1475,10 @@ PrefabInstance:
 --- !u!224 &312844360397109803 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5359752953992241438, guid: 2143615664420804c8e676194a85d44c, type: 3}
+  m_PrefabInstance: {fileID: 5635930181814901557}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &312844360397109802 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5359752953992241439, guid: 2143615664420804c8e676194a85d44c, type: 3}
   m_PrefabInstance: {fileID: 5635930181814901557}
   m_PrefabAsset: {fileID: 0}
