@@ -17,7 +17,7 @@ public class ChemexScore
     public int addCoffeeScoreTotal;
 
     public int putTogetherScore;
-    public int putTogetherTotal;
+    public int putTogetherScoreTotal;
 
     public int stoveScore;
     public int stoveScoreTotal;
