@@ -411,8 +411,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DripHandler, Assembly-CSharp
+      - m_Target: {fileID: 575356714}
+        m_TargetAssemblyTypeName: ChemexHandler, Assembly-CSharp
         m_MethodName: MoveLevel
         m_Mode: 1
         m_Arguments:
@@ -544,8 +544,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DripHandler, Assembly-CSharp
+      - m_Target: {fileID: 575356714}
+        m_TargetAssemblyTypeName: ChemexHandler, Assembly-CSharp
         m_MethodName: MoveLevel
         m_Mode: 1
         m_Arguments:
@@ -847,7 +847,7 @@ MonoBehaviour:
     prefab: {fileID: 1800954233005182419, guid: ddcb7f0c0be6c9d44a66dc10d05e4f1c, type: 3}
     button: {fileID: 1450287002}
   - name: 2
-    prefab: {fileID: 0}
+    prefab: {fileID: 1600666915058075563, guid: 5da7a6233895a0a42b193cfec17e89be, type: 3}
     button: {fileID: 707406558}
   - name: 3
     prefab: {fileID: 0}
@@ -1302,8 +1302,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DripHandler, Assembly-CSharp
+      - m_Target: {fileID: 575356714}
+        m_TargetAssemblyTypeName: ChemexHandler, Assembly-CSharp
         m_MethodName: MoveLevel
         m_Mode: 1
         m_Arguments:
@@ -1602,8 +1602,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DripHandler, Assembly-CSharp
+      - m_Target: {fileID: 575356714}
+        m_TargetAssemblyTypeName: ChemexHandler, Assembly-CSharp
         m_MethodName: MoveLevel
         m_Mode: 1
         m_Arguments:
@@ -2252,8 +2252,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DripHandler, Assembly-CSharp
+      - m_Target: {fileID: 575356714}
+        m_TargetAssemblyTypeName: ChemexHandler, Assembly-CSharp
         m_MethodName: MoveLevel
         m_Mode: 1
         m_Arguments:

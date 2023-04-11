@@ -7,8 +7,13 @@ using UnityEngine.EventSystems;
 public class AddLiquid : MonoBehaviour
 {
     public GameObject spriteMask;
+    public bool random = true;
+
     public GameObject lineGuide;
+
+    [ConditionalHide("random", false)]
     public float lineYMin;
+    [ConditionalHide("random", false)]
     public float lineYMax;
 
     private float yStart;
@@ -17,7 +22,7 @@ public class AddLiquid : MonoBehaviour
     public float ySpeed = 0.001f;
 
 
-    public float correctYMask;
+    private float correctYMask;
     
 
     // Start is called before the first frame update
@@ -29,12 +34,19 @@ public class AddLiquid : MonoBehaviour
 
     private void PositionLine()
     {
-        float positionPercentage = UnityEngine.Random.Range(0.10f, 0.90f);
-        float lineYPos = lineYMin + (Mathf.Abs(lineYMax - lineYMin) * positionPercentage);
+        if (random)
+        {
+            float positionPercentage = UnityEngine.Random.Range(0.10f, 0.90f);
+            float lineYPos = lineYMin + (Mathf.Abs(lineYMax - lineYMin) * positionPercentage);
 
-        lineGuide.transform.localPosition = new Vector2(lineGuide.transform.localPosition.x, lineYPos);
+            lineGuide.transform.localPosition = new Vector2(lineGuide.transform.localPosition.x, lineYPos);
 
-        correctYMask = yStart + (Mathf.Abs(yEnd - yStart) * positionPercentage);
+            correctYMask = yStart + (Mathf.Abs(yEnd - yStart) * positionPercentage);
+        }
+        else
+        {
+            correctYMask = yEnd;
+        }
     }
 
     // Update is called once per frame
@@ -56,10 +68,21 @@ public class AddLiquid : MonoBehaviour
     private void FillLiquid()
     {
         float curY = spriteMask.transform.localPosition.y;
-        if(curY < yEnd)
+        if(ySpeed < 0)
         {
-            float newY = Mathf.Min(curY + ySpeed, yEnd);
-            spriteMask.transform.localPosition = new Vector3(spriteMask.transform.localPosition.x, newY);
+            if (curY > yEnd)
+            {
+                float newY = Mathf.Max(curY + ySpeed, yEnd);
+                spriteMask.transform.localPosition = new Vector3(spriteMask.transform.localPosition.x, newY);
+            }
+        }
+        else
+        {
+            if (curY < yEnd)
+            {
+                float newY = Mathf.Min(curY + ySpeed, yEnd);
+                spriteMask.transform.localPosition = new Vector3(spriteMask.transform.localPosition.x, newY);
+            }
         }
     }
 
@@ -80,7 +103,7 @@ public class AddLiquid : MonoBehaviour
 
         if(curScore != curScoreTotal)
         {
-            if(yChange < correctYChange)
+            if((correctYChange > 0 && yChange < correctYChange) || (correctYChange < 0 && yChange > correctYChange))
             {
                 comments.Add("More water needed");
             }
