@@ -34,7 +34,7 @@ public class ChemexAddWaterController : MonoBehaviour
 
     public void WaterAdded()
     {
-        prompt.text = "Wait";
+        prompt.text = "Wait!";
         waterDoneButton.SetActive(false);
         chemex.GetComponent<AddLiquid>().enabled = false;
         progressBar.SetActive(true);

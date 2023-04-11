@@ -17,31 +17,38 @@ public class MovementBar : MonoBehaviour
     public float rotationZSpeed;
     public float rotationZMax;
     public GameObject objectToChange;
-    //position -> not necessary for now
-    //acceleration
-    //range of error
 
-    //speed of change
-    //range of change
     public GameObject animatedImage;
     public Transform animatedImagePos;
-    public SpriteMask coffeeMask;
+    public GameObject coffeeFull;
     public bool interacting = false;
 
-    private float saveZoneMinY;
-    private float saveZoneMaxY;
+    private float curSaveMinY;
+    private float curSaveMaxY;
 
-    private float ogZRotation;
-    private Vector3 minPosition;
-    private Vector3 maxPosition;
+    private static Vector3 saveZoneTotalMin;
+    private static Vector3 saveZoneTotalMax;
 
+    private static float ogZRotation;
+
+    private static Vector3 minPosition;
+    private static Vector3 maxPosition;
+
+    private static float ogCoffeeScaleY;
+    private static float ogCoffeePosY;
     // Start is called before the first frame update
     void Start()
     {
         ogZRotation = objectToChange.transform.rotation.eulerAngles.z;
+        ogCoffeeScaleY = coffeeFull.transform.localScale.y;
+        ogCoffeePosY = coffeeFull.transform.localPosition.y;
 
-        saveZoneMinY = saveZone.transform.localPosition.y - (saveZone.GetComponent<RectTransform>().sizeDelta.y/2);
-        saveZoneMaxY = saveZone.transform.localPosition.y + (saveZone.GetComponent<RectTransform>().sizeDelta.y / 2);
+        saveZoneTotalMax = new Vector3(saveZone.transform.localPosition.x, bar.GetComponent<RectTransform>().sizeDelta.y / 2 - saveZone.GetComponent<RectTransform>().sizeDelta.y / 2 - 0.05f, saveZone.transform.localPosition.z);
+        saveZoneTotalMin = new Vector3(saveZone.transform.localPosition.x, (-bar.GetComponent<RectTransform>().sizeDelta.y / 2) + saveZone.GetComponent<RectTransform>().sizeDelta.y / 2 + 0.05f, saveZone.transform.localPosition.z);
+        saveZone.transform.localPosition = saveZoneTotalMin;
+
+        curSaveMinY = saveZone.transform.localPosition.y - (saveZone.GetComponent<RectTransform>().sizeDelta.y/2);
+        curSaveMaxY = saveZone.transform.localPosition.y + (saveZone.GetComponent<RectTransform>().sizeDelta.y / 2);
 
         maxPosition = new Vector3(position.transform.localPosition.x, bar.GetComponent<RectTransform>().sizeDelta.y / 2 - position.GetComponent<RectTransform>().sizeDelta.y / 2 - 0.05f, position.transform.localPosition.z);
         minPosition = new Vector3(position.transform.localPosition.x, (-bar.GetComponent<RectTransform>().sizeDelta.y / 2) + position.GetComponent<RectTransform>().sizeDelta.y / 2 + 0.05f, position.transform.localPosition.z);
@@ -57,11 +64,12 @@ public class MovementBar : MonoBehaviour
         {
             BarUnactions();
         }
-        if(position.transform.localPosition.y < saveZoneMaxY && position.transform.localPosition.y > saveZoneMinY)
+        if(position.transform.localPosition.y < curSaveMaxY && position.transform.localPosition.y > curSaveMinY)
         {
             Debug.Log("safe");
             fillProgress.fillAmount += fillSpeed;
-            coffeeMask.transform.localPosition = new Vector3(coffeeMask.transform.localPosition.x, 1 - fillProgress.fillAmount, coffeeMask.transform.localPosition.z);
+            coffeeFull.transform.localScale = new Vector3(coffeeFull.transform.localScale.x, (1 - fillProgress.fillAmount) * ogCoffeeScaleY, coffeeFull.transform.localScale.z);
+            coffeeFull.transform.localPosition = new Vector3(coffeeFull.transform.localPosition.x, (1 - fillProgress.fillAmount) * ogCoffeePosY, coffeeFull.transform.localPosition.z);
             animatedImage.GetComponent<Image>().enabled = (fillProgress.fillAmount < 1);
             animatedImage.transform.localPosition = animatedImagePos.position;
         }

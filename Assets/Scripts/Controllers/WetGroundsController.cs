@@ -36,7 +36,7 @@ public class WetGroundsController : MonoBehaviour
 
     public void WaterAdded()
     {
-        prompt.text = "Wait";
+        prompt.text = "Wait!";
         waterDoneButton.SetActive(false);
         chemex.GetComponent<AddLiquid>().enabled = false;
         progressBar.SetActive(true);
@@ -50,7 +50,7 @@ public class WetGroundsController : MonoBehaviour
         groundsPlaced.SetActive(true);
         chemex.GetComponent<AddLiquid>().enabled = true;
         waterDoneButton.SetActive(true);
-        prompt.text = "Wet Grounds";
+        prompt.text = "Wet Grounds!";
     }
 
     public void ProgressDone()
