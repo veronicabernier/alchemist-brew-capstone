@@ -8,7 +8,7 @@ public class MovementBar : MonoBehaviour
 {
     //bar
     public GameObject bar;
-    public GameObject saveZone;
+    public GameObject safeZone;
     public GameObject position;
     //fill bar
     public Image fillProgress;
@@ -23,11 +23,13 @@ public class MovementBar : MonoBehaviour
     public GameObject coffeeFull;
     public bool interacting = false;
 
-    private float curSaveMinY;
-    private float curSaveMaxY;
+    public float y0Value = 0f;
 
-    private static Vector3 saveZoneTotalMin;
-    private static Vector3 saveZoneTotalMax;
+    private float curSafeMinY;
+    private float curSafeMaxY;
+
+    private static Vector3 safeZoneTotalMin;
+    private static Vector3 safeZoneTotalMax;
 
     private static float ogZRotation;
 
@@ -43,12 +45,12 @@ public class MovementBar : MonoBehaviour
         ogCoffeeScaleY = coffeeFull.transform.localScale.y;
         ogCoffeePosY = coffeeFull.transform.localPosition.y;
 
-        saveZoneTotalMax = new Vector3(saveZone.transform.localPosition.x, bar.GetComponent<RectTransform>().sizeDelta.y / 2 - saveZone.GetComponent<RectTransform>().sizeDelta.y / 2 - 0.05f, saveZone.transform.localPosition.z);
-        saveZoneTotalMin = new Vector3(saveZone.transform.localPosition.x, (-bar.GetComponent<RectTransform>().sizeDelta.y / 2) + saveZone.GetComponent<RectTransform>().sizeDelta.y / 2 + 0.05f, saveZone.transform.localPosition.z);
-        saveZone.transform.localPosition = saveZoneTotalMin;
+        safeZoneTotalMax = new Vector3(safeZone.transform.localPosition.x, bar.GetComponent<RectTransform>().sizeDelta.y / 2 - safeZone.GetComponent<RectTransform>().sizeDelta.y / 2 - 0.05f, safeZone.transform.localPosition.z);
+        safeZoneTotalMin = new Vector3(0, y0Value, 0) + new Vector3(safeZone.transform.localPosition.x, (-bar.GetComponent<RectTransform>().sizeDelta.y / 2) + safeZone.GetComponent<RectTransform>().sizeDelta.y / 2 + 0.05f, safeZone.transform.localPosition.z);
+        safeZone.transform.localPosition = safeZoneTotalMin;
 
-        curSaveMinY = saveZone.transform.localPosition.y - (saveZone.GetComponent<RectTransform>().sizeDelta.y/2);
-        curSaveMaxY = saveZone.transform.localPosition.y + (saveZone.GetComponent<RectTransform>().sizeDelta.y / 2);
+        curSafeMinY = safeZone.transform.localPosition.y - (safeZone.GetComponent<RectTransform>().sizeDelta.y/2);
+        curSafeMaxY = safeZone.transform.localPosition.y + (safeZone.GetComponent<RectTransform>().sizeDelta.y / 2);
 
         maxPosition = new Vector3(position.transform.localPosition.x, bar.GetComponent<RectTransform>().sizeDelta.y / 2 - position.GetComponent<RectTransform>().sizeDelta.y / 2 - 0.05f, position.transform.localPosition.z);
         minPosition = new Vector3(position.transform.localPosition.x, (-bar.GetComponent<RectTransform>().sizeDelta.y / 2) + position.GetComponent<RectTransform>().sizeDelta.y / 2 + 0.05f, position.transform.localPosition.z);
@@ -64,7 +66,7 @@ public class MovementBar : MonoBehaviour
         {
             BarUnactions();
         }
-        if(position.transform.localPosition.y < curSaveMaxY && position.transform.localPosition.y > curSaveMinY)
+        if(position.transform.localPosition.y < curSafeMaxY && position.transform.localPosition.y > curSafeMinY)
         {
             Debug.Log("safe");
             fillProgress.fillAmount += fillSpeed;
@@ -72,6 +74,12 @@ public class MovementBar : MonoBehaviour
             coffeeFull.transform.localPosition = new Vector3(coffeeFull.transform.localPosition.x, (1 - fillProgress.fillAmount) * ogCoffeePosY, coffeeFull.transform.localPosition.z);
             animatedImage.GetComponent<Image>().enabled = (fillProgress.fillAmount < 1);
             animatedImage.transform.localPosition = animatedImagePos.position;
+
+            //update safe zone
+            safeZone.transform.localPosition = safeZoneTotalMin + (safeZoneTotalMax-safeZoneTotalMin)*fillProgress.fillAmount;
+
+            curSafeMinY = safeZone.transform.localPosition.y - (safeZone.GetComponent<RectTransform>().sizeDelta.y / 2);
+            curSafeMaxY = safeZone.transform.localPosition.y + (safeZone.GetComponent<RectTransform>().sizeDelta.y / 2);
         }
         else
         {
