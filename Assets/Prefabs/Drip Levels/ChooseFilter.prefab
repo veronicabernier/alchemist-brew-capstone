@@ -1722,7 +1722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15446eede8325747a0fade48ce98278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToFill: 10
+  timeToFill: 30
   progressAmount: {fileID: 6062199841512860841}
   secondsLeft: {fileID: 6062199842596625648}
 --- !u!1 &6062199842596625678

@@ -25,6 +25,7 @@ public class MovementBar : MonoBehaviour
     //range of change
     public GameObject animatedImage;
     public Transform animatedImagePos;
+    public SpriteMask coffeeMask;
     public bool interacting = false;
 
     private float saveZoneMinY;
@@ -60,7 +61,8 @@ public class MovementBar : MonoBehaviour
         {
             Debug.Log("safe");
             fillProgress.fillAmount += fillSpeed;
-            animatedImage.GetComponent<Image>().enabled = true;
+            coffeeMask.transform.localPosition = new Vector3(coffeeMask.transform.localPosition.x, 1 - fillProgress.fillAmount, coffeeMask.transform.localPosition.z);
+            animatedImage.GetComponent<Image>().enabled = (fillProgress.fillAmount < 1);
             animatedImage.transform.localPosition = animatedImagePos.position;
         }
         else
@@ -89,5 +91,20 @@ public class MovementBar : MonoBehaviour
 
         float changeRatio = Math.Abs(newAngles.z - ogZRotation) / Math.Abs(rotationZMax - ogZRotation);
         position.transform.localPosition = minPosition + new Vector3(0, changeRatio * Math.Abs(minPosition.y - maxPosition.y), 0);
+    }
+
+    public void LevelFinished()
+    {
+        List<string> comments = new List<string>();
+
+        int curScoreTotal = 10;
+        int curScore = (int)(fillProgress.fillAmount * curScoreTotal);
+        if(curScore < curScoreTotal)
+        {
+            comments.Add("Didn't finish serving !");
+        }
+        SingleScore myScore = new SingleScore(curScore, curScoreTotal, comments);
+
+        this.SendMessageUpwards("StopLevel", myScore);
     }
 }
