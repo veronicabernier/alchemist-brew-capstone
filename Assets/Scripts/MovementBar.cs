@@ -68,7 +68,6 @@ public class MovementBar : MonoBehaviour
         }
         if(position.transform.localPosition.y < curSafeMaxY && position.transform.localPosition.y > curSafeMinY)
         {
-            Debug.Log("safe");
             fillProgress.fillAmount += fillSpeed;
             coffeeFull.transform.localScale = new Vector3(coffeeFull.transform.localScale.x, (1 - fillProgress.fillAmount) * ogCoffeeScaleY, coffeeFull.transform.localScale.z);
             coffeeFull.transform.localPosition = new Vector3(coffeeFull.transform.localPosition.x, (1 - fillProgress.fillAmount) * ogCoffeePosY, coffeeFull.transform.localPosition.z);
@@ -83,7 +82,6 @@ public class MovementBar : MonoBehaviour
         }
         else
         {
-            Debug.Log("danger");
             animatedImage.GetComponent<Image>().enabled = false;
         }
 

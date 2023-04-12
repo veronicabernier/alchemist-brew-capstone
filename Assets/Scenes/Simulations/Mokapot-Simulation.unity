@@ -993,7 +993,7 @@ MonoBehaviour:
     prefab: {fileID: 4655000498854174083, guid: 170df4a2fb098174bb5411743d8e78d1, type: 3}
     button: {fileID: 19716089}
   - name: 6
-    prefab: {fileID: 0}
+    prefab: {fileID: 8993627540911595729, guid: b26745502c3892449b09c10279a577d0, type: 3}
     button: {fileID: 347678359}
   levelsMenu: {fileID: 1856905504}
   feedbackName: {fileID: 1872198469}
