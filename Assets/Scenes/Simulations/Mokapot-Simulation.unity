@@ -207,8 +207,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DripHandler, Assembly-CSharp
+      - m_Target: {fileID: 575356714}
+        m_TargetAssemblyTypeName: MokapotHandler, Assembly-CSharp
         m_MethodName: MoveLevel
         m_Mode: 1
         m_Arguments:
@@ -545,8 +545,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DripHandler, Assembly-CSharp
+      - m_Target: {fileID: 575356714}
+        m_TargetAssemblyTypeName: MokapotHandler, Assembly-CSharp
         m_MethodName: MoveLevel
         m_Mode: 1
         m_Arguments:
@@ -678,8 +678,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DripHandler, Assembly-CSharp
+      - m_Target: {fileID: 575356714}
+        m_TargetAssemblyTypeName: MokapotHandler, Assembly-CSharp
         m_MethodName: MoveLevel
         m_Mode: 1
         m_Arguments:
@@ -975,13 +975,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - name: 0
-    prefab: {fileID: 0}
+    prefab: {fileID: 1142679862411280473, guid: 5cdd3b7f02be6e04faa8fc776f70a5d5, type: 3}
     button: {fileID: 385660362}
   - name: 1
-    prefab: {fileID: 0}
+    prefab: {fileID: 1800954233005182419, guid: ddcb7f0c0be6c9d44a66dc10d05e4f1c, type: 3}
     button: {fileID: 1450287002}
   - name: 2
-    prefab: {fileID: 0}
+    prefab: {fileID: 1478886683680058921, guid: 124f93fa76c2c9842b5d51afa0c96ee2, type: 3}
     button: {fileID: 2139045049}
   - name: 3
     prefab: {fileID: 0}
@@ -1576,8 +1576,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DripHandler, Assembly-CSharp
+      - m_Target: {fileID: 575356714}
+        m_TargetAssemblyTypeName: MokapotHandler, Assembly-CSharp
         m_MethodName: MoveLevel
         m_Mode: 1
         m_Arguments:
@@ -1876,8 +1876,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DripHandler, Assembly-CSharp
+      - m_Target: {fileID: 575356714}
+        m_TargetAssemblyTypeName: MokapotHandler, Assembly-CSharp
         m_MethodName: MoveLevel
         m_Mode: 1
         m_Arguments:
@@ -2826,8 +2826,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DripHandler, Assembly-CSharp
+      - m_Target: {fileID: 575356714}
+        m_TargetAssemblyTypeName: MokapotHandler, Assembly-CSharp
         m_MethodName: MoveLevel
         m_Mode: 1
         m_Arguments:
@@ -4456,8 +4456,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DripHandler, Assembly-CSharp
+      - m_Target: {fileID: 575356714}
+        m_TargetAssemblyTypeName: MokapotHandler, Assembly-CSharp
         m_MethodName: MoveLevel
         m_Mode: 1
         m_Arguments:
