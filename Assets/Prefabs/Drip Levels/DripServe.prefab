@@ -10,9 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4541897597354164872}
   - component: {fileID: 4541897597354164868}
-  - component: {fileID: 4541897597354164871}
-  - component: {fileID: 4541897597354164870}
-  - component: {fileID: 4541897597354164873}
   m_Layer: 0
   m_Name: Cup
   m_TagString: Untagged
@@ -90,67 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &4541897597354164871
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4541897597354164875}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.1184988, y: -0.022473574}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.5, y: 4}
-    newSize: {x: 3.4, y: 7.5}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 3.206656, y: 2.3928628}
-  m_EdgeRadius: 0
---- !u!114 &4541897597354164870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4541897597354164875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49b8d068263505c4aba546cad7c99c4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onlyHorizontal: 0
-  minXLimit: 0
-  maxXLimit: 0
-  snapIntoPlaceScript: 1
-  sizeChangeFactor: 1.2
---- !u!114 &4541897597354164873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4541897597354164875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86ed228a333d0824d91954d6d3334375, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  snapToPoint: 1
-  snapPoint: {fileID: 0}
-  snapRange: 1
-  allowDragAfterSnap: 0
-  dissapearAfterSnap: 0
-  messageUpwards: 1
 --- !u!1 &4541897597537306451
 GameObject:
   m_ObjectHideFlags: 0
