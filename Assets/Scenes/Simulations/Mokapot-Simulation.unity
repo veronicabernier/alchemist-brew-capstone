@@ -987,7 +987,7 @@ MonoBehaviour:
     prefab: {fileID: 3507266438154481971, guid: e381b31cdfdeb6b48b46115d0c2f9809, type: 3}
     button: {fileID: 707406558}
   - name: 4
-    prefab: {fileID: 0}
+    prefab: {fileID: 5192187695933663125, guid: 59134b05ffd59624d87e1525f0940cff, type: 3}
     button: {fileID: 850061777}
   - name: 5
     prefab: {fileID: 0}
