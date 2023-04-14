@@ -245,4 +245,102 @@ class drip_scores(Base):
                f"{self.refillReservoirScore} {self.refillReservoirScoreTotal} {self.brewScore} {self.brewScoreTotal} " \
                f"{self.serveScore} {self.serveScoreTotal} {self.scoreTotal} {self.evalTotal} {self.grade} {self.dateObtained})"
 
+class mokapot_scores(Base):
+    __tablename__ = "mokapot_scores"
+    mokapot_scoreid = Column("mokapot_scoreid", Integer, autoincrement=True, primary_key=True)
+    userid = Column("userid", Integer)
+    weightScore = Column("weightScore", Integer)
+    weightScoreTotal = Column("weightScoreTotal", Integer)
+    grindScore = Column("grindScore", Integer)
+    grindScoreTotal = Column("grindScoreTotal", Integer)
+    chooseWaterScore = Column("chooseWaterScore", Integer)
+    chooseWaterScoreTotal = Column("chooseWaterScoreTotal", Integer)
+    addCoffeeScore = Column("addCoffeeScore", Integer)
+    addCoffeeScoreTotal = Column("addCoffeeScoreTotal", Integer)
+    putTogetherScore = Column("putTogetherScore", Integer)
+    putTogetherScoreTotal = Column("putTogetherScoreTotal", Integer)
+    stoveScore = Column("stoveScore", Integer)
+    stoveScoreTotal = Column("stoveScoreTotal", Integer)
+    serveScore = Column("serveScore", Integer)
+    serveScoreTotal = Column("serveScoreTotal", Integer)
+    scoreTotal = Column("scoreTotal", Integer)
+    evalTotal = Column("evalTotal", Integer)
+    grade = Column("grade", Integer)
+    dateObtained = Column("date", DateTime)
+
+
+    def __init__(self, userid, weightScore, weightScoreTotal,grindScore, grindScoreTotal,
+                 chooseWaterScore, chooseWaterScoreTotal, addCoffeeScore, addCoffeeScoreTotal,
+                 putTogetherScore, putTogetherScoreTotal, stoveScore, stoveScoreTotal,
+                 serveScore, serveScoreTotal, scoreTotal, evalTotal, grade, dateObtained):
+        self.userid = userid
+        self.weightScore = weightScore
+        self.weightScoreTotal = weightScoreTotal
+        self.grindScore = grindScore
+        self.grindScoreTotal = grindScoreTotal
+        self.chooseWaterScore = chooseWaterScore
+        self.chooseWaterScoreTotal = chooseWaterScoreTotal
+        self.addCoffeeScore = addCoffeeScore
+        self.addCoffeeScoreTotal = addCoffeeScoreTotal
+        self.putTogetherScore = putTogetherScore
+        self.putTogetherScoreTotal = putTogetherScoreTotal
+        self.stoveScore = stoveScore
+        self.stoveScoreTotal = stoveScoreTotal
+        self.serveScore = serveScore
+        self.serveScoreTotal = serveScoreTotal
+        self.scoreTotal = scoreTotal
+        self.evalTotal = evalTotal
+        self.grade = grade
+        self.dateObtained = dateObtained
+
+    def __repr__(self):
+        return f"({self.userid} {self.weightScore} {self.weightScoreTotal} {self.grindScore} {self.grindScoreTotal}"\
+               f"{self.chooseWaterScore} {self.chooseWaterScoreTotal} {self.addCoffeeScore} {self.addCoffeeScoreTotal}"\
+               f"{self.putTogetherScore} {self.putTogetherScoreTotal} {self.stoveScore} {self.stoveScoreTotal}"\
+               f"{self.serveScore} {self.serveScoreTotal} {self.scoreTotal} {self.evalTotal} {self.grade} {self.dateObtained})"
+
+class chemex_scores(Base):
+    __tablename__ = "chemex_scores"
+    chemex_scoreid = Column("chemex_scoreid", Integer, autoincrement=True, primary_key=True)
+    userid = Column("userid", Integer)
+    weightScore = Column("weightScore", Integer)
+    weightScoreTotal = Column("weightScoreTotal", Integer)
+    grindScore = Column("grindScore", Integer)
+    grindScoreTotal = Column("grindScoreTotal", Integer)
+    wetGroundsScore = Column("wetGroundsScore", Integer)
+    wetGroundsScoreTotal = Column("wetGroundsScoreTotal", Integer)
+    addWaterScore = Column("addWaterScore", Integer)
+    addWaterScoreTotal = Column("addWaterScoreTotal", Integer)
+    serveScore = Column("serveScore", Integer)
+    serveScoreTotal = Column("serveScoreTotal", Integer)
+    scoreTotal = Column("scoreTotal", Integer)
+    evalTotal = Column("evalTotal", Integer)
+    grade = Column("grade", Integer)
+    dateObtained = Column("date", DateTime)
+
+
+    def __init__(self, userid, weightScore, weightScoreTotal,grindScore, grindScoreTotal,
+                 wetGroundsScore, wetGroundsScoreTotal, addWaterScore, addWaterScoreTotal,
+                 serveScore, serveScoreTotal, scoreTotal, evalTotal, grade, dateObtained):
+        self.userid = userid
+        self.weightScore = weightScore
+        self.weightScoreTotal = weightScoreTotal
+        self.grindScore = grindScore
+        self.grindScoreTotal = grindScoreTotal
+        self.wetGroundsScore = wetGroundsScore
+        self.wetGroundsScoreTotal = wetGroundsScoreTotal
+        self.addWaterScore = addWaterScore
+        self.addWaterScoreTotal = addWaterScoreTotal
+        self.serveScore = serveScore
+        self.serveScoreTotal = serveScoreTotal
+        self.scoreTotal = scoreTotal
+        self.evalTotal = evalTotal
+        self.grade = grade
+        self.dateObtained = dateObtained
+
+    def __repr__(self):
+        return f"({self.userid} {self.weightScore} {self.weightScoreTotal} {self.grindScore} {self.grindScoreTotal}"\
+               f"{self.wetGroundsScore} {self.wetGroundsScoreTotal} {self.addWaterScore} {self.addWaterScoreTotal}"\
+               f"{self.serveScore} {self.serveScoreTotal} {self.scoreTotal} {self.evalTotal} {self.grade} {self.dateObtained})"
+
 Base.metadata.create_all(engine)

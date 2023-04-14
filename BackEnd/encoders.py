@@ -35,6 +35,7 @@ def encoder_score(record):
                 'grindScoreTotal': record.grindScoreTotal, 'tampScore': record.tampScore, 'tampScoreTotal': record.tampScoreTotal, 'brewScore': record.brewScore,
                 'brewScoreTotal': record.brewScoreTotal, 'serveScore': record.serveScore, 'serveScoreTotal': record.serveScoreTotal,
                 'scoreTotal': record.scoreTotal, 'evalTotal': record.evalTotal, 'grade': record.grade, 'dateObtained': record.dateObtained}
+
     if isinstance(record, tables.drip_scores):
         return {'drip_scoreid': record.drip_scoreid, 'userid': record.userid, 'weightScore': record.weightScore,
                 'weightScoreTotal': record.weightScoreTotal, 'reservoirScore': record.reservoirScore,
@@ -48,6 +49,32 @@ def encoder_score(record):
                 'serveScore': record.serveScore, 'serveScoreTotal': record.serveScoreTotal,
                 'scoreTotal': record.scoreTotal, 'evalTotal': record.evalTotal, 'grade': record.grade,
                 'dateObtained': record.dateObtained}
+
+    if isinstance(record, tables.mokapot_scores):
+        return {'mokapot_scoreid': record.mokapot_scoreid, 'userid': record.userid, 'weightScore': record.weightScore,
+                'weightScoreTotal': record.weightScoreTotal, 'grindScore': record.grindScore,
+                'grindScoreTotal': record.grindScoreTotal,  'chooseWaterScore': record.chooseWaterScore,
+                'chooseWaterScoreTotal': record.chooseWaterScoreTotal,
+                'addCoffeeScore': record.addCoffeeScore,
+                'addCoffeeScoreTotal': record.addCoffeeScoreTotal,
+                'putTogetherScore': record.putTogetherScore,
+                'putTogetherScoreTotal': record.putTogetherScoreTotal,
+                'stoveScore': record.stoveScore, 'stoveScoreTotal': record.stoveScoreTotal,
+                'serveScore': record.serveScore, 'serveScoreTotal': record.serveScoreTotal,
+                'scoreTotal': record.scoreTotal, 'evalTotal': record.evalTotal, 'grade': record.grade,
+                'dateObtained': record.dateObtained}
+
+    if isinstance(record, tables.chemex_scores):
+        return {'chemex_scoreid': record.chemex_scoreid, 'userid': record.userid, 'weightScore': record.weightScore,
+                'weightScoreTotal': record.weightScoreTotal, 'grindScore': record.grindScore,
+                'grindScoreTotal': record.grindScoreTotal,  'wetGroundsScore': record.wetGroundsScore,
+                'wetGroundsScoreTotal': record.wetGroundsScoreTotal,
+                'addWaterScore': record.addWaterScore,
+                'addWaterScoreTotal': record.addWaterScoreTotal,
+                'serveScore': record.serveScore, 'serveScoreTotal': record.serveScoreTotal,
+                'scoreTotal': record.scoreTotal, 'evalTotal': record.evalTotal, 'grade': record.grade,
+                'dateObtained': record.dateObtained}
+
     raise TypeError(f'Object{record} is not any type to score.')
 
 # def encoder_drip_score(record):

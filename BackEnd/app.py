@@ -276,6 +276,28 @@ def get_drip_scores(userid):
             result_list.append(result)
         return jsonify(Attempts=result_list), 200
 
+@app.route("/<userid>/mokapot_scores", methods=["POST", "GET"])
+def get_mokapot_scores(userid):
+    result_list = []
+    if request.method == "GET":
+        mokapot = Session.query(tables.mokapot_scores).filter_by(userid=userid).all()
+
+        for i in mokapot:
+            result = encoders.encoder_score(i)
+            result_list.append(result)
+        return jsonify(Attempts=result_list), 200
+
+@app.route("/<userid>/chemex_scores", methods=["POST", "GET"])
+def get_chemex_scores(userid):
+    result_list = []
+    if request.method == "GET":
+        chemex = Session.query(tables.chemex_scores).filter_by(userid=userid).all()
+
+        for i in chemex:
+            result = encoders.encoder_score(i)
+            result_list.append(result)
+        return jsonify(Attempts=result_list), 200
+
 @app.route("/<userid>/espresso_simulation", methods=["POST", "GET"])
 def new_espresso_score(userid):
     if request.method == "POST":
@@ -340,6 +362,69 @@ def new_drip_score(userid):
             refillReservoirScore=refillReservoirScore, refillReservoirScoreTotal=refillReservoirScoreTotal,
             brewScore=brewScore, brewScoreTotal=brewScoreTotal,serveScore=serveScore, serveScoreTotal=serveScoreTotal,
             scoreTotal=scoreTotal, evalTotal=evalTotal, grade=grade, dateObtained=datetime.datetime.now()))
+        Session.commit()
+        Session.flush()
+        return jsonify("Scores recorded"), 201
+
+@app.route("/<userid>/mokapot_simulation", methods=["POST", "GET"])
+def new_mokapot_score(userid):
+    if request.method == "POST":
+        weightScore = request.form.get('weightScore')
+        weightScoreTotal = request.form.get('weightScoreTotal')
+        grindScore = request.form.get('grindScore')
+        grindScoreTotal = request.form.get('grindScoreTotal')
+        chooseWaterScore = request.form.get('chooseWaterScore')
+        chooseWaterScoreTotal = request.form.get('chooseWaterScoreTotal')
+        addCoffeeScore = request.form.get('addCoffeeScore')
+        addCoffeeScoreTotal = request.form.get('addCoffeeScoreTotal')
+        putTogetherScore = request.form.get('putTogetherScore')
+        putTogetherScoreTotal = request.form.get('putTogetherScoreTotal')
+        stoveScore = request.form.get('stoveScore')
+        stoveScoreTotal = request.form.get('stoveScoreTotal')
+        serveScore = request.form.get('serveScore')
+        serveScoreTotal = request.form.get('serveScoreTotal')
+        scoreTotal = int(weightScore) + int(chooseWaterScore) + int(addCoffeeScore) + int(grindScore) + \
+                     int(putTogetherScore) + int(stoveScore) + int(serveScore)
+        evalTotal = int(weightScoreTotal) + int(chooseWaterScoreTotal) + int(addCoffeeScoreTotal) + \
+                    int(grindScoreTotal) + int(putTogetherScoreTotal) + int(stoveScoreTotal) + int(serveScoreTotal)
+        grade = (scoreTotal/evalTotal)*100
+
+        Session.add(
+            tables.mokapot_scores(userid=userid, weightScore=weightScore, weightScoreTotal=weightScoreTotal,
+            grindScore=grindScore, grindScoreTotal=grindScoreTotal, chooseWaterScore=chooseWaterScore,
+            chooseWaterScoreTotal=chooseWaterScoreTotal, addCoffeeScore=addCoffeeScore,
+            addCoffeeScoreTotal=addCoffeeScoreTotal, putTogetherScore=putTogetherScore,
+            putTogetherScoreTotal=putTogetherScoreTotal, stoveScore=stoveScore, stoveScoreTotal=stoveScoreTotal,
+            serveScore=serveScore, serveScoreTotal=serveScoreTotal, scoreTotal=scoreTotal, evalTotal=evalTotal,
+            grade=grade, dateObtained=datetime.datetime.now()))
+        Session.commit()
+        Session.flush()
+        return jsonify("Scores recorded"), 201
+
+@app.route("/<userid>/chemex_simulation", methods=["POST", "GET"])
+def new_chemex_score(userid):
+    if request.method == "POST":
+        weightScore = request.form.get('weightScore')
+        weightScoreTotal = request.form.get('weightScoreTotal')
+        grindScore = request.form.get('grindScore')
+        grindScoreTotal = request.form.get('grindScoreTotal')
+        wetGroundsScore = request.form.get('wetGroundsScore')
+        wetGroundsScoreTotal = request.form.get('wetGroundsScoreTotal')
+        addWaterScore = request.form.get('addWaterScore')
+        addWaterScoreTotal = request.form.get('addWaterScoreTotal')
+        serveScore = request.form.get('serveScore')
+        serveScoreTotal = request.form.get('serveScoreTotal')
+        scoreTotal = int(weightScore) + int(wetGroundsScore) + int(addWaterScore) + int(grindScore) + int(serveScore)
+        evalTotal = int(weightScoreTotal) + int(wetGroundsScoreTotal) + int(addWaterScoreTotal) + \
+                    int(grindScoreTotal) + int(serveScoreTotal)
+        grade = (scoreTotal/evalTotal)*100
+
+        Session.add(
+            tables.chemex_scores(userid=userid, weightScore=weightScore, weightScoreTotal=weightScoreTotal,
+            grindScore=grindScore, grindScoreTotal=grindScoreTotal, wetGroundsScore=wetGroundsScore,
+            wetGroundsScoreTotal=wetGroundsScoreTotal, addWaterScore=addWaterScore, addWaterScoreTotal=addWaterScoreTotal,
+            serveScore=serveScore, serveScoreTotal=serveScoreTotal, scoreTotal=scoreTotal, evalTotal=evalTotal,
+            grade=grade, dateObtained=datetime.datetime.now()))
         Session.commit()
         Session.flush()
         return jsonify("Scores recorded"), 201
