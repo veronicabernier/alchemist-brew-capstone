@@ -38,7 +38,7 @@ public class EspressoHandler : MonoBehaviour
 
     [LabeledArrayAttribute(typeof(LevelTypes))]
     public Level[] levels = new Level[System.Enum.GetValues(typeof(LevelTypes)).Length];
-    public GameObject espressoMenu;
+    public GameObject levelsMenu;
     public TextMeshProUGUI feedbackName;
     public TextMeshProUGUI feedback;
     public TextMeshProUGUI menuLabel;
@@ -72,8 +72,13 @@ public class EspressoHandler : MonoBehaviour
     //to be called by level button
     public void MoveLevel()
     {
-        espressoMenu.SetActive(false);
+        levelsMenu.SetActive(false);
         levels[curLevel].instance = Instantiate(levels[curLevel].prefab, transform);
+        if (levels[curLevel].name == LevelTypes.Grind)
+        {
+            GrindController gc = levels[curLevel].instance.GetComponent<GrindController>();
+            gc.wantedGrindSetting = SnapToCloserX.SettingType.Small;
+        }
     }
 
 
@@ -130,7 +135,7 @@ public class EspressoHandler : MonoBehaviour
         //move level
         if(curLevel < levels.Length - 1)
         {
-            espressoMenu.SetActive(true);
+            levelsMenu.SetActive(true);
             UpdateLevelMenu(myScore);
         }
         else

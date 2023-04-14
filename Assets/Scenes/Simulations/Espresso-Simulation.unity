@@ -939,7 +939,7 @@ Transform:
   m_GameObject: {fileID: 409428033}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.57, y: 0.57, z: 1}
+  m_LocalScale: {x: 0.65, y: 0.65, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -1027,7 +1027,7 @@ MonoBehaviour:
   - name: 6
     prefab: {fileID: 9207528698853244262, guid: 18a99e4a19feed64bb0504a002045c23, type: 3}
     button: {fileID: 347678359}
-  espressoMenu: {fileID: 1856905504}
+  levelsMenu: {fileID: 1856905504}
   feedbackName: {fileID: 1872198469}
   feedback: {fileID: 1567111352}
   menuLabel: {fileID: 992412999}
@@ -2445,7 +2445,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
