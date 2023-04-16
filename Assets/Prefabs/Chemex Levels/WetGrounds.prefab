@@ -1135,7 +1135,7 @@ MonoBehaviour:
   lineYMin: -1.73
   lineYMax: -1.73
   yEnd: 0
-  ySpeed: -0.001
+  ySpeed: -0.002
 --- !u!50 &3452724378126046139
 Rigidbody2D:
   serializedVersion: 4

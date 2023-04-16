@@ -50,7 +50,7 @@ public class AddLiquid : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Input.GetMouseButton(0))
         {
