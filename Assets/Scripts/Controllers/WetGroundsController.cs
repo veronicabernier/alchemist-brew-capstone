@@ -12,11 +12,13 @@ public class WetGroundsController : MonoBehaviour
 
     public GameObject grounds;
     public GameObject groundsPlaced;
+    public GameObject filter;
     public GameObject chemex;
 
     public GameObject waterDoneButton;
 
     public TextMeshProUGUI prompt;
+    public TextMeshProUGUI hintPrompt;
     public GameObject progressBar;
 
     public GameObject timer;
@@ -25,7 +27,7 @@ public class WetGroundsController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        grounds.SetActive(false);
     }
 
     // Update is called once per frame
@@ -36,6 +38,7 @@ public class WetGroundsController : MonoBehaviour
 
     public void WaterAdded()
     {
+        hintPrompt.text = "";
         prompt.text = "Wait!";
         waterDoneButton.SetActive(false);
         chemex.GetComponent<AddLiquid>().enabled = false;
@@ -46,11 +49,24 @@ public class WetGroundsController : MonoBehaviour
 
     public void ObjectPlaced()
     {
-        //grounds placed
-        groundsPlaced.SetActive(true);
-        chemex.GetComponent<AddLiquid>().enabled = true;
-        waterDoneButton.SetActive(true);
-        prompt.text = "Wet Grounds!";
+        if (grounds.GetComponent<Drag>().dragIsActive)
+        {
+            //filter placed
+            filter.GetComponent<BoxCollider2D>().enabled = false;
+
+            grounds.SetActive(true);
+            prompt.text = "Add Grounds!";
+        }
+        else
+        {
+            //grounds placed
+            groundsPlaced.SetActive(true);
+            chemex.GetComponent<AddLiquid>().enabled = true;
+            waterDoneButton.SetActive(true);
+            prompt.text = "Wet Grounds!";
+            hintPrompt.text = "Press to add water.";
+        }
+
     }
 
     public void ProgressDone()

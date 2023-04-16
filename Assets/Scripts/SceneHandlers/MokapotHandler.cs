@@ -58,7 +58,7 @@ public class MokapotHandler : MonoBehaviour
         foreach(Level l in levels)
         {
             l.button.GetComponent<Button>().enabled = false;
-            l.button.GetComponent<Image>().color = new Color(0.55f, 0.55f, 0.55f, 0.8f);
+            l.button.GetComponent<Image>().color = new Color(0.35f, 0.35f, 0.35f, 0.8f);
         }
         UpdateLevelMenu(null);
     }
@@ -87,7 +87,7 @@ public class MokapotHandler : MonoBehaviour
         if (curLevel > -1)
         {
             levels[curLevel].button.GetComponent<Button>().enabled = false;
-            levels[curLevel].button.GetComponent<Image>().color = new Color(0.55f, 0.55f, 0.55f, 0.8f);
+            levels[curLevel].button.GetComponent<Image>().color = new Color(0.35f, 0.35f, 0.35f, 0.8f);
 
             //update feedback
             feedbackName.text = levels[curLevel].name.ToString() + " Result:" + myScore.curScore.ToString() + "/" + myScore.curScoreTotal.ToString();
