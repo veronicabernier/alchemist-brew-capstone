@@ -327,6 +327,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChemexAddWater
       objectReference: {fileID: 0}
+    - target: {fileID: 7238989965510014365, guid: 559c4449df1ce974799419e19a847595, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7238989966932414187, guid: 559c4449df1ce974799419e19a847595, type: 3}
       propertyPath: m_Camera
       value: 
