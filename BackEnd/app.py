@@ -343,7 +343,7 @@ def new_drip_score(userid):
         grindScoreTotal = request.form.get('grindScoreTotal')
         chooseFilterScore = request.form.get('chooseFilterScore')
         chooseFilterScoreTotal = request.form.get('chooseFilterScoreTotal')
-        refillReservoirScore = request.form.get('chooseFilterScore')
+        refillReservoirScore = request.form.get('refillReservoirScore')
         refillReservoirScoreTotal = request.form.get('refillReservoirScoreTotal')
         brewScore = request.form.get('brewScore')
         brewScoreTotal = request.form.get('brewScoreTotal')
