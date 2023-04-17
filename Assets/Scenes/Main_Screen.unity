@@ -763,7 +763,7 @@ GameObject:
   - component: {fileID: 615087968}
   - component: {fileID: 615087967}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: LogBook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -961,7 +961,7 @@ GameObject:
   - component: {fileID: 1019897010}
   - component: {fileID: 1019897009}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Practice_Method
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

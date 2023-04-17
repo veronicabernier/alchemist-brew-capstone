@@ -2,28 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class GetinputExample : MonoBehaviour
 {
-    public string inputFieldUsernameName = "InputFieldUsername";
-    public string inputFieldPasswordName = "InputFieldPassword";
+    private string inputFieldUsernameName = "username";
+    private string inputFieldPasswordName = "password";
+    private string loginButton = "login";
     public InputField inputFieldUsername;
     public InputField inputFieldPassword;
+    public Button loginObject;
 
     private string username;
     private string password;
 
     void Start()
     {
-        inputFieldUsername = GameObject.Find(inputFieldUsernameName).GetComponent<InputField>();
-        inputFieldPassword = GameObject.Find(inputFieldPasswordName).GetComponent<InputField>();
+        inputFieldUsername = GameObject.FindGameObjectWithTag(inputFieldUsernameName).GetComponent<InputField>();
+        inputFieldPassword = GameObject.FindGameObjectWithTag(inputFieldPasswordName).GetComponent<InputField>();
+        loginObject = GameObject.FindGameObjectWithTag(loginButton).GetComponent<Button>();
         inputFieldUsername.onValueChanged.AddListener(OnUsernameChanged);
         inputFieldPassword.onValueChanged.AddListener(OnPasswordChanged);
-        Debug.Log("username input: " + username);
-        Debug.Log("password input: " + password);
+        loginObject.onClick.AddListener(OnLoginPress);
+      
     }
 
-    void OnUsernameChanged(string newValue)
+    void OnUsernameChanged(string newValue) 
     {
         username = newValue;
     }
@@ -31,6 +35,37 @@ public class GetinputExample : MonoBehaviour
     void OnPasswordChanged(string newValue)
     {
         password = newValue;
+    }
+    void OnLoginPress()
+    {
+        {
+            WWWForm form = new WWWForm();
+            form.AddField("email", username);
+            form.AddField("password", password); 
+
+            StartCoroutine(PostRequest("http://127.0.0.1:5000/login", form));
+        }
+
+        IEnumerator PostRequest(string uri, WWWForm postData)
+        {
+            using (UnityWebRequest webRequest = UnityWebRequest.Post(uri, postData))
+            {
+                yield return webRequest.SendWebRequest();
+                if (webRequest.result == UnityWebRequest.Result.ConnectionError)
+                {
+                    Debug.Log("Error: " + webRequest.error);
+                }
+                else
+                {
+                    Debug.Log(webRequest.downloadHandler.text);
+                }
+            }
+        }
+
+    
+
+    Debug.Log("username input: " + username);
+        Debug.Log("password input: " + password);
     }
 }
 

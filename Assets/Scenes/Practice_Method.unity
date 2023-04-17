@@ -1593,7 +1593,7 @@ GameObject:
   - component: {fileID: 1132357215}
   - component: {fileID: 1132357214}
   m_Layer: 0
-  m_Name: SceneManager
+  m_Name: Log_Book
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1611,7 +1611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa6c542f4dc75cb458b2371cd162a595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Mokapot-Simulation
+  sceneName: Log_Book
 --- !u!4 &1132357215
 Transform:
   m_ObjectHideFlags: 0

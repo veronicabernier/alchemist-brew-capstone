@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 133924353}
   m_Layer: 5
   m_Name: InputFieldpassword
-  m_TagString: Untagged
+  m_TagString: password
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -226,17 +226,17 @@ RectTransform:
   m_GameObject: {fileID: 133924351}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.015, y: 0.015, z: 1}
   m_Children:
   - {fileID: 857774972}
   - {fileID: 1881602284}
-  m_Father: {fileID: 274063894}
-  m_RootOrder: 0
+  m_Father: {fileID: 277764608}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7.9333353, y: 162}
-  m_SizeDelta: {x: 229.26, y: 33.8445}
+  m_AnchoredPosition: {x: 1.2103, y: -1.2672}
+  m_SizeDelta: {x: 214.63, y: 32.142}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &133924353
 MonoBehaviour:
@@ -367,7 +367,7 @@ GameObject:
   - component: {fileID: 274063895}
   m_Layer: 5
   m_Name: InputFieldusername
-  m_TagString: Untagged
+  m_TagString: username
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -383,16 +383,15 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.015, y: 0.015, z: 1}
   m_Children:
-  - {fileID: 133924352}
   - {fileID: 1151679771}
   - {fileID: 1389853047}
   m_Father: {fileID: 277764608}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.079, y: -1.28}
-  m_SizeDelta: {x: 229.26, y: 33.8445}
+  m_AnchoredPosition: {x: 1.2103, y: 1.1328}
+  m_SizeDelta: {x: 214.63, y: 32.142}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &274063895
 MonoBehaviour:
@@ -608,6 +607,7 @@ RectTransform:
   - {fileID: 876716051}
   - {fileID: 1528883926}
   - {fileID: 2096882620}
+  - {fileID: 133924352}
   - {fileID: 274063894}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -637,10 +637,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 819eeeb0d95d1c845946e91abac96013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputFieldUsernameName: InputFieldUsername
-  inputFieldPasswordName: InputFieldPassword
   inputFieldUsername: {fileID: 0}
   inputFieldPassword: {fileID: 0}
+  loginObject: {fileID: 0}
+--- !u!1 &283974240
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 283974242}
+  - component: {fileID: 283974241}
+  m_Layer: 0
+  m_Name: Main_Screen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &283974241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283974240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa6c542f4dc75cb458b2371cd162a595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: Main_Screen
+--- !u!4 &283974242
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283974240}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.7235473, y: -1.1006658, z: -6.112858}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &455366441
 GameObject:
   m_ObjectHideFlags: 0
@@ -1218,7 +1261,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 274063894}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1297,7 +1340,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 274063894}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1359,8 +1402,8 @@ GameObject:
   - component: {fileID: 1528883928}
   - component: {fileID: 1528883927}
   m_Layer: 5
-  m_Name: Log in
-  m_TagString: Untagged
+  m_Name: Login
+  m_TagString: login
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1428,7 +1471,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1528883928}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 283974241}
+        m_TargetAssemblyTypeName: level_manager, Assembly-CSharp
+        m_MethodName: changeScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1528883928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1991,10 +2046,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 819eeeb0d95d1c845946e91abac96013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputFieldUsernameName: InputFieldUsername
-  inputFieldPasswordName: InputFieldPassword
   inputFieldUsername: {fileID: 274063895}
   inputFieldPassword: {fileID: 133924353}
+  loginObject: {fileID: 0}
 --- !u!1 &2096882619
 GameObject:
   m_ObjectHideFlags: 0
@@ -2008,7 +2062,7 @@ GameObject:
   - component: {fileID: 2096882622}
   - component: {fileID: 2096882621}
   m_Layer: 5
-  m_Name: Sign up
+  m_Name: Signup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

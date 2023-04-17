@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Distributer
   - Tamper
+  - username
+  - password
+  - login
   layers:
   - Default
   - TransparentFX
