@@ -1,7 +1,7 @@
 import datetime
 import bcrypt
 from sqlalchemy import create_engine, ForeignKey, Column, Text, Integer, Boolean, Date, Float, DateTime, String, \
-    DateTime, update, Null, null
+    DateTime, update, text
 from sqlalchemy_utils import database_exists, create_database
 from sqlalchemy.orm import sessionmaker, declarative_base
 from BackEnd.config.dbconfig import pg_config as settings
@@ -11,6 +11,7 @@ from flask import jsonify
 import json
 import tables
 import encoders
+import psycopg2
 
 app = Flask(__name__)
 #db = SQLAlchemy(app)
@@ -428,6 +429,59 @@ def new_chemex_score(userid):
         Session.commit()
         Session.flush()
         return jsonify("Scores recorded"), 201
+
+@app.route("/tags", methods=["POST", "GET"])
+def get_tags():
+    result_list = []
+    if request.method == "GET":
+        flavorWheel = Session.query(tables.tags).order_by(tables.tags.tagid).filter_by().all()
+
+        for i in flavorWheel:
+            result = encoders.encoder_tag(i)
+            result_list.append(result)
+        return jsonify(Attempts=result_list), 200
+
+@app.route("/basic_tags", methods=["POST", "GET"])
+def get_basic_tags():
+    result_list = []
+    if request.method == "GET":
+        flavorWheel = Session.query(tables.tags).order_by(tables.tags.tagid).filter_by(middle_section='...').all()
+
+        for i in flavorWheel:
+            result = encoders.encoder_tag(i)
+            result_list.append(result)
+        return jsonify(Attempts=result_list), 200
+
+@app.route("/intermediate_tags", methods=["POST", "GET"])
+def get_intermediate_tags():
+    result_list = []
+    if request.method == "GET":
+        flavorWheel = Session.query(tables.tags).order_by(tables.tags.tagid).\
+            filter(tables.tags.middle_section !='').\
+            filter_by(outer_section='')
+        for i in flavorWheel:
+            result = encoders.encoder_tag(i)
+            result_list.append(result)
+        return jsonify(Attempts=result_list), 200
+
+@app.route("/advanced_tags", methods=["POST", "GET"])
+def get_advanced_tags():
+    result_list = []
+    if request.method == "GET":
+        # flavorWheel = Session.query(tables.tags).order_by(tables.tags.tagid).\
+        #     filter(tables.tags.outer_section !='')
+        flavorWheel = Session.execute(text("select * "
+                                      "from tags "
+                                      "where outer_section != '' or middle_section in (select middle_section "
+                                      "from tags "
+                                      "group by middle_section "
+                                      "having count(middle_section) = 1) "
+                                      "order by tagid"))
+        for i in flavorWheel:
+            result = encoders.tags_dict(i)
+            print(result)
+            result_list.append(result)
+        return jsonify(Attempts=result_list), 200
 
 
 if __name__ == '__main__':

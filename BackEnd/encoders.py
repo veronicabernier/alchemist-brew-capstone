@@ -77,18 +77,16 @@ def encoder_score(record):
 
     raise TypeError(f'Object{record} is not any type to score.')
 
-# def encoder_drip_score(record):
-#     if isinstance(record, tables.drip_scores):
-#         return {'drip_scoreid': record.drip_scoreid, 'userid': record.userid, 'weightScore': record.weightScore,
-#                 'weightScoreTotal': record.weightScoreTotal, 'reservoirScore': record.reservoirScore,
-#                 'reservoirScoreTotal': record.reservoirScoreTotal, 'grindScore': record.grindScore,
-#                 'grindScoreTotal': record.grindScoreTotal,
-#                 'chooseFilterScore': record.chooseFilterScore,
-#                 'chooseFilterScoreTotal': record.chooseFilterScoreTotal,
-#                 'refillReservoirScore': record.refillReservoirScore,
-#                 'refillReservoirScoreTotal': record.refillReservoirScoreTotal,
-#                 'brewScore': record.brewScore, 'brewScoreTotal': record.brewScoreTotal,
-#                 'serveScore': record.serveScore, 'serveScoreTotal': record.serveScoreTotal,
-#                 'scoreTotal': record.scoreTotal, 'evalTotal': record.evalTotal, 'grade': record.grade,
-#                 'dateObtained': record.dateObtained}
-#     raise TypeError(f'Object{record} is not any type to score.')
+def encoder_tag(tag):
+    if isinstance(tag, tables.tags):
+        return {'tagid': tag.tagid, 'inner_section': tag.inner_section, 'middle_section': tag.middle_section,
+                'outer_section': tag.outer_section}
+    raise TypeError(f'Object{tag} is not of type tags.')
+
+def tags_dict(row):
+    result = {}
+    result['tagid'] = row[0]
+    result['inner_section'] = row[1]
+    result['middle_section'] = row[2]
+    result['outer_section'] = row[3]
+    return  result
