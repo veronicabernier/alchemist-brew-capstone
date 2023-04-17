@@ -213,7 +213,7 @@ public class MokapotHandler : MonoBehaviour
         form.AddField("addCoffeeScore", mokapotScore.addCoffeeScore);
         form.AddField("addCoffeeScoreTotal", mokapotScore.addCoffeeScoreTotal);
         form.AddField("putTogetherScore", mokapotScore.putTogetherScore);
-        form.AddField("putTogetherScoreTotal", mokapotScore.putTogetherScore);
+        form.AddField("putTogetherScoreTotal", mokapotScore.putTogetherScoreTotal);
         form.AddField("stoveScore", mokapotScore.stoveScore);
         form.AddField("stoveScoreTotal", mokapotScore.stoveScoreTotal);
         form.AddField("serveScore", mokapotScore.serveScore);
