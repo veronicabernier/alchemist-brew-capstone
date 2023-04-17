@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class EspressoHandler : MonoBehaviour
@@ -153,6 +154,8 @@ public class EspressoHandler : MonoBehaviour
             newText.transform.localPosition = new Vector3(newText.transform.localPosition.x, newText.transform.localPosition.y - (i*spaceBetweenScores), newText.transform.localPosition.z);
             newText.GetComponent<TextMeshProUGUI>().text = (i+1).ToString() + ". " + levels[i].name.ToString() + ":    "+ levels[i].curScore.ToString() + "/" + levels[i].curScoreTotal.ToString();
         }
+
+        SendToDatabase();
     }
 
     void SaveScores(int curScore, int curTotalScore, List<string> comments)
@@ -197,4 +200,27 @@ public class EspressoHandler : MonoBehaviour
             espressoScore.serveScoreTotal = curTotalScore;
         }
     }
+
+    void SendToDatabase()
+    {
+        int userId = PostInformation.userid;
+        WWWForm form = new WWWForm();
+        form.AddField("weightScore", espressoScore.weightScore);
+        form.AddField("weightScoreTotal", espressoScore.weightScoreTotal);
+        form.AddField("reservoirScore", espressoScore.reservoirScore);
+        form.AddField("reservoirScoreTotal", espressoScore.reservoirScoreTotal);
+        form.AddField("powerOnScore", espressoScore.powerOnScore);
+        form.AddField("powerOnScoreTotal", espressoScore.powerOnScoreTotal);
+        form.AddField("grindScore", espressoScore.grindScore);
+        form.AddField("grindScoreTotal", espressoScore.grindScoreTotal);
+        form.AddField("tampScore", espressoScore.tampScore);
+        form.AddField("tampScoreTotal", espressoScore.tampScoreTotal);
+        form.AddField("brewScore", espressoScore.brewScore);
+        form.AddField("brewScoreTotal", espressoScore.brewScoreTotal);
+        form.AddField("serveScore", espressoScore.serveScore);
+        form.AddField("serveScoreTotal", espressoScore.serveScoreTotal);
+
+        StartCoroutine(PostInformation.PostRequest(PostInformation.address + userId.ToString() + "/espresso_simulation", form));
+    }
+
 }
