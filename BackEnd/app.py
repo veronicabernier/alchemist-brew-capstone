@@ -217,29 +217,42 @@ def add_recipe(userid):
 
 @app.route("/<userid>/<recipeid>/add", methods=["POST", "GET"])
 def new_brew(userid, recipeid):
-    result_list = []
+    recipe_list = []
+    tag_list = []
     if request.method == "POST":
         ext_time = request.form.get('ext_time')
         ext_weight = request.form.get('ext_weight')
-        flavor = request.form.get('flavor')
+        notes = request.form.get('notes')
+        tagid = request.form.get('tagid')
 
         prebrew = Session.query(tables.recipes).filter_by(userid=userid, recipeid=recipeid, recipe_visibility=True).all()
+        tag = Session.query(tables.tags).filter_by(tagid=tagid).all()
 
         for i in prebrew:
             result = encoders.encoder_recipes(i)
-            result_list.append(result)
+            recipe_list.append(result)
+        for i in tag:
+            result = encoders.encoder_tag(i)
+            tag_list.append(result)
 
-        brew_method = result_list[0].get('brew_method')
-        grind_setting = result_list[0].get('grind_setting')
-        brand = result_list[0].get('brand')
-        roast = result_list[0].get('roast')
-        bean_type = result_list[0].get('bean_type')
-        coffee_weight = result_list[0].get('coffee_weight')
+        brew_method = recipe_list[0].get('brew_method')
+        grind_setting = recipe_list[0].get('grind_setting')
+        brand = recipe_list[0].get('brand')
+        roast = recipe_list[0].get('roast')
+        bean_type = recipe_list[0].get('bean_type')
+        coffee_weight = recipe_list[0].get('coffee_weight')
+
+        inner_section = tag_list[0].get('inner_section')
+        middle_section = tag_list[0].get('middle_section')
+        outer_section = tag_list[0].get('outer_section')
+        print(inner_section, middle_section, outer_section)
 
         Session.add(
-            tables.brews( recipeid=recipeid, brew_method=brew_method, grind_setting=grind_setting, brand=brand, roast=roast,
-                  bean_type=bean_type, coffee_weight=coffee_weight, userid=userid, ext_time=ext_time,
-                   ext_weight=ext_weight, flavor=flavor, date=datetime.datetime.now(), brew_visibility=True))
+            tables.brews(recipeid=recipeid, brew_method=brew_method, grind_setting=grind_setting, brand=brand, roast=roast,
+                        bean_type=bean_type, coffee_weight=coffee_weight, userid=userid, ext_time=ext_time,
+                        ext_weight=ext_weight, notes=notes, date=datetime.datetime.now(), tagid=tagid,
+                        inner_section=inner_section, middle_section=middle_section, outer_section=outer_section,
+                        brew_visibility=True))
         Session.commit()
         Session.flush()
         return jsonify("Recipe created"), 201
@@ -251,6 +264,40 @@ def get_brew_attempt(userid):
         attempt = Session.query(tables.brews).filter_by(userid=userid).all()
 
         for i in attempt:
+            result = encoders.encoder_brews(i)
+            result_list.append(result)
+        return jsonify(Attempts=result_list), 200
+
+@app.route("/<userid>/search/<tagid>", methods=["POST", "GET"])
+def search_brews_by_tag(userid, tagid):
+    result_list = []
+    if request.method == "GET":
+        attempt = Session.query(tables.brews).filter_by(tagid=tagid).all()
+
+        for i in attempt:
+            result = encoders.encoder_brews(i)
+            result_list.append(result)
+        return jsonify(Attempts=result_list), 200
+
+@app.route("/<userid>/search/flavor", methods=["POST", "GET"])
+def search_brews_by_flavor(userid):
+    flavor = request.form.get('flavor')
+    result_list = []
+    if request.method == "GET":
+        inner = Session.query(tables.brews).order_by(tables.brews.date.desc()).filter_by(inner_section=flavor).\
+            filter(tables.brews.userid != userid).all()
+        middle = Session.query(tables.brews).order_by(tables.brews.date.desc()).filter_by(middle_section=flavor).\
+            filter(tables.brews.userid != userid).all()
+        outer = Session.query(tables.brews).order_by(tables.brews.date.desc()).filter_by(outer_section=flavor).\
+            filter(tables.brews.userid != userid).all()
+
+        for i in inner:
+            result = encoders.encoder_brews(i)
+            result_list.append(result)
+        for i in middle:
+            result = encoders.encoder_brews(i)
+            result_list.append(result)
+        for i in outer:
             result = encoders.encoder_brews(i)
             result_list.append(result)
         return jsonify(Attempts=result_list), 200
@@ -445,7 +492,7 @@ def get_tags():
 def get_basic_tags():
     result_list = []
     if request.method == "GET":
-        flavorWheel = Session.query(tables.tags).order_by(tables.tags.tagid).filter_by(middle_section='...').all()
+        flavorWheel = Session.query(tables.tags).order_by(tables.tags.tagid).filter_by(middle_section='').all()
 
         for i in flavorWheel:
             result = encoders.encoder_tag(i)
@@ -478,7 +525,7 @@ def get_advanced_tags():
                                       "having count(middle_section) = 1) "
                                       "order by tagid"))
         for i in flavorWheel:
-            result = encoders.tags_dict(i)
+            result = encoders.encoder_tag(i)
             print(result)
             result_list.append(result)
         return jsonify(Attempts=result_list), 200

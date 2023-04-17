@@ -23,8 +23,9 @@ def encoder_brews(brew):
         return {'brewid': brew.brewid, 'recipeid': brew.recipeid, 'brew_method': brew.brew_method,
                 'grind_setting': brew.grind_setting, 'brand': brew.brand, 'roast': brew.roast,
                 'bean_type': brew.bean_type, 'coffee_weight': brew.coffee_weight, 'userid': brew.userid,
-                'ext_time': brew.ext_time, 'ext_weight': brew.ext_weight, 'flavor': brew.flavor, 'date': brew.date,
-                'brew_visibility': brew.brew_visibility}
+                'ext_time': brew.ext_time, 'ext_weight': brew.ext_weight, 'notes': brew.notes, 'date': brew.date,
+                'tagid': brew.tagid, 'inner_section': brew.inner_section, 'middle_section': brew.middle_section,
+                'outer_section': brew.outer_section, 'brew_visibility': brew.brew_visibility}
     raise TypeError(f'Object{brew} is not of type recipes.')
 
 def encoder_score(record):
@@ -78,10 +79,10 @@ def encoder_score(record):
     raise TypeError(f'Object{record} is not any type to score.')
 
 def encoder_tag(tag):
-    if isinstance(tag, tables.tags):
-        return {'tagid': tag.tagid, 'inner_section': tag.inner_section, 'middle_section': tag.middle_section,
-                'outer_section': tag.outer_section}
-    raise TypeError(f'Object{tag} is not of type tags.')
+    # if isinstance(tag, tables.tags):
+    return {'tagid': tag.tagid, 'inner_section': tag.inner_section, 'middle_section': tag.middle_section,
+            'outer_section': tag.outer_section}
+    # raise TypeError(f'Object{tag} is not of type tags.')
 
 def tags_dict(row):
     result = {}

@@ -102,41 +102,50 @@ class brews(Base):
     __tablename__ = "brews"
     brewid = Column("brewid", Integer, autoincrement=True, primary_key=True)
     recipeid = Column("recipeid", Integer, ForeignKey("recipes.recipeid"), nullable=False)
+    userid = Column("userid", Integer, nullable=False)
     brew_method = Column("brew_method", String)
     grind_setting = Column("grind_setting", Float)
     brand = Column("brand", String)
     roast = Column("roast", String)
     bean_type = Column("bean_type", String)
     coffee_weight = Column("coffee_weight", Float)
-    userid = Column("userid", Integer, nullable=False)
     # recipe_visibility = Column("recipe_visibility", Boolean)
     ext_time = Column("ext_time", Integer)
     ext_weight = Column("ext_weight", Float)
-    flavor = Column("flavor", String)
+    notes = Column("notes", String)
     date = Column("date", DateTime)
+    tagid = Column("tagid", Integer)
+    inner_section = Column("inner_section", String)
+    middle_section = Column("middle_section", String)
+    outer_section = Column("outer_section", String)
     brew_visibility = Column("brew_visibility", Boolean)
 
-    def __init__(self, recipeid, brew_method, grind_setting, brand, roast, bean_type, coffee_weight,
-                 userid, ext_time, ext_weight, flavor, date, brew_visibility):
+    def __init__(self, recipeid, userid, brew_method, grind_setting, brand, roast, bean_type, coffee_weight,
+                 ext_time, ext_weight, notes, date, tagid,  inner_section, middle_section,
+                 outer_section, brew_visibility):
         self.recipeid = recipeid
+        self.userid = userid
         self.brew_method = brew_method
         self.grind_setting = grind_setting
         self.brand = brand
         self.roast = roast
         self.bean_type = bean_type
         self.coffee_weight = coffee_weight
-        self.userid = userid
         # self.recipe_visibility = recipe_visibility
         self.ext_time = ext_time
         self.ext_weight = ext_weight
-        self.flavor = flavor
+        self.notes = notes
         self.date = date
+        self.tagid = tagid
+        self.inner_section = inner_section
+        self.middle_section = middle_section
+        self.outer_section = outer_section
         self.brew_visibility = brew_visibility
 
     def __repr__(self):
-        return f"({self.recipeid} {self.brew_method} {self.grind_setting} {self.brand}" \
-               f" {self.roast} {self.bean_type} {self.coffee_weight} {self.userid} " \
-               f"{self.ext_time} {self.ext_weight} {self.flavor} {self.date} {self.brew_visibility})"
+        return f"({self.recipeid} {self.userid}  {self.brew_method} {self.grind_setting} {self.brand}" \
+               f" {self.roast} {self.bean_type} {self.coffee_weight} {self.ext_time} {self.ext_weight} " \
+               f"{self.notes} {self.date} {self.tagid} {self.brew_visibility})"
 
 class espresso_scores(Base):
     __tablename__ = "espresso_scores"
