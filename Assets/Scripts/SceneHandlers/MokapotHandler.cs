@@ -153,6 +153,8 @@ public class MokapotHandler : MonoBehaviour
             newText.transform.localPosition = new Vector3(newText.transform.localPosition.x, newText.transform.localPosition.y - (i*spaceBetweenScores), newText.transform.localPosition.z);
             newText.GetComponent<TextMeshProUGUI>().text = (i+1).ToString() + ". " + levels[i].name.ToString() + ":    "+ levels[i].curScore.ToString() + "/" + levels[i].curScoreTotal.ToString();
         }
+
+        SendToDatabase();
     }
 
     void SaveScores(int curScore, int curTotalScore, List<string> comments)
@@ -196,5 +198,27 @@ public class MokapotHandler : MonoBehaviour
            mokapotScore.serveScore = curScore;
            mokapotScore.serveScoreTotal = curTotalScore;
         }
+    }
+
+    void SendToDatabase()
+    {
+        int userId = PostInformation.userid;
+        WWWForm form = new WWWForm();
+        form.AddField("weightScore", mokapotScore.weightScore);
+        form.AddField("weightScoreTotal", mokapotScore.weightScoreTotal);
+        form.AddField("grindScore", mokapotScore.grindScore);
+        form.AddField("grindScoreTotal", mokapotScore.grindScoreTotal);
+        form.AddField("chooseWaterScore", mokapotScore.chooseWaterScore);
+        form.AddField("chooseWaterScoreTotal", mokapotScore.chooseWaterScoreTotal);
+        form.AddField("addCoffeeScore", mokapotScore.addCoffeeScore);
+        form.AddField("addCoffeeScoreTotal", mokapotScore.addCoffeeScoreTotal);
+        form.AddField("putTogetherScore", mokapotScore.putTogetherScore);
+        form.AddField("putTogetherScoreTotal", mokapotScore.putTogetherScore);
+        form.AddField("stoveScore", mokapotScore.stoveScore);
+        form.AddField("stoveScoreTotal", mokapotScore.stoveScoreTotal);
+        form.AddField("serveScore", mokapotScore.serveScore);
+        form.AddField("serveScoreTotal", mokapotScore.serveScoreTotal);
+
+        StartCoroutine(PostInformation.PostRequest(PostInformation.address + userId.ToString() + "/mokapot_simulation", form));
     }
 }
