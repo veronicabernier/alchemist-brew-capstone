@@ -378,4 +378,33 @@ class tagsbackup(Base):
     def __repr__(self):
         return f"({self.inner_section} {self.middle_section} {self.outer_section})"
 
+class temp_users(Base):
+    __tablename__ = "temp_users"
+    userid = Column("userid", Integer, autoincrement=True, primary_key=True)
+    username = Column("username", String)
+    email = Column("email", String)
+    password = Column("password", String)
+    private_profile = Column("private_profile", Boolean)
+    birth_date = Column("birth_date", Date)
+    gender = Column("gender", String)
+    location = Column("location", String)
+    confirmation_code = Column("confirmation_code", Integer)
+    confirmation = Column("confirmation", Boolean)
+
+    def __init__(self, username, email, password, private_profile,
+                 birth_date, gender, location, confirmation_code, confirmation):
+        self.username = username
+        self.email = email
+        self.password = password
+        self.private_profile = private_profile
+        self.birth_date = birth_date
+        self.gender = gender
+        self.location = location
+        self.confirmation_code = confirmation_code
+        self.confirmation = confirmation
+
+    def __repr__(self):
+        return f"({self.username} {self.email} {self.password} {self.private_profile}" \
+               f"{self.birth_date} {self.gender} {self.location} {self.confirmation_code} {self.confirmation} )"
+
 Base.metadata.create_all(engine)

@@ -1,23 +1,25 @@
 import datetime
 import bcrypt
-from sqlalchemy import create_engine, ForeignKey, Column, Text, Integer, Boolean, Date, Float, DateTime, String, \
-    DateTime, update, text
+import os
+import math
+import random
+import smtplib
+from sqlalchemy import create_engine, update, text
 from sqlalchemy_utils import database_exists, create_database
 from sqlalchemy.orm import sessionmaker, declarative_base
 from BackEnd.config.dbconfig import pg_config as settings
 from flask import Flask, request
 from flask_cors import CORS
 from flask import jsonify
-import json
+
 import tables
 import encoders
-import psycopg2
 
 app = Flask(__name__)
 #db = SQLAlchemy(app)
 CORS(app)
 
-salt = bcrypt.gensalt()
+# salt = bcrypt.gensalt()
 def get_engine(user, passwd, host, port, db):
     url = f"postgresql://{user}:{passwd}@{host}:{port}/{db}"
     if not database_exists(url):
@@ -61,6 +63,7 @@ engine = Session.get_bind()
 @app.route("/signup", methods=['POST', 'GET'])
 def register():
     if request.method == "POST":
+        salt = bcrypt.gensalt()
         username = request.form.get('username')
         email = request.form.get('email')
         password = request.form.get("password")
@@ -70,19 +73,26 @@ def register():
         location = request.form.get("location")
 
         emaildata = Session.query(tables.users).filter_by(email=email).first()
-        t=datetime.datetime.now().strftime("%I:%M%p")
-        d=datetime.datetime.now().date()
+        t = datetime.datetime.now().strftime("%I:%M%p")
+        d = datetime.datetime.now().date()
 
-        print(d, t)
-        print(username, email, password, confirm, birth_date, gender, location)
         if emaildata == None:
             if password == confirm:
                 passencode = password.encode(encoding='UTF-8', errors='strict')
-                print(passencode)
                 hashpass = bcrypt.hashpw(passencode, salt)
-                print(hashpass)
                 storedpass = hashpass.decode(encoding='UTF-8', errors='strict')
-                Session.add(tables.users(username=username, email=email, password=storedpass, private_profile=True, birth_date=birth_date, gender=gender, location=location))
+                server = smtplib.SMTP('smtp.gmail.com', 587)
+                server.starttls()
+                password = 'j x s y g g q w m f g n b f v h'
+                server.login('alchemy.coffee.brew@gmail.com', password)
+                OTP = ''.join([str(random.randint(0, 9)) for i in range(4)])
+                msg = 'Hello, Your OTP is ' + str(OTP)
+                sender = 'alchemy.coffee.brew@gmail.com'  # write email id of sender
+                server.sendmail(sender, email, msg)
+                Session.add(tables.temp_users(username=username, email=email, password=storedpass,
+                                              private_profile=True, birth_date=birth_date, gender=gender,
+                                              location=location, confirmation_code=OTP, confirmation=False))
+                server.quit()
                 Session.commit()
                 Session.flush()
                 return jsonify("Singup complete"), 201
@@ -95,23 +105,39 @@ def register():
 
     return jsonify(Error="Missing Information"), 400
 
+@app.route("/signup/<userid>/verify", methods=['POST', 'GET'])
+def account_verification(userid):
+    result_list = []
+    if request.method == "POST":
+        confirmation_code = request.form.get('confirmation_code')
+        verification_code = Session.query(tables.temp_users).filter_by(userid=userid)
+        for i in verification_code:
+            result = encoders.encoder_temp_user(i)
+            result_list.append(result)
+        print(result_list[0].get('confirmation_code'), confirmation_code)
+        print(result_list[0].get('confirmation_code') == int(confirmation_code))
+        if(result_list[0].get('confirmation_code') == int(confirmation_code)):
+            Session.execute(update(tables.temp_users).filter_by(userid=userid).values(
+                confirmation=True))
+            Session.commit()
+            Session.flush()
+            return jsonify("Email Verified")
+        return jsonify(Error="Wrong code")
+
+
+
 @app.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == "POST":
         email = request.form.get('email')
         password = request.form.get("password")
+        salt = bcrypt.gensalt()
 
         emaildata = Session.query(tables.users.email).filter_by(email=email).first()
         passworddata = Session.query(tables.users.password).filter_by(email=email).first()
 
-        print(emaildata)
-        print(passworddata[0])
-        print(email, password)
-
         passencode = password.encode(encoding='UTF-8', errors='strict')
-        print(passencode)
-        hashpass = bcrypt.hashpw(passencode, salt)
-        print(hashpass)
+        # hashpass = bcrypt.hashpw(passencode, salt)
 
         if emaildata is None:
 
@@ -124,6 +150,54 @@ def login():
                 return jsonify("Succesfull login"), 400  # to be edited from here do redict to either svm or home
 
     return jsonify(Error="User or password is incorrect"), 400
+
+@app.route("/<userid>/profile", methods=["POST", "GET"])
+def get_user_profile(userid):
+    result_list = []
+    if request.method == "GET":
+        profile = Session.query(tables.users).filter_by(userid=userid).all()
+
+        for i in profile:
+            result = encoders.encoder_user(i)
+            result_list.append(result)
+        return jsonify(Recepies=result_list), 200
+
+@app.route("/<userid>/profile/edit", methods=["PUT"])
+def edit_user_profile(userid):
+    result_list = []
+    username = request.form.get('username')
+    email = request.form.get('email')
+    private_profile = request.form.get('private_profile')
+    birth_date = request.form.get('birth_date')
+    gender = request.form.get('gender')
+    location = request.form.get('location')
+    if request.method == "PUT":
+        profile = Session.query(tables.users).filter_by(userid=userid).all()
+
+        for i in profile:
+            result = encoders.encoder_user(i)
+            result_list.append(result)
+
+        if(username == None or len(username) == 0):
+            username = result_list[0].get('username')
+        if (email == None or len(email) == 0):
+            email = result_list[0].get('email')
+        if(private_profile == None or len(private_profile) == 0):
+            private_profile = result_list[0].get('private_profile')
+        if(birth_date == None or len(birth_date) == 0):
+            birth_date = result_list[0].get('birth_date')
+        if(gender == None or len(gender) == 0):
+            gender = result_list[0].get('gender')
+        if(location == None or len(location) == 0):
+            location = result_list[0].get('location')
+
+        Session.execute(update(tables.users).filter_by(userid=userid).values(
+            username=username, email=email, private_profile=private_profile, birth_date=birth_date,
+            gender=gender, location=location))
+
+        Session.commit()
+        Session.flush()
+        return jsonify("Profile edited"), 200
 
 @app.route("/<userid>/recipe list", methods=["POST", "GET"])
 def get_all_recipes(userid):
@@ -258,10 +332,21 @@ def new_brew(userid, recipeid):
         return jsonify("Recipe created"), 201
 
 @app.route("/<userid>/brew list", methods=["POST", "GET"])
-def get_brew_attempt(userid):
+def get_brew_attempts(userid):
     result_list = []
     if request.method == "GET":
         attempt = Session.query(tables.brews).filter_by(userid=userid).all()
+
+        for i in attempt:
+            result = encoders.encoder_brews(i)
+            result_list.append(result)
+        return jsonify(Attempts=result_list), 200
+
+@app.route("/<userid>/brew list/<brewid>", methods=["POST", "GET"])
+def get_brew_attempt(userid, brewid):
+    result_list = []
+    if request.method == "GET":
+        attempt = Session.query(tables.brews).filter_by(userid=userid, brewid=brewid).all()
 
         for i in attempt:
             result = encoders.encoder_brews(i)
@@ -301,6 +386,30 @@ def search_brews_by_flavor(userid):
             result = encoders.encoder_brews(i)
             result_list.append(result)
         return jsonify(Attempts=result_list), 200
+
+@app.route("/<userid>/search/<recipeid>/copy", methods=["POST", "GET"])
+def copy_recipe(userid, recipeid):
+    recipe_list = []
+    if request.method == "POST":
+
+        prebrew = Session.query(tables.recipes).filter_by(recipeid=recipeid,
+                                                          recipe_visibility=True).all()
+        for i in prebrew:
+            result = encoders.encoder_recipes(i)
+            recipe_list.append(result)
+        brew_method = recipe_list[0].get('brew_method')
+        grind_setting = recipe_list[0].get('grind_setting')
+        brand = recipe_list[0].get('brand')
+        roast = recipe_list[0].get('roast')
+        bean_type = recipe_list[0].get('bean_type')
+        coffee_weight = recipe_list[0].get('coffee_weight')
+
+        Session.add(
+            tables.recipes(brew_method=brew_method.lower(), grind_setting=grind_setting, brand=brand.lower(), roast=roast.lower(),
+                  bean_type=bean_type.lower(), coffee_weight=coffee_weight, userid=userid, recipe_visibility=True))
+        Session.commit()
+        Session.flush()
+        return jsonify("Recipe copied"), 201
 
 @app.route("/<userid>/espresso_scores", methods=["POST", "GET"])
 def get_espresso_scores(userid):
@@ -515,8 +624,6 @@ def get_intermediate_tags():
 def get_advanced_tags():
     result_list = []
     if request.method == "GET":
-        # flavorWheel = Session.query(tables.tags).order_by(tables.tags.tagid).\
-        #     filter(tables.tags.outer_section !='')
         flavorWheel = Session.execute(text("select * "
                                       "from tags "
                                       "where outer_section != '' or middle_section in (select middle_section "
