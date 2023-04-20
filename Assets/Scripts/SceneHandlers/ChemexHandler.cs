@@ -56,7 +56,7 @@ public class ChemexHandler : MonoBehaviour
         foreach(Level l in levels)
         {
             l.button.GetComponent<Button>().enabled = false;
-            l.button.GetComponent<Image>().color = new Color(0.55f, 0.55f, 0.55f, 0.8f);
+            l.button.GetComponent<Image>().color = new Color(0.35f, 0.35f, 0.35f, 0.8f);
         }
         UpdateLevelMenu(null);
     }
@@ -85,7 +85,7 @@ public class ChemexHandler : MonoBehaviour
         if (curLevel > -1)
         {
             levels[curLevel].button.GetComponent<Button>().enabled = false;
-            levels[curLevel].button.GetComponent<Image>().color = new Color(0.55f, 0.55f, 0.55f, 0.8f);
+            levels[curLevel].button.GetComponent<Image>().color = new Color(0.35f, 0.35f, 0.35f, 0.8f);
 
             //update feedback
             feedbackName.text = levels[curLevel].name.ToString() + " Result:" + myScore.curScore.ToString() + "/" + myScore.curScoreTotal.ToString();
@@ -151,6 +151,7 @@ public class ChemexHandler : MonoBehaviour
             newText.transform.localPosition = new Vector3(newText.transform.localPosition.x, newText.transform.localPosition.y - (i*spaceBetweenScores), newText.transform.localPosition.z);
             newText.GetComponent<TextMeshProUGUI>().text = (i+1).ToString() + ". " + levels[i].name.ToString() + ":    "+ levels[i].curScore.ToString() + "/" + levels[i].curScoreTotal.ToString();
         }
+        SendToDatabase();
     }
 
     void SaveScores(int curScore, int curTotalScore, List<string> comments)
@@ -184,5 +185,23 @@ public class ChemexHandler : MonoBehaviour
             chemexScore.serveScore = curScore;
             chemexScore.serveScoreTotal = curTotalScore;
         }
+    }
+
+    void SendToDatabase()
+    {
+        int userId = PostInformation.userid;
+        WWWForm form = new WWWForm();
+        form.AddField("weightScore", chemexScore.weightScore);
+        form.AddField("weightScoreTotal", chemexScore.weightScoreTotal);
+        form.AddField("grindScore", chemexScore.grindScore);
+        form.AddField("grindScoreTotal", chemexScore.grindScoreTotal);
+        form.AddField("wetGroundsScore", chemexScore.wetGroundsScore);
+        form.AddField("wetGroundsScoreTotal", chemexScore.wetGroundsScoreTotal);
+        form.AddField("addWaterScore", chemexScore.addWaterScore);
+        form.AddField("addWaterScoreTotal", chemexScore.addWaterScoreTotal);
+        form.AddField("serveScore", chemexScore.serveScore);
+        form.AddField("serveScoreTotal", chemexScore.serveScoreTotal);
+
+        StartCoroutine(PostInformation.PostRequest(PostInformation.address + userId.ToString() + "/chemex_simulation", form));
     }
 }

@@ -58,7 +58,7 @@ public class DripHandler : MonoBehaviour
         foreach(Level l in levels)
         {
             l.button.GetComponent<Button>().enabled = false;
-            l.button.GetComponent<Image>().color = new Color(0.55f, 0.55f, 0.55f, 0.8f);
+            l.button.GetComponent<Image>().color = new Color(0.35f, 0.35f, 0.35f, 0.8f);
         }
         UpdateLevelMenu(null);
     }
@@ -87,7 +87,7 @@ public class DripHandler : MonoBehaviour
         if (curLevel > -1)
         {
             levels[curLevel].button.GetComponent<Button>().enabled = false;
-            levels[curLevel].button.GetComponent<Image>().color = new Color(0.55f, 0.55f, 0.55f, 0.8f);
+            levels[curLevel].button.GetComponent<Image>().color = new Color(0.35f, 0.35f, 0.35f, 0.8f);
 
             //update feedback
             feedbackName.text = levels[curLevel].name.ToString() + " Result:" + myScore.curScore.ToString() + "/" + myScore.curScoreTotal.ToString();
@@ -153,6 +153,8 @@ public class DripHandler : MonoBehaviour
             newText.transform.localPosition = new Vector3(newText.transform.localPosition.x, newText.transform.localPosition.y - (i*spaceBetweenScores), newText.transform.localPosition.z);
             newText.GetComponent<TextMeshProUGUI>().text = (i+1).ToString() + ". " + levels[i].name.ToString() + ":    "+ levels[i].curScore.ToString() + "/" + levels[i].curScoreTotal.ToString();
         }
+
+        SendToDatabase();
     }
 
     void SaveScores(int curScore, int curTotalScore, List<string> comments)
@@ -196,5 +198,27 @@ public class DripHandler : MonoBehaviour
             dripScore.serveScore = curScore;
             dripScore.serveScoreTotal = curTotalScore;
         }
+    }
+
+    void SendToDatabase()
+    {
+        int userId = PostInformation.userid;
+        WWWForm form = new WWWForm();
+        form.AddField("weightScore", dripScore.weightScore);
+        form.AddField("weightScoreTotal", dripScore.weightScoreTotal);
+        form.AddField("reservoirScore", dripScore.reservoirScore);
+        form.AddField("reservoirScoreTotal", dripScore.reservoirScoreTotal);
+        form.AddField("grindScore", dripScore.grindScore);
+        form.AddField("grindScoreTotal", dripScore.grindScoreTotal);
+        form.AddField("chooseFilterScore", dripScore.chooseFilterScore);
+        form.AddField("chooseFilterScoreTotal", dripScore.chooseFilterScoreTotal);
+        form.AddField("refillReservoirScore", dripScore.refillReservoirScore);
+        form.AddField("refillReservoirScoreTotal", dripScore.refillReservoirScoreTotal);
+        form.AddField("brewScore", dripScore.brewScore);
+        form.AddField("brewScoreTotal", dripScore.brewScoreTotal);
+        form.AddField("serveScore", dripScore.serveScore);
+        form.AddField("serveScoreTotal", dripScore.serveScoreTotal);
+
+        StartCoroutine(PostInformation.PostRequest(PostInformation.address + userId.ToString() + "/drip_simulation", form));
     }
 }
