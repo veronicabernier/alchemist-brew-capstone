@@ -9,6 +9,11 @@ TagManager:
   - username
   - password
   - login
+  - SignUp
+  - ConfirmPassword
+  - BirthDate
+  - Email
+  - Location
   layers:
   - Default
   - TransparentFX

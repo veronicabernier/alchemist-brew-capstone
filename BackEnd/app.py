@@ -1,10 +1,10 @@
 import datetime
 import bcrypt
 from sqlalchemy import create_engine, ForeignKey, Column, Text, Integer, Boolean, Date, Float, DateTime, String, \
-    DateTime, update, Null, null
+    DateTime, update, null
 from sqlalchemy_utils import database_exists, create_database
 from sqlalchemy.orm import sessionmaker, declarative_base
-from BackEnd.config.dbconfig import pg_config as settings
+from config.db_config import db_config as settings
 from flask import Flask, request
 from flask_cors import CORS
 from flask import jsonify
@@ -178,7 +178,7 @@ def register():
                 Session.add(users(username=username, email=email, password=storedpass, private_profile=True, birth_date=birth_date, gender=gender, location=location))
                 Session.commit()
                 Session.flush()
-                return jsonify("Singup complete"), 201
+                return jsonify("Signup complete"), 201
             else:
                 Session.flush()
                 return jsonify(Error="Password does not match"), 404
