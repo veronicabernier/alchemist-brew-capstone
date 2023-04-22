@@ -86,12 +86,18 @@ def register():
                 password = 'j x s y g g q w m f g n b f v h'
                 server.login('alchemy.coffee.brew@gmail.com', password)
                 OTP = ''.join([str(random.randint(0, 9)) for i in range(4)])
+                OTPencode = OTP.encode(encoding='UTF-8', errors='strict')
+                hashOTP = bcrypt.hashpw(OTPencode, salt)
+                storedOTP = hashOTP.decode(encoding='UTF-8', errors='strict')
                 msg = 'Hello, Your OTP is ' + str(OTP)
                 sender = 'alchemy.coffee.brew@gmail.com'  # write email id of sender
                 server.sendmail(sender, email, msg)
-                Session.add(tables.temp_users(username=username, email=email, password=storedpass,
+                Session.add(tables.users(username=username, email=email, password=storedpass,
                                               private_profile=True, birth_date=birth_date, gender=gender,
-                                              location=location, confirmation_code=OTP, confirmation=False))
+                                              location=location))
+                Session.commit()
+                userid=Session.query(tables.users.userid).filter_by(email=email).first()
+                Session.add(tables.confirmations(userid=userid[0], email=email, confirmation_code=storedOTP, confirmation=False))
                 server.quit()
                 Session.commit()
                 Session.flush()
@@ -110,14 +116,15 @@ def account_verification(userid):
     result_list = []
     if request.method == "POST":
         confirmation_code = request.form.get('confirmation_code')
-        verification_code = Session.query(tables.temp_users).filter_by(userid=userid)
-        for i in verification_code:
-            result = encoders.encoder_temp_user(i)
-            result_list.append(result)
-        print(result_list[0].get('confirmation_code'), confirmation_code)
-        print(result_list[0].get('confirmation_code') == int(confirmation_code))
-        if(result_list[0].get('confirmation_code') == int(confirmation_code)):
-            Session.execute(update(tables.temp_users).filter_by(userid=userid).values(
+        verification_code = Session.query(tables.confirmations.confirmation_code).filter_by(userid=userid).first()
+        # for i in verification_code:
+        #     result = encoders.encoder_temp_user(i)
+        #     result_list.append(result)
+        # print(result_list[0].get('confirmation_code'), confirmation_code)
+        # print(result_list[0].get('confirmation_code') == int(confirmation_code))
+        if(bcrypt.checkpw(confirmation_code.encode(encoding='UTF-8', errors='strict'),
+                          verification_code[0].encode(encoding='UTF-8', errors='strict'))):
+            Session.execute(update(tables.confirmations).filter_by(userid=userid).values(
                 confirmation=True))
             Session.commit()
             Session.flush()

@@ -91,13 +91,11 @@ def encoder_user(user):
                 'gender': user.gender, 'location': user.location}
     raise TypeError(f'Object{user} is not of type users.')
 
-def encoder_temp_user(temp_user):
-    if isinstance(temp_user, tables.temp_users):
-        return {'userid': temp_user.userid, 'username': temp_user.username, 'email': temp_user.email,
-                'password': temp_user.password, 'private_profile': temp_user.private_profile,
-                'birth_date': temp_user.birth_date, 'gender': temp_user.gender, 'location': temp_user.location,
-                'confirmation_code': temp_user.confirmation_code, 'confirmation': temp_user.confirmation}
-    raise TypeError(f'Object{temp_user} is not of type users.')
+def encoder_confirmation(confirmation):
+    if isinstance(confirmation, tables.temp_users):
+        return {'userid': confirmation.userid, 'email': confirmation.email,
+                'confirmation_code': confirmation.confirmation_code, 'confirmation': confirmation.confirmation}
+    raise TypeError(f'Object{confirmation} is not of type users.')
 
 def tags_dict(row):
     result = {}
