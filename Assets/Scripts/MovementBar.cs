@@ -70,7 +70,8 @@ public class MovementBar : MonoBehaviour
         {
             fillProgress.fillAmount += fillSpeed;
             coffeeFull.transform.localScale = new Vector3(coffeeFull.transform.localScale.x, (1 - fillProgress.fillAmount) * ogCoffeeScaleY, coffeeFull.transform.localScale.z);
-            coffeeFull.transform.localPosition = new Vector3(coffeeFull.transform.localPosition.x, (1 - fillProgress.fillAmount) * ogCoffeePosY, coffeeFull.transform.localPosition.z);
+            float newCoffeeY = ogCoffeePosY - (1.0f/2.0f)*(ogCoffeeScaleY - coffeeFull.transform.localScale.y);
+            coffeeFull.transform.localPosition = new Vector3(coffeeFull.transform.localPosition.x, newCoffeeY, coffeeFull.transform.localPosition.z);
             animatedImage.GetComponent<Image>().enabled = (fillProgress.fillAmount < 1);
             animatedImage.transform.localPosition = animatedImagePos.position;
 
