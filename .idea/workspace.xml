@@ -57,6 +57,7 @@
       <option name="presentableId" value="Default" />
       <updated>1680021644023</updated>
       <workItem from="1680021645485" duration="3345000" />
+      <workItem from="1682089884094" duration="2814000" />
     </task>
     <servers />
   </component>
@@ -75,6 +76,8 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/dbconfig_cpython_310_pyc$dbconfig.coverage" NAME="dbconfig Coverage Results" MODIFIED="1681768034250" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackEnd/config" />
+    <SUITE FILE_PATH="coverage/dbconfig_cpython_310_pyc$app.coverage" NAME="app Coverage Results" MODIFIED="1681769000147" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackEnd" />
     <SUITE FILE_PATH="coverage/temp_capstone_practice$dbconfig.coverage" NAME="dbconfig Coverage Results" MODIFIED="1680023692842" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackEnd/config" />
     <SUITE FILE_PATH="coverage/temp_capstone_practice$app.coverage" NAME="app Coverage Results" MODIFIED="1680052866903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackEnd" />
     <SUITE FILE_PATH="coverage/temp_capstone_practice$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1680022014145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
