@@ -41,14 +41,15 @@ public class GetinputExample : MonoBehaviour
         {
             WWWForm form = new WWWForm();
             form.AddField("email", username);
-            form.AddField("password", password); 
+            form.AddField("password", password);
 
-            StartCoroutine(PostRequest("http://127.0.0.1:5000/login", form));
+            StartCoroutine(PostRequest(form));
+
         }
 
-        IEnumerator PostRequest(string uri, WWWForm postData)
+        IEnumerator PostRequest(WWWForm form)
         {
-            using (UnityWebRequest webRequest = UnityWebRequest.Post(uri, postData))
+            using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1:5000/login", form))
             {
                 yield return webRequest.SendWebRequest();
                 if (webRequest.result == UnityWebRequest.Result.ConnectionError)
@@ -58,14 +59,15 @@ public class GetinputExample : MonoBehaviour
                 else
                 {
                     Debug.Log(webRequest.downloadHandler.text);
+                    Debug.Log("username input: " + username);
+                   /* Debug.Log("password input: " + password);*/
                 }
             }
         }
 
     
 
-    Debug.Log("username input: " + username);
-        Debug.Log("password input: " + password);
+    
     }
 }
 

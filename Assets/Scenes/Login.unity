@@ -521,7 +521,6 @@ GameObject:
   - component: {fileID: 277764606}
   - component: {fileID: 277764605}
   - component: {fileID: 277764609}
-  - component: {fileID: 277764610}
   m_Layer: 5
   m_Name: Canvas (1)
   m_TagString: Untagged
@@ -625,21 +624,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 277764604}
   m_CullTransparentMesh: 1
---- !u!114 &277764610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 277764604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 819eeeb0d95d1c845946e91abac96013, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputFieldUsername: {fileID: 0}
-  inputFieldPassword: {fileID: 0}
-  loginObject: {fileID: 0}
 --- !u!1 &283974240
 GameObject:
   m_ObjectHideFlags: 0
@@ -1154,7 +1138,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Username
+  m_text: Email
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1519,7 +1503,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1606692530}
-  - component: {fileID: 1606692531}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -1541,19 +1524,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1606692531
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606692529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa6c542f4dc75cb458b2371cd162a595, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: Sign_up
 --- !u!1 &1658216499
 GameObject:
   m_ObjectHideFlags: 0
@@ -2036,7 +2006,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputFieldUsername: {fileID: 274063895}
   inputFieldPassword: {fileID: 133924353}
-  loginObject: {fileID: 0}
+  loginObject: {fileID: 1528883927}
 --- !u!1 &2096882619
 GameObject:
   m_ObjectHideFlags: 0
@@ -2120,7 +2090,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1606692531}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: level_manager, Assembly-CSharp
         m_MethodName: changeScene
         m_Mode: 1

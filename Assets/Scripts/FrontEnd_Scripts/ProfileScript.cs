@@ -42,6 +42,8 @@ public class ProfileScript : MonoBehaviour
             locationText.text = userData.location;*/
             usernameText.text = userData.Recepies[0].username;
             emailText.text = userData.Recepies[0].email;
+            genderText.text = userData.Recepies[0].gender;
+            locationText.text = userData.Recepies[0].location;
         }
     }
 }
