@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Networking;
+using UnityEngine.UI;
+using TMPro;
+using System.Linq;
+using UnityEngine.SceneManagement;
 
 
 public class SignupConnection : MonoBehaviour
@@ -15,8 +18,11 @@ private string BirthDatename = "BirthDate";
 private string Locationname = "Location";
 private string SignUpButton = "SignUp";
 
+public TextMeshProUGUI successMessage;
+public float messageduration = 3f;
 
-public InputField inputFieldUsername;
+
+    public InputField inputFieldUsername;
 public InputField inputFieldPassword;
 public InputField inputFieldEmail;
     public InputField inputFieldConfirmPassword;
@@ -153,7 +159,24 @@ void Start()
                 }
                 else
                 {
+
+
+
                     Debug.Log(webRequest.downloadHandler.text);
+
+                    if (webRequest.downloadHandler.text.Contains("Password does not match"))
+                    {
+                        successMessage.text = "Password doesn't match";
+                    }
+                    else
+                    {
+                        successMessage.text = "Signed up Successfull!";
+
+                        yield return new WaitForSeconds(messageduration);
+                        successMessage.text = "";
+
+                        SceneManager.LoadScene("Login");
+                    }
                 }
             }
         }
@@ -162,9 +185,9 @@ void Start()
 
         Debug.Log("username input: " + username);
         Debug.Log("password input: " + password);
-        Debug.Log("password input: " + confirmPassword);
-        Debug.Log("password input: " + email);
-        Debug.Log("password input: " + location);
-        Debug.Log("password input: " + Birthdate);
+        Debug.Log("confirmpassword input: " + confirmPassword);
+        Debug.Log("email input: " + email);
+        Debug.Log("location input: " + location);
+        Debug.Log("BirthDate input: " + Birthdate);
     }
 }

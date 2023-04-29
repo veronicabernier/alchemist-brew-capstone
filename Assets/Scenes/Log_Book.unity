@@ -2592,6 +2592,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 248d9fa993d3e44daa165a75b0063088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Content: {fileID: 0}
+  m_Horizontal: 1
+  m_Vertical: 1
+  m_MovementType: 1
+  m_Elasticity: 0.1
+  m_Inertia: 1
+  m_DecelerationRate: 0.135
+  m_ScrollSensitivity: 1
+  m_Viewport: {fileID: 0}
+  m_HorizontalScrollbar: {fileID: 0}
+  m_VerticalScrollbar: {fileID: 0}
+  m_HorizontalScrollbarVisibility: 0
+  m_VerticalScrollbarVisibility: 0
+  m_HorizontalScrollbarSpacing: 0
+  m_VerticalScrollbarSpacing: 0
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  IsGrid: 0
+  PrototypeCell: {fileID: 0}
+  SelfInitialize: 1
+  Direction: 0
+  _segments: 0
 --- !u!114 &714624724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5284,7 +5307,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1331370558}
-  - component: {fileID: 1331370557}
   - component: {fileID: 1331370559}
   m_Layer: 0
   m_Name: SceneManager
@@ -5293,19 +5315,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1331370557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1331370556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa6c542f4dc75cb458b2371cd162a595, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: Sign_up
 --- !u!4 &1331370558
 Transform:
   m_ObjectHideFlags: 0

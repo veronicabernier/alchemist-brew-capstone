@@ -5,43 +5,46 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using UnityEngine.SceneManagement;
 /*using JSonhelper;*/
 
 public class RecipeList : MonoBehaviour
 {
     public GameObject recipeItemPrefab;
+    
     /*public Transform contentTransform;*/
     public RectTransform contentTransform;
-    public Dropdown dropdownSearchable;
+    public Dropdown dropdownBrands;
+    /*public Dropdown dropdownTags;*/
+    public Dropdown dropdownRoast;
     private RecipeData[] recipes;
-    private List<string> brands = new List<string>();
+
+    private List<string> brands = new List<string>() {"All"};
+    private List<string> roast = new List<string>() {"All"};
+    
+
+    public static RecipeData SelectedRecipe;
 
 
+    /*public void SetSelected Recipe(RecipeData recipe)
+    {
+        Selected = recipe;
+    }*/
+
+
+
+    public void LoadRecipeDetails(RecipeData recipe)
+    {
+        SelectedRecipe = recipe;
+        SceneManager.LoadScene("EditRecipe");
+    }
     void Start()
     {
         StartCoroutine(GetRecipes());
-        /*dropdownSearchable.onValueChanged.AddListener(OnDropdownValueChanged);*/
+      
     }
-   /* void OnDropdownValueChanged(int index)
-    {
-        
-        string selectedValue = dropdownSearchable.options[index].text;
 
-        // Filter the brews based on the selected value
-        RecipeData[] filteredRecipies = recipes.Where(recipes => recipes.brand == selectedValue).ToArray();
-
-        // Update the list with the filtered brews
-        foreach (Transform child in contentTransform)
-        {
-            Destroy(child.gameObject);
-        }
-
-        foreach (RecipeData i in filteredRecipies)
-        {
-            GameObject recipeItem = Instantiate(recipeItemPrefab, contentTransform);
-            recipeItem.GetComponent<RecipeItem>().SetRecipe(i);
-        }
-    }*/
+   
 
     IEnumerator GetRecipes()
     {
@@ -82,6 +85,7 @@ public class RecipeList : MonoBehaviour
                      
                     GameObject recipeItem = Instantiate(recipeItemPrefab, contentTransform);
                     recipeItem.GetComponent<RecipeItem>().SetRecipe(i);
+                   /* recipeItem.GetComponent<Button>().onClick.AddListener(() => recipeItem.GetComponent<RecipeItem>().OnClickRecipeItem());*/
                 }
                 GameObject firstRecipeItem = contentTransform.GetChild(0).gameObject;
                 Destroy(firstRecipeItem);
@@ -99,10 +103,26 @@ public class RecipeList : MonoBehaviour
                     brands.Add(recipes[i].brand);
                 }
             }
+            for (int i = 0; i < recipes.Length; i++)
+            {
+                if (!roast.Contains(recipes[i].roast))
+                {
+                    roast.Add(recipes[i].roast);
+                }
+            }
+            roast.Sort();
             brands.Sort();
+            /*tags.Sort();*/
 
-            dropdownSearchable.ClearOptions();
-            dropdownSearchable.AddOptions(brands);
+
+           
+            /*dropdownRoast.ClearOptions();*/
+            dropdownRoast.AddOptions(roast);
+            
+           /* dropdownTags.ClearOptions();
+            dropdownTags.AddOptions(tags);*/
+            dropdownBrands.ClearOptions();
+            dropdownBrands.AddOptions(brands);
 
            
         }

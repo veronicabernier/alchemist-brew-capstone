@@ -10,7 +10,13 @@ public class BrewList : MonoBehaviour
     public GameObject BrewItemPrefab;
     public RectTransform contentTransform;
     private BrewData[] brews;
- 
+    public Dropdown dropdownBrands;
+    public Dropdown dropdownTags;
+    public Dropdown dropdownRoast;
+    private List<string> brands = new List<string>() { "All" };
+    private List<string> roast = new List<string>() { "All" };
+    private List<string> tag = new List<string>() { "All" };
+
     void Start()
     {
         StartCoroutine(GetBrews());
@@ -54,6 +60,42 @@ public class BrewList : MonoBehaviour
                 Debug.Log(brews[1].brand + "recipe brand");
 
             }
+            for (int i = 0; i < brews.Length; i++)
+            {
+                if (!brands.Contains(brews[i].brand))
+                {
+                    brands.Add(brews[i].brand);
+                }
+            }
+            for (int i = 0; i < brews.Length; i++)
+            {
+                if (!roast.Contains(brews[i].roast))
+                {
+                    roast.Add(brews[i].roast);
+                }
+            }
+            for (int i = 0; i < brews.Length; i++)
+            {
+                if (!tag.Contains(brews[i].inner_section))
+                {
+                    tag.Add(brews[i].inner_section);
+                }
+            }
+            roast.Sort();
+            brands.Sort();
+            tag.Sort();
+            /*tags.Sort();*/
+
+
+            /*dropdownRoast.ClearOptions();*/
+            dropdownRoast.AddOptions(roast);
+           
+            dropdownTags.AddOptions(tag);
+
+            /* dropdownTags.ClearOptions();
+             dropdownTags.AddOptions(tags);*/
+            dropdownBrands.ClearOptions();
+            dropdownBrands.AddOptions(brands);
         }
     }
 }

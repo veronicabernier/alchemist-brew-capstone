@@ -157,6 +157,7 @@ def login():
             else:
                if (bcrypt.checkpw(password.encode(encoding='UTF-8', errors='strict'), passworddata[0].encode(encoding='UTF-8', errors='strict'))):
                 return jsonify("Succesfull login"), 400  # to be edited from here do redict to either svm or home
+            return jsonify(Error="User or password is incorrect"), 400
 
     return jsonify(Error="User or password is incorrect"), 400
 
