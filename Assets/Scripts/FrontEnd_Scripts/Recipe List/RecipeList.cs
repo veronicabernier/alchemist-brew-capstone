@@ -14,23 +14,10 @@ public class RecipeList : MonoBehaviour
     
     /*public Transform contentTransform;*/
     public RectTransform contentTransform;
-    public Dropdown dropdownBrands;
-    /*public Dropdown dropdownTags;*/
-    public Dropdown dropdownRoast;
     private RecipeData[] recipes;
-
-    private List<string> brands = new List<string>() {"All"};
-    private List<string> roast = new List<string>() {"All"};
     
 
     public static RecipeData SelectedRecipe;
-
-
-    /*public void SetSelected Recipe(RecipeData recipe)
-    {
-        Selected = recipe;
-    }*/
-
 
 
     public void LoadRecipeDetails(RecipeData recipe)
@@ -89,42 +76,13 @@ public class RecipeList : MonoBehaviour
                 }
                 GameObject firstRecipeItem = contentTransform.GetChild(0).gameObject;
                 Destroy(firstRecipeItem);
-                float newHeight = 250 * recipes.Length;
+                float newHeight = recipeItemPrefab.GetComponent<RectTransform>().sizeDelta.y * recipes.Length;
                 contentTransform.sizeDelta = new Vector2(contentTransform.sizeDelta.x, newHeight);
                 contentTransform.anchoredPosition = new Vector2(contentTransform.anchoredPosition.x, 0);
                 Debug.Log("Successfully parsed " + recipes.Length + " recipes.");
                 Debug.Log(recipes[1].brand + "recipe brand");
 
-            }
-            for (int i = 0; i < recipes.Length; i++)
-            {
-                if (!brands.Contains(recipes[i].brand))
-                {
-                    brands.Add(recipes[i].brand);
-                }
-            }
-            for (int i = 0; i < recipes.Length; i++)
-            {
-                if (!roast.Contains(recipes[i].roast))
-                {
-                    roast.Add(recipes[i].roast);
-                }
-            }
-            roast.Sort();
-            brands.Sort();
-            /*tags.Sort();*/
-
-
-           
-            /*dropdownRoast.ClearOptions();*/
-            dropdownRoast.AddOptions(roast);
-            
-           /* dropdownTags.ClearOptions();
-            dropdownTags.AddOptions(tags);*/
-            dropdownBrands.ClearOptions();
-            dropdownBrands.AddOptions(brands);
-
-           
+            }    
         }
     }
 }

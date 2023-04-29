@@ -58,31 +58,6 @@ public class BrewList : MonoBehaviour
                 Debug.Log(brews[1].brand + "recipe brand");
 
             }
-            for (int i = 0; i < brews.Length; i++)
-            {
-                if (!brands.Contains(brews[i].brand))
-                {
-                    brands.Add(brews[i].brand);
-                }
-            }
-            for (int i = 0; i < brews.Length; i++)
-            {
-                if (!roast.Contains(brews[i].roast))
-                {
-                    roast.Add(brews[i].roast);
-                }
-            }
-            for (int i = 0; i < brews.Length; i++)
-            {
-                if (!tag.Contains(brews[i].inner_section))
-                {
-                    tag.Add(brews[i].inner_section);
-                }
-            }
-            roast.Sort();
-            brands.Sort();
-            tag.Sort();
-            /*tags.Sort();*/
 
         }
     }
