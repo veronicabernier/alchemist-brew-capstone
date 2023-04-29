@@ -19,8 +19,7 @@ public class DemoCell : MonoBehaviour, ICell
 
     private void Start()
     {
-        //Can also be done in the inspector
-        GetComponent<Button>().onClick.AddListener(ButtonListener);
+
     }
 
     //This is called from the SetCell method in DataSource
@@ -34,9 +33,4 @@ public class DemoCell : MonoBehaviour, ICell
         idLabel.text = contactInfo.id;
     }
 
-    
-    private void ButtonListener()
-    {
-        Debug.Log("Index : " + _cellIndex +  ", Name : " + _contactInfo.Name  + ", Gender : " + _contactInfo.Gender);
-    }
 }

@@ -23,9 +23,9 @@ using TMPro;
     public void SetBrew(BrewData brew)
     {
     beanTypeText.text = "Bean Type: " + brew.bean_type;
-    brandText.text = "Brand:" + brew.brand;
-    brewMethodText.text = "Brew Method:" + brew.brew_method;
-    coffeeWeightText.text = "Coffee Weight:" + brew.coffee_weight.ToString();
+    brandText.text = "Brand: " + brew.brand;
+    brewMethodText.text = "Brew Method: " + brew.brew_method;
+    coffeeWeightText.text = "Coffee Weight: " + brew.coffee_weight.ToString();
     extTimeText.text = "Time: " + brew.ext_time.ToString();
     extWeightText.text ="Weight: " +  brew.ext_weight.ToString();
     grindSettingText.text = "Grind Setting: " + brew.grind_setting.ToString();

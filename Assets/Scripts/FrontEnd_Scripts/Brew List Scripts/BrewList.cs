@@ -10,9 +10,7 @@ public class BrewList : MonoBehaviour
     public GameObject BrewItemPrefab;
     public RectTransform contentTransform;
     private BrewData[] brews;
-    public Dropdown dropdownBrands;
-    public Dropdown dropdownTags;
-    public Dropdown dropdownRoast;
+
     private List<string> brands = new List<string>() { "All" };
     private List<string> roast = new List<string>() { "All" };
     private List<string> tag = new List<string>() { "All" };
@@ -53,7 +51,7 @@ public class BrewList : MonoBehaviour
                 }
                 GameObject firstRecipeItem = contentTransform.GetChild(0).gameObject;
                 Destroy(firstRecipeItem);
-                float newHeight = 350 * brews.Length;
+                float newHeight = BrewItemPrefab.GetComponent<RectTransform>().sizeDelta.y * brews.Length;
                 contentTransform.sizeDelta = new Vector2(contentTransform.sizeDelta.x, newHeight);
                 contentTransform.anchoredPosition = new Vector2(contentTransform.anchoredPosition.x, 0);
                 Debug.Log("Successfully parsed " + brews.Length + " recipes.");
@@ -86,16 +84,6 @@ public class BrewList : MonoBehaviour
             tag.Sort();
             /*tags.Sort();*/
 
-
-            /*dropdownRoast.ClearOptions();*/
-            dropdownRoast.AddOptions(roast);
-           
-            dropdownTags.AddOptions(tag);
-
-            /* dropdownTags.ClearOptions();
-             dropdownTags.AddOptions(tags);*/
-            dropdownBrands.ClearOptions();
-            dropdownBrands.AddOptions(brands);
         }
     }
 }
