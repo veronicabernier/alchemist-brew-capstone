@@ -71,7 +71,7 @@ public class EditRecipe : MonoBehaviour
 
         IEnumerator PostRequest(WWWForm form)
         {
-            using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1:5000/1/" + selectedRecipe.recipeid + "/edit", form))
+            using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1:5000/" + PostInformation.userid + "/" + selectedRecipe.recipeid + " / edit", form))
             /*using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1:5000/1/14/edit", form))*/
             {
                 webRequest.method = "PUT";

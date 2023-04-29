@@ -22,7 +22,7 @@ public class BrewList : MonoBehaviour
 
     IEnumerator GetBrews()
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get("http://127.0.0.1:5000/1/brew%20list"))
+        using (UnityWebRequest webRequest = UnityWebRequest.Get("http://127.0.0.1:5000/" + PostInformation.userid + "/brew%20list"))
         {
             yield return webRequest.SendWebRequest();
 

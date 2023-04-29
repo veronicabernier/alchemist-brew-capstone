@@ -35,7 +35,7 @@ public class RecipeList : MonoBehaviour
 
     IEnumerator GetRecipes()
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get("http://127.0.0.1:5000/1/recipe%20list"))
+        using (UnityWebRequest webRequest = UnityWebRequest.Get("http://127.0.0.1:5000/" + PostInformation.userid + "/recipe%20list"))
         {
             yield return webRequest.SendWebRequest();
 
