@@ -155,7 +155,7 @@ def login():
             else:
                if (bcrypt.checkpw(password.encode(encoding='UTF-8', errors='strict'), passworddata[0].encode(encoding='UTF-8', errors='strict'))):
                 userid = Session.query(tables.users.userid).filter_by(email=email).first()
-                return jsonify("Succesfull login", userid[0]), 400  # to be edited from here do redict to either svm or home
+                return jsonify(message="Succesfull login", userId=userid[0]), 400  # to be edited from here do redict to either svm or home
 
     return jsonify(Error="User or password is incorrect"), 400
 

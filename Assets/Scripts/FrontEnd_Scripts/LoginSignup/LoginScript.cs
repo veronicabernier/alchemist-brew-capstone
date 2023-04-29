@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using System;
 
 public class LoginScript : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class LoginScript : MonoBehaviour
     private string loginButton = "login";
     public InputField inputFieldUsername;
     public InputField inputFieldPassword;
-    public Button loginObject;
+    public string afterLoginSceneName;
 
     private string username;
     private string password;
@@ -20,11 +21,8 @@ public class LoginScript : MonoBehaviour
     {
         inputFieldUsername = GameObject.FindGameObjectWithTag("username").GetComponent<InputField>();
         inputFieldPassword = GameObject.FindGameObjectWithTag("password").GetComponent<InputField>();
-        loginObject = GameObject.FindGameObjectWithTag(loginButton).GetComponent<Button>();
         inputFieldUsername.onValueChanged.AddListener(OnUsernameChanged);
         inputFieldPassword.onValueChanged.AddListener(OnPasswordChanged);
-        loginObject.onClick.AddListener(OnLoginPress);
-      
     }
 
     void OnUsernameChanged(string newValue) 
@@ -37,7 +35,7 @@ public class LoginScript : MonoBehaviour
     {
         password = newValue;
     }
-    void OnLoginPress()
+    public void OnLoginPress()
     
         {
             WWWForm form = new WWWForm();
@@ -60,17 +58,26 @@ public class LoginScript : MonoBehaviour
                 else
                 {
                     Debug.Log(webRequest.downloadHandler.text);
+                    PostInformation.userid = JsonUtility.FromJson<LoginData>(webRequest.downloadHandler.text).userId;
+                    Debug.Log(PostInformation.userid);
                     Debug.Log("username input: " + username);
+                    SceneChanger sc = new SceneChanger();
+                    sc.changeScene(afterLoginSceneName);
                    /* Debug.Log("password input: " + password);*/
                 }
             }
         }
 
-    
 
-    
-    
+    [System.Serializable]
+    public class LoginData
+    {
+        public string message;
+        public int userId;
+    }
 }
+
+
 
 
 
