@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="266002ff-1caa-40c7-b9ab-dfe7d493c776" name="Changes" comment="" />
+    <list default="true" id="266002ff-1caa-40c7-b9ab-dfe7d493c776" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -77,7 +79,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c9912a0c-e7b0-485c-9db1-02e15b0983eb" name="Changes" comment="" />
+      <changelist id="266002ff-1caa-40c7-b9ab-dfe7d493c776" name="Changes" comment="" />
       <created>1680021644023</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -85,6 +87,7 @@
       <workItem from="1680021645485" duration="3345000" />
       <workItem from="1682089884094" duration="2814000" />
       <workItem from="1682729210775" duration="1456000" />
+      <workItem from="1682740464885" duration="648000" />
     </task>
     <servers />
   </component>
@@ -104,7 +107,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/dbconfig_cpython_310_pyc$dbconfig.coverage" NAME="dbconfig Coverage Results" MODIFIED="1681768034250" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackEnd/config" />
-    <SUITE FILE_PATH="coverage/dbconfig_cpython_310_pyc$app.coverage" NAME="app Coverage Results" MODIFIED="1682730086332" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackEnd" />
+    <SUITE FILE_PATH="coverage/dbconfig_cpython_310_pyc$app.coverage" NAME="app Coverage Results" MODIFIED="1682740512504" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackEnd" />
     <SUITE FILE_PATH="coverage/temp_capstone_practice$dbconfig.coverage" NAME="dbconfig Coverage Results" MODIFIED="1680023692842" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackEnd/config" />
     <SUITE FILE_PATH="coverage/temp_capstone_practice$app.coverage" NAME="app Coverage Results" MODIFIED="1680052866903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackEnd" />
     <SUITE FILE_PATH="coverage/temp_capstone_practice$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1680022014145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
