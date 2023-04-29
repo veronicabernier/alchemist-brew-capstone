@@ -9,7 +9,7 @@ from sqlalchemy import create_engine, ForeignKey, Column, Text, Integer, Boolean
     DateTime, update, null
 from sqlalchemy_utils import database_exists, create_database
 from sqlalchemy.orm import sessionmaker, declarative_base
-from config.dbconfig import db_config as settings
+from config.dbconfig import pg_config as settings
 from flask import Flask, request
 from flask_cors import CORS
 from flask import jsonify
