@@ -5,11 +5,9 @@ import math
 import random
 import smtplib
 from sqlalchemy import create_engine, update, text
-from sqlalchemy import create_engine, ForeignKey, Column, Text, Integer, Boolean, Date, Float, DateTime, String, \
-    DateTime, update, null
 from sqlalchemy_utils import database_exists, create_database
 from sqlalchemy.orm import sessionmaker, declarative_base
-from config.dbconfig import pg_config as settings
+from BackEnd.config.dbconfig import pg_config as settings
 from flask import Flask, request
 from flask_cors import CORS
 from flask import jsonify
@@ -103,7 +101,7 @@ def register():
                 server.quit()
                 Session.commit()
                 Session.flush()
-                return jsonify("Signup complete"), 201
+                return jsonify("Singup complete", userid[0]), 201
             else:
                 Session.flush()
                 return jsonify(Error="Password does not match"), 404
@@ -156,8 +154,8 @@ def login():
                 return jsonify(Error="Incorrect password"), 400
             else:
                if (bcrypt.checkpw(password.encode(encoding='UTF-8', errors='strict'), passworddata[0].encode(encoding='UTF-8', errors='strict'))):
-                return jsonify("Succesfull login"), 400  # to be edited from here do redict to either svm or home
-            
+                userid = Session.query(tables.users.userid).filter_by(email=email).first()
+                return jsonify("Succesfull login", userid[0]), 400  # to be edited from here do redict to either svm or home
 
     return jsonify(Error="User or password is incorrect"), 400
 
