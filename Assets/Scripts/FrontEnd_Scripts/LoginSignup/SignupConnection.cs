@@ -10,54 +10,36 @@ using UnityEngine.SceneManagement;
 
 public class SignupConnection : MonoBehaviour
 { 
-private string inputFieldUsernameName = "username";
-private string inputFieldEmailname = "Email";
-private string inputFieldPasswordName = "password";
-private string inputFieldConfirmPasswordname = "ConfirmPassword";
-private string BirthDatename = "BirthDate";
-private string Locationname = "Location";
-private string SignUpButton = "SignUp";
+    private string inputFieldUsernameName = "username";
+    private string inputFieldEmailname = "Email";
+    private string inputFieldPasswordName = "password";
+    private string inputFieldConfirmPasswordname = "ConfirmPassword";
+    private string BirthDatename = "BirthDate";
+    private string Locationname = "Location";
+    private string SignUpButton = "SignUp";
 
-public TextMeshProUGUI successMessage;
-public float messageduration = 3f;
+    public TextMeshProUGUI successMessage;
+    public float messageduration = 3f;
 
 
     public InputField inputFieldUsername;
-public InputField inputFieldPassword;
-public InputField inputFieldEmail;
+    public InputField inputFieldPassword;
+    public InputField inputFieldEmail;
     public InputField inputFieldConfirmPassword;
     public InputField inputFieldBirthDate;
     public InputField inputFieldLocation;
-public Button SignupObject;
 
-public Dropdown gender;
+    public Dropdown gender;
 
-    
-
-
-private string username;
-private string password;
+    private string username;
+    private string password;
     private string email;
     private string confirmPassword;
     private string Birthdate;
     private string location;
 
-void Start()
-{
-        inputFieldUsername = GameObject.FindGameObjectWithTag(inputFieldUsernameName).GetComponent<InputField>();
-        inputFieldPassword = GameObject.FindGameObjectWithTag(inputFieldPasswordName).GetComponent<InputField>();
-        inputFieldConfirmPassword= GameObject.FindGameObjectWithTag(inputFieldConfirmPasswordname).GetComponent<InputField>();
-        inputFieldEmail = GameObject.FindGameObjectWithTag(inputFieldEmailname).GetComponent<InputField>();
-        inputFieldBirthDate = GameObject.FindGameObjectWithTag(BirthDatename).GetComponent<InputField>();
-        inputFieldLocation = GameObject.FindGameObjectWithTag(Locationname).GetComponent<InputField>();
-        SignupObject = GameObject.FindGameObjectWithTag(SignUpButton).GetComponent<Button>();
-
-
-
-
-
-
-
+    void Start()
+    {
         inputFieldUsername.onValueChanged.AddListener(OnUsernameChanged);
         inputFieldPassword.onValueChanged.AddListener(OnPasswordChanged);
         inputFieldEmail.onValueChanged.AddListener(OnEmailChange);
@@ -66,13 +48,6 @@ void Start()
         inputFieldBirthDate.onValueChanged.AddListener(OnBirthDateChange);
 
 
-
-
-
-
-
-
-        SignupObject.onClick.AddListener(OnSignupPress);
 
         gender.onValueChanged.AddListener(delegate
         {
@@ -125,14 +100,7 @@ void Start()
         password = newValue;
     }
 
-  
-
-
-
-
-
-
-    void OnSignupPress()
+    public void OnSignupPress()
     {
         {
             WWWForm form = new WWWForm();
