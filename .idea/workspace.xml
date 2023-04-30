@@ -6,12 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="266002ff-1caa-40c7-b9ab-dfe7d493c776" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Login.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Login.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Recipe_List.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Recipe_List.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Sign_up.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Sign_up.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FrontEnd_Scripts/LoginSignup/LoginScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/FrontEnd_Scripts/LoginSignup/LoginScript.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FrontEnd_Scripts/LoginSignup/SignupConnection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/FrontEnd_Scripts/LoginSignup/SignupConnection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/EditRecipe.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/EditRecipe.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FrontEnd_Scripts/Edit Recipe/EditRecipe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/FrontEnd_Scripts/Edit Recipe/EditRecipe.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,7 +92,7 @@
       <workItem from="1682729210775" duration="1456000" />
       <workItem from="1682740464885" duration="648000" />
       <workItem from="1682787558966" duration="6568000" />
-      <workItem from="1682880817551" duration="821000" />
+      <workItem from="1682880817551" duration="2157000" />
     </task>
     <servers />
   </component>
@@ -116,7 +112,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/dbconfig_cpython_310_pyc$dbconfig.coverage" NAME="dbconfig Coverage Results" MODIFIED="1681768034250" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackEnd/config" />
-    <SUITE FILE_PATH="coverage/dbconfig_cpython_310_pyc$app.coverage" NAME="app Coverage Results" MODIFIED="1682881640476" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackEnd" />
+    <SUITE FILE_PATH="coverage/dbconfig_cpython_310_pyc$app.coverage" NAME="app Coverage Results" MODIFIED="1682885864295" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackEnd" />
     <SUITE FILE_PATH="coverage/temp_capstone_practice$dbconfig.coverage" NAME="dbconfig Coverage Results" MODIFIED="1680023692842" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackEnd/config" />
     <SUITE FILE_PATH="coverage/temp_capstone_practice$app.coverage" NAME="app Coverage Results" MODIFIED="1680052866903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackEnd" />
     <SUITE FILE_PATH="coverage/temp_capstone_practice$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1680022014145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
