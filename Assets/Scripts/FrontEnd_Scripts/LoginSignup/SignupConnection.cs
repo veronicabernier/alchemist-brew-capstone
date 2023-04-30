@@ -26,6 +26,10 @@ public class SignupConnection : MonoBehaviour
     public NotificationManager popup;
     public NotificationManager popupSuccess;
     public string afterLoginSceneName;
+    public GameObject showPasswordButton;
+    public GameObject hidePasswordButton;
+    public GameObject showConfirmPasswordButton;
+    public GameObject hideConfirmPasswordButton;
 
     private string username = "";
     private string password = "";
@@ -47,6 +51,9 @@ public class SignupConnection : MonoBehaviour
         {
             GenderValueChangedHappened(gender);
         });
+
+        inputFieldPassword.inputType = InputField.InputType.Password;
+        inputFieldConfirmPassword.inputType = InputField.InputType.Password;
     }
     public void GenderValueChangedHappened(Dropdown sender)
     {
@@ -54,9 +61,9 @@ public class SignupConnection : MonoBehaviour
     }
 
 
-    void OnPasswordConfirmChanged(string newvalue)
+    void OnPasswordConfirmChanged(string newValue)
     {
-        confirmPassword = newvalue;
+        confirmPassword = newValue;
     }
     void OnEmailChange(string newvalue)
     {
@@ -173,4 +180,38 @@ public class SignupConnection : MonoBehaviour
         return "";
     }
 
+    public void showPassword(bool show)
+    {
+        if (show)
+        {
+            inputFieldPassword.inputType = InputField.InputType.Standard;
+            inputFieldPassword.textComponent.text = password;
+            showPasswordButton.SetActive(false);
+            hidePasswordButton.SetActive(true);
+        }
+        else
+        {
+            inputFieldPassword.inputType = InputField.InputType.Password;
+            inputFieldPassword.textComponent.text = new string('*', password.Length);
+            showPasswordButton.SetActive(true);
+            hidePasswordButton.SetActive(false);
+        }
+    }
+    public void showConfirmPassword(bool show)
+    {
+        if (show)
+        {
+            inputFieldConfirmPassword.inputType = InputField.InputType.Standard;
+            inputFieldConfirmPassword.textComponent.text = confirmPassword;
+            showConfirmPasswordButton.SetActive(false);
+            hideConfirmPasswordButton.SetActive(true);
+        }
+        else
+        {
+            inputFieldConfirmPassword.inputType = InputField.InputType.Password;
+            inputFieldConfirmPassword.textComponent.text = new string('*', confirmPassword.Length);
+            showConfirmPasswordButton.SetActive(true);
+            hideConfirmPasswordButton.SetActive(false);
+        }
+    }
 }

@@ -14,6 +14,9 @@ public class LoginScript : MonoBehaviour
     public InputField inputFieldPassword;
     public string afterLoginSceneName;
 
+    public GameObject showPasswordButton;
+    public GameObject hidePasswordButton;
+
     private string username;
     private string password;
 
@@ -23,6 +26,8 @@ public class LoginScript : MonoBehaviour
         inputFieldPassword = GameObject.FindGameObjectWithTag("password").GetComponent<InputField>();
         inputFieldUsername.onValueChanged.AddListener(OnUsernameChanged);
         inputFieldPassword.onValueChanged.AddListener(OnPasswordChanged);
+
+        inputFieldPassword.inputType = InputField.InputType.Password;
     }
 
     void OnUsernameChanged(string newValue) 
@@ -67,6 +72,24 @@ public class LoginScript : MonoBehaviour
                 }
             }
         }
+
+    public void showPassword(bool show)
+    {
+        if (show)
+        {
+            inputFieldPassword.inputType = InputField.InputType.Standard;
+            inputFieldPassword.textComponent.text = password;
+            showPasswordButton.SetActive(false);
+            hidePasswordButton.SetActive(true);
+        }
+        else
+        {
+            inputFieldPassword.inputType = InputField.InputType.Password;
+            inputFieldPassword.textComponent.text = new string('*', password.Length);
+            showPasswordButton.SetActive(true);
+            hidePasswordButton.SetActive(false);
+        }
+    }
 
 
     [System.Serializable]
