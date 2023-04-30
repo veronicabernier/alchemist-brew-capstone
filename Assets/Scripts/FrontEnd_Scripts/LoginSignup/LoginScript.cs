@@ -8,10 +8,7 @@ using Michsky.MUIP;
 
 public class LoginScript : MonoBehaviour
 {
-    private string inputFieldUsernameName = "username";
-    private string inputFieldPasswordName = "password";
-    private string loginButton = "login";
-    public InputField inputFieldUsername;
+    public InputField inputFieldEmail;
     public InputField inputFieldPassword;
     public string afterLoginSceneName;
 
@@ -20,23 +17,20 @@ public class LoginScript : MonoBehaviour
     public GameObject showPasswordButton;
     public GameObject hidePasswordButton;
 
-    private string username;
-    private string password;
+    private string email = "";
+    private string password = "";
 
     void Start()
     {
-        inputFieldUsername = GameObject.FindGameObjectWithTag("username").GetComponent<InputField>();
-        inputFieldPassword = GameObject.FindGameObjectWithTag("password").GetComponent<InputField>();
-        inputFieldUsername.onValueChanged.AddListener(OnUsernameChanged);
+        inputFieldEmail.onValueChanged.AddListener(OnEmailChanged);
         inputFieldPassword.onValueChanged.AddListener(OnPasswordChanged);
 
         inputFieldPassword.inputType = InputField.InputType.Password;
     }
 
-    void OnUsernameChanged(string newValue) 
+    void OnEmailChanged(string newValue) 
     {
-        username = newValue;
-        Debug.Log("username input: " + username);
+        email = newValue;
     }
 
     void OnPasswordChanged(string newValue)
@@ -44,14 +38,21 @@ public class LoginScript : MonoBehaviour
         password = newValue;
     }
     public void OnLoginPress()
-    
+    {
+        string validFieldsError = validFields();
+        if (validFieldsError == "")
         {
             WWWForm form = new WWWForm();
-            form.AddField("email", username);
+            form.AddField("email", email);
             form.AddField("password", password);
 
             StartCoroutine(PostRequest(form));
-
+        }
+        else
+        {
+            popup.description = validFieldsError;
+            popup.UpdateUI();
+            popup.Open();
         }
 
         IEnumerator PostRequest(WWWForm form)
@@ -85,6 +86,17 @@ public class LoginScript : MonoBehaviour
                 }
             }
         }
+    }
+
+    private string validFields()
+    {
+        if (password == "" || email == "")
+        {
+            return "Complete all fields.";
+        }
+
+        return "";
+    }
 
     public void showPassword(bool show)
     {
@@ -113,76 +125,3 @@ public class LoginScript : MonoBehaviour
     }
 }
 
-
-
-
-
-/*{
-    public InputField InputFieldusername;
-    public InputField InputFieldpassword;
-
-    private void Start()
-    {
-        string username = InputFieldusername.text;
-        string password = InputFieldpassword.text;
-
-        Debug.Log("username input: " + username);
-        Debug.Log("password input: " + password);
-    }
-}*/
-
-
-
-/*{
-    public InputField InputFieldusername;
-    public InputField InputFieldpassword;
-
-    private string username;
-    private string password;
-
-    private void Start()
-    {
-        // Subscribe to the OnValueChanged event of each input field
-        InputFieldusername.onValueChanged.AddListener(OnUsernameChanged);
-        InputFieldpassword.onValueChanged.AddListener(OnPasswordChanged);
-        Debug.Log("usernameInput = " + InputFieldusername);
-        Debug.Log("passwordInput = " + InputFieldpassword);
-    }
-
-    private void OnUsernameChanged(string newUsername)
-    {
-        username = newUsername;
-        Debug.Log("New username: " + username);
-    }
-
-    private void OnPasswordChanged(string newPassword)
-    {
-        password = newPassword;
-        Debug.Log("New password: " + password);
-    }
-}*/
-
-//{
-// private InputField InputFieldUsername;
-// private InputField InputfieldPassword;
-
-
-// Start is called before the first frame update
-//  void Start()
-// {
-//usernameInput = GameObject.Find("InputFieldUsername").GetComponent<InputField>();
-// passwordInput = GameObject.Find("InputfieldPassword").GetComponent<InputField>();
-//  Debug.Log("Username input found: " + (InputFieldUsername != null));
-//    Debug.Log("Password input found: " + (InputfieldPassword != null));
-// }
-
-// Update is called once per frame
-// void Update()
-//  {
-// string username = usernameInput.text;
-// string password = passwordInput.text;
-
-// Debug.Log("Input Text 1: " + username);
-// Debug.Log("Input Text 2: " + password);
-//}
-//}

@@ -442,7 +442,7 @@ GameObject:
   - component: {fileID: 274063896}
   - component: {fileID: 274063895}
   m_Layer: 5
-  m_Name: InputFieldusername
+  m_Name: InputFieldemail
   m_TagString: username
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -640,7 +640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23ffc60ae5d51142bc743d403a2c41e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputFieldUsername: {fileID: 274063895}
+  inputFieldEmail: {fileID: 274063895}
   inputFieldPassword: {fileID: 133924353}
   afterLoginSceneName: Main_Screen
   popup: {fileID: 102000822}
