@@ -15,7 +15,7 @@ public class RecipeList : MonoBehaviour
     /*public Transform contentTransform;*/
     public RectTransform contentTransform;
     private RecipeData[] recipes;
-    
+    public GameObject emptyText;
 
     public static RecipeData SelectedRecipe;
 
@@ -58,29 +58,21 @@ public class RecipeList : MonoBehaviour
                 else if (recipes.Length == 0)
                 {
                     Debug.Log("Recipes array is empty.");
+                    emptyText.SetActive(true);
                 }
-
-                Debug.Log("Roast: " + recipes[2].roast);
-
 
 
                  foreach (RecipeData i in recipes)
                 /*for (int i = 0; i < recipes.length; i++)*/
                  {
-                    
-                     
-                     
                     GameObject recipeItem = Instantiate(recipeItemPrefab, contentTransform);
                     recipeItem.GetComponent<RecipeItem>().SetRecipe(i);
                    /* recipeItem.GetComponent<Button>().onClick.AddListener(() => recipeItem.GetComponent<RecipeItem>().OnClickRecipeItem());*/
                 }
-                GameObject firstRecipeItem = contentTransform.GetChild(0).gameObject;
-                Destroy(firstRecipeItem);
+
                 float newHeight = recipeItemPrefab.GetComponent<RectTransform>().sizeDelta.y * recipes.Length;
                 contentTransform.sizeDelta = new Vector2(contentTransform.sizeDelta.x, newHeight);
                 contentTransform.anchoredPosition = new Vector2(contentTransform.anchoredPosition.x, 0);
-                Debug.Log("Successfully parsed " + recipes.Length + " recipes.");
-                Debug.Log(recipes[1].brand + "recipe brand");
 
             }    
         }

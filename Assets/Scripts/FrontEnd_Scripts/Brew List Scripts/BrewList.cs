@@ -9,6 +9,7 @@ public class BrewList : MonoBehaviour
 {
     public GameObject BrewItemPrefab;
     public RectTransform contentTransform;
+    public GameObject emptyText;
     private BrewData[] brews;
 
     private List<string> brands = new List<string>() { "All" };
@@ -41,21 +42,17 @@ public class BrewList : MonoBehaviour
                 else if (brews.Length == 0)
                 {
                     Debug.Log("Recipes array is empty.");
+                    emptyText.SetActive(true);
                 }
-                Debug.Log("Roast: " + brews[0].bean_type);
 
                 foreach (BrewData i in brews)
                 {
                     GameObject brewItem = Instantiate(BrewItemPrefab, contentTransform);
                     brewItem.GetComponent<BrewItem>().SetBrew(i);
                 }
-                GameObject firstRecipeItem = contentTransform.GetChild(0).gameObject;
-                Destroy(firstRecipeItem);
                 float newHeight = BrewItemPrefab.GetComponent<RectTransform>().sizeDelta.y * brews.Length;
                 contentTransform.sizeDelta = new Vector2(contentTransform.sizeDelta.x, newHeight);
                 contentTransform.anchoredPosition = new Vector2(contentTransform.anchoredPosition.x, 0);
-                Debug.Log("Successfully parsed " + brews.Length + " recipes.");
-                Debug.Log(brews[1].brand + "recipe brand");
 
             }
 
