@@ -123,38 +123,26 @@ public class SignupConnection : MonoBehaviour
                 yield return webRequest.SendWebRequest();
                 if (webRequest.result == UnityWebRequest.Result.ConnectionError)
                 {
-                    Debug.Log("Error: " + webRequest.error);
                     popup.description = webRequest.error;
                     popup.UpdateUI();
                     popup.Open();
                 }
                 else
                 {
-                    Debug.Log(webRequest.downloadHandler.text);
+                    LoginData loginData = JsonUtility.FromJson<LoginData>(webRequest.downloadHandler.text);
 
-                    if (webRequest.downloadHandler.text.Contains("Password does not match"))
+                    if (loginData.userId == -1)
                     {
-                        popup.description = "Password doesn't match";
+                        popup.description = loginData.Error; ;
                         popup.UpdateUI();
                         popup.Open();
                     }
                     else
                     {
-                        if(webRequest.downloadHandler.text.Contains("Singup complete"))
-                        {
-                            PostInformation.userid = JsonUtility.FromJson<LoginData>(webRequest.downloadHandler.text).userId;
-                            popupSuccess.Open();
-
-                            SceneChanger sc = new SceneChanger();
-                            sc.changeScene(afterLoginSceneName);
-                        }
-                        else
-                        {
-                            popup.description = webRequest.downloadHandler.text;
-                            popup.UpdateUI();
-                            popup.Open();
-                        }
-
+                        popupSuccess.Open();
+                        PostInformation.userid = loginData.userId;
+                        yield return new WaitForSecondsRealtime(popupSuccess.timer);
+                        new SceneChanger().changeScene(afterLoginSceneName);
                     }
                 }
             }

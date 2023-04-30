@@ -101,15 +101,15 @@ def register():
                 server.quit()
                 Session.commit()
                 Session.flush()
-                return jsonify(message="Singup complete", userId=userid[0]), 201
+                return jsonify(Error="No error.", userId=userid[0]), 201
             else:
                 Session.flush()
-                return jsonify(Error="Password does not match"), 404
+                return jsonify(Error="Password does not match", userId=-1), 404
         else:
             Session.flush()
-            return jsonify(Error="User can't register, user already exists"), 403
+            return jsonify(Error="User can't register, user already exists", userId=-1), 403
 
-    return jsonify(Error="Missing Information"), 400
+    return jsonify(Error="Missing Information", userId=-1), 400
 
 @app.route("/signup/<userid>/verify", methods=['POST', 'GET'])
 def account_verification(userid):
@@ -148,16 +148,16 @@ def login():
 
         if emaildata is None:
 
-            return jsonify(Error="User does not exist"), 400
+            return jsonify(Error="User does not exist", userId=-1), 400
         else:
             if (passworddata is None):
-                return jsonify(Error="Incorrect password"), 400
+                return jsonify(Error="Incorrect password", userId=-1), 400
             else:
                if (bcrypt.checkpw(password.encode(encoding='UTF-8', errors='strict'), passworddata[0].encode(encoding='UTF-8', errors='strict'))):
                 userid = Session.query(tables.users.userid).filter_by(email=email).first()
-                return jsonify(message="Succesfull login", userId=userid[0]), 400  # to be edited from here do redict to either svm or home
+                return jsonify(Error="No error.", userId=userid[0]), 400  # to be edited from here do redict to either svm or home
 
-    return jsonify(Error="User or password is incorrect"), 400
+    return jsonify(Error="User or password is incorrect", userId=-1), 400
 
 @app.route("/<userid>/profile", methods=["POST", "GET"])
 def get_user_profile(userid):

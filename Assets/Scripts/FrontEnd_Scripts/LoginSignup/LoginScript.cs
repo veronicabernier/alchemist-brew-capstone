@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using System;
+using Michsky.MUIP;
 
 public class LoginScript : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class LoginScript : MonoBehaviour
     public InputField inputFieldPassword;
     public string afterLoginSceneName;
 
+    public NotificationManager popup;
+    public NotificationManager popupSuccess;
     public GameObject showPasswordButton;
     public GameObject hidePasswordButton;
 
@@ -58,17 +61,27 @@ public class LoginScript : MonoBehaviour
                 yield return webRequest.SendWebRequest();
                 if (webRequest.result == UnityWebRequest.Result.ConnectionError)
                 {
-                    Debug.Log("Error: " + webRequest.error);
+                    popup.description = webRequest.error;
+                    popup.UpdateUI();
+                    popup.Open();
                 }
                 else
                 {
-                    Debug.Log(webRequest.downloadHandler.text);
-                    PostInformation.userid = JsonUtility.FromJson<LoginData>(webRequest.downloadHandler.text).userId;
-                    Debug.Log(PostInformation.userid);
-                    Debug.Log("username input: " + username);
-                    SceneChanger sc = new SceneChanger();
-                    sc.changeScene(afterLoginSceneName);
-                   /* Debug.Log("password input: " + password);*/
+                    LoginData loginData = JsonUtility.FromJson<LoginData>(webRequest.downloadHandler.text);
+
+                    if (loginData.userId == -1)
+                    {
+                        popup.description = loginData.Error; ;
+                        popup.UpdateUI();
+                        popup.Open();
+                    }
+                    else
+                    {
+                        popupSuccess.Open();
+                        PostInformation.userid = loginData.userId;
+                        yield return new WaitForSecondsRealtime(popupSuccess.timer);
+                        new SceneChanger().changeScene(afterLoginSceneName);
+                    }
                 }
             }
         }
@@ -95,7 +108,7 @@ public class LoginScript : MonoBehaviour
     [System.Serializable]
     public class LoginData
     {
-        public string message;
+        public string Error;
         public int userId;
     }
 }
