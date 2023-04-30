@@ -8,6 +8,7 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 using Michsky.MUIP;
 using static LoginScript;
+using System;
 
 public class SignupConnection : MonoBehaviour
 { 
@@ -18,6 +19,8 @@ public class SignupConnection : MonoBehaviour
     public InputField inputFieldLocation;
 
     public Bitsplash.DatePicker.DatePickerContent datepickerBirthDate;
+    public Bitsplash.DatePicker.DatePickerDropDownBase datepickerDropdown;
+
     public Dropdown gender;
     //public GameObject popup;
     public NotificationManager popup;
@@ -62,7 +65,10 @@ public class SignupConnection : MonoBehaviour
 
     void OnBirthDateChange()
     {
-        Birthdate = datepickerBirthDate.DisplayDate.ToString("yyyy-mm-dd");
+        if(datepickerDropdown.GetSelectedDate() != null)
+        {
+            Birthdate = DateTime.Parse(datepickerDropdown.GetSelectedDate().ToString()).ToString("yyyy-MM-dd");
+        }
     }
 
     void OnLocationChange(string newValue)
@@ -111,7 +117,7 @@ public class SignupConnection : MonoBehaviour
                 if (webRequest.result == UnityWebRequest.Result.ConnectionError)
                 {
                     Debug.Log("Error: " + webRequest.error);
-                    popup.description = "Make sure all fields have valid values.";
+                    popup.description = webRequest.error;
                     popup.UpdateUI();
                     popup.Open();
                 }
@@ -130,16 +136,14 @@ public class SignupConnection : MonoBehaviour
                         if(webRequest.downloadHandler.text.Contains("Singup complete"))
                         {
                             PostInformation.userid = JsonUtility.FromJson<LoginData>(webRequest.downloadHandler.text).userId;
+                            popupSuccess.Open();
 
                             SceneChanger sc = new SceneChanger();
                             sc.changeScene(afterLoginSceneName);
-                            popupSuccess.Open();
-
-                            SceneManager.LoadScene("Login");
                         }
                         else
                         {
-                            popup.description = "Unknown Error";
+                            popup.description = webRequest.downloadHandler.text;
                             popup.UpdateUI();
                             popup.Open();
                         }

@@ -855,6 +855,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 674010629369964517, guid: 37101c90e8254a145bf81e0dd4499417, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 674010629369964517, guid: 37101c90e8254a145bf81e0dd4499417, type: 3}
       propertyPath: m_SizeDelta.y
       value: -7.5
       objectReference: {fileID: 0}
@@ -865,6 +869,10 @@ PrefabInstance:
     - target: {fileID: 674010629469690973, guid: 37101c90e8254a145bf81e0dd4499417, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 674010629469690973, guid: 37101c90e8254a145bf81e0dd4499417, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 674010629469690973, guid: 37101c90e8254a145bf81e0dd4499417, type: 3}
       propertyPath: m_SizeDelta.y
@@ -964,11 +972,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3789166196143700191, guid: 37101c90e8254a145bf81e0dd4499417, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -114
       objectReference: {fileID: 0}
     - target: {fileID: 3789166196143700191, guid: 37101c90e8254a145bf81e0dd4499417, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -250
       objectReference: {fileID: 0}
     - target: {fileID: 3789166196143700191, guid: 37101c90e8254a145bf81e0dd4499417, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -997,6 +1005,10 @@ PrefabInstance:
     - target: {fileID: 6868262871004218765, guid: 37101c90e8254a145bf81e0dd4499417, type: 3}
       propertyPath: text
       value: April, 2023
+      objectReference: {fileID: 0}
+    - target: {fileID: 6868262871004218765, guid: 37101c90e8254a145bf81e0dd4499417, type: 3}
+      propertyPath: mTextObject
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37101c90e8254a145bf81e0dd4499417, type: 3}
@@ -1923,6 +1935,7 @@ MonoBehaviour:
   inputFieldConfirmPassword: {fileID: 1424715530}
   inputFieldLocation: {fileID: 993252272}
   datepickerBirthDate: {fileID: 1568633834}
+  datepickerDropdown: {fileID: 8789802342388797746}
   gender: {fileID: 385645191}
   popup: {fileID: 1299640907}
   popupSuccess: {fileID: 1577423886}
@@ -2729,7 +2742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1350301964240770, guid: 61db1f75e1a0bc84a9e6e1cffcd47b99, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114159909094249202, guid: 61db1f75e1a0bc84a9e6e1cffcd47b99, type: 3}
       propertyPath: m_VerticalFit
@@ -2825,15 +2838,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 224140982003034070, guid: 61db1f75e1a0bc84a9e6e1cffcd47b99, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224140982003034070, guid: 61db1f75e1a0bc84a9e6e1cffcd47b99, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224140982003034070, guid: 61db1f75e1a0bc84a9e6e1cffcd47b99, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 764
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224140982003034070, guid: 61db1f75e1a0bc84a9e6e1cffcd47b99, type: 3}
       propertyPath: m_SizeDelta.y
@@ -2841,11 +2854,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 224140982003034070, guid: 61db1f75e1a0bc84a9e6e1cffcd47b99, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 400
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224140982003034070, guid: 61db1f75e1a0bc84a9e6e1cffcd47b99, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224602918499771590, guid: 61db1f75e1a0bc84a9e6e1cffcd47b99, type: 3}
       propertyPath: m_Pivot.x
@@ -6239,7 +6252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1350301964240770, guid: 61db1f75e1a0bc84a9e6e1cffcd47b99, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114159909094249202, guid: 61db1f75e1a0bc84a9e6e1cffcd47b99, type: 3}
       propertyPath: m_VerticalFit
