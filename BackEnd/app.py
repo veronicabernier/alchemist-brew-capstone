@@ -101,7 +101,7 @@ def register():
                 server.quit()
                 Session.commit()
                 Session.flush()
-                return jsonify("Singup complete", userid[0]), 201
+                return jsonify(message="Singup complete", userId=userid[0]), 201
             else:
                 Session.flush()
                 return jsonify(Error="Password does not match"), 404

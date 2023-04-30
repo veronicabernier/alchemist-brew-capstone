@@ -6,37 +6,30 @@ using UnityEngine.UI;
 using TMPro;
 using System.Linq;
 using UnityEngine.SceneManagement;
-
+using Michsky.MUIP;
+using static LoginScript;
 
 public class SignupConnection : MonoBehaviour
 { 
-    private string inputFieldUsernameName = "username";
-    private string inputFieldEmailname = "Email";
-    private string inputFieldPasswordName = "password";
-    private string inputFieldConfirmPasswordname = "ConfirmPassword";
-    private string BirthDatename = "BirthDate";
-    private string Locationname = "Location";
-    private string SignUpButton = "SignUp";
-
-    public TextMeshProUGUI successMessage;
-    public float messageduration = 3f;
-
-
     public InputField inputFieldUsername;
     public InputField inputFieldPassword;
     public InputField inputFieldEmail;
     public InputField inputFieldConfirmPassword;
-    public InputField inputFieldBirthDate;
     public InputField inputFieldLocation;
 
+    public Bitsplash.DatePicker.DatePickerContent datepickerBirthDate;
     public Dropdown gender;
+    //public GameObject popup;
+    public NotificationManager popup;
+    public NotificationManager popupSuccess;
+    public string afterLoginSceneName;
 
-    private string username;
-    private string password;
-    private string email;
-    private string confirmPassword;
-    private string Birthdate;
-    private string location;
+    private string username = "";
+    private string password = "";
+    private string email = "";
+    private string confirmPassword = "";
+    private string Birthdate = "";
+    private string location = "";
 
     void Start()
     {
@@ -45,45 +38,31 @@ public class SignupConnection : MonoBehaviour
         inputFieldEmail.onValueChanged.AddListener(OnEmailChange);
         inputFieldConfirmPassword.onValueChanged.AddListener(OnPasswordConfirmChanged);
         inputFieldLocation.onValueChanged.AddListener(OnLocationChange);
-        inputFieldBirthDate.onValueChanged.AddListener(OnBirthDateChange);
 
-
-
+        datepickerBirthDate.OnSelectionChanged.AddListener(OnBirthDateChange);
         gender.onValueChanged.AddListener(delegate
         {
             GenderValueChangedHappened(gender);
         });
-
-
-}
+    }
     public void GenderValueChangedHappened(Dropdown sender)
     {
         Debug.Log(" You have selected  " + gender.options[gender.value].text); 
     }
 
 
-
-    /*//private string username;
-    private string password;
-    private string email;
-    private string confirmPassword;
-    private string Birthdate;
-    private string location;*/
-
     void OnPasswordConfirmChanged(string newvalue)
     {
         confirmPassword = newvalue;
-
     }
     void OnEmailChange(string newvalue)
     {
         email = newvalue;
-
     }
 
-    void OnBirthDateChange(string newValue)
+    void OnBirthDateChange()
     {
-        Birthdate = newValue;
+        Birthdate = datepickerBirthDate.DisplayDate.ToString("yyyy-mm-dd");
     }
 
     void OnLocationChange(string newValue)
@@ -102,6 +81,8 @@ public class SignupConnection : MonoBehaviour
 
     public void OnSignupPress()
     {
+        string validFieldsError = validFields();
+        if (validFieldsError == "")
         {
             WWWForm form = new WWWForm();
             form.AddField("username", username);
@@ -115,6 +96,12 @@ public class SignupConnection : MonoBehaviour
 
             StartCoroutine(PostRequest("http://127.0.0.1:5000/signup", form));
         }
+        else
+        {
+            popup.description = validFieldsError;
+            popup.UpdateUI();
+            popup.Open();
+        }
 
         IEnumerator PostRequest(string uri, WWWForm postData)
         {
@@ -124,26 +111,39 @@ public class SignupConnection : MonoBehaviour
                 if (webRequest.result == UnityWebRequest.Result.ConnectionError)
                 {
                     Debug.Log("Error: " + webRequest.error);
+                    popup.description = "Make sure all fields have valid values.";
+                    popup.UpdateUI();
+                    popup.Open();
                 }
                 else
                 {
-
-
-
                     Debug.Log(webRequest.downloadHandler.text);
 
                     if (webRequest.downloadHandler.text.Contains("Password does not match"))
                     {
-                        successMessage.text = "Password doesn't match";
+                        popup.description = "Password doesn't match";
+                        popup.UpdateUI();
+                        popup.Open();
                     }
                     else
                     {
-                        successMessage.text = "Signed up Successfull!";
+                        if(webRequest.downloadHandler.text.Contains("Singup complete"))
+                        {
+                            PostInformation.userid = JsonUtility.FromJson<LoginData>(webRequest.downloadHandler.text).userId;
 
-                        yield return new WaitForSeconds(messageduration);
-                        successMessage.text = "";
+                            SceneChanger sc = new SceneChanger();
+                            sc.changeScene(afterLoginSceneName);
+                            popupSuccess.Open();
 
-                        SceneManager.LoadScene("Login");
+                            SceneManager.LoadScene("Login");
+                        }
+                        else
+                        {
+                            popup.description = "Unknown Error";
+                            popup.UpdateUI();
+                            popup.Open();
+                        }
+
                     }
                 }
             }
@@ -158,4 +158,15 @@ public class SignupConnection : MonoBehaviour
         Debug.Log("location input: " + location);
         Debug.Log("BirthDate input: " + Birthdate);
     }
+
+    private string validFields()
+    {
+        if(username == "" ||  password == "" || email == "" || confirmPassword == "" || Birthdate == "" || location == "" || gender.options[gender.value].text == "")
+        {
+            return "Complete all fields.";
+        }
+
+        return "";
+    }
+
 }
