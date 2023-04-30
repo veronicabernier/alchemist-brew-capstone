@@ -50,4 +50,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Log_Book.unity
     guid: 8f0bb1fe76dc7a14e99ac040ca3726cc
+  - enabled: 1
+    path: Assets/Scenes/AddRecipe.unity
+    guid: 27af18979aef5c14cac975b727d0c47e
   m_configObjects: {}

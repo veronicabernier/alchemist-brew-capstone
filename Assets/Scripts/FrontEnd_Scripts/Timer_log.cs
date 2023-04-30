@@ -7,7 +7,7 @@ using TMPro;
 public class Timer_log : MonoBehaviour
 {
     public TMP_Text Dispvar;
-    float val;
+    public float val;
     bool str;
 
     // Start is called before the first frame update

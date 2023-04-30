@@ -3,107 +3,196 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using Michsky.MUIP;
+
 public class Logbook_Connection : MonoBehaviour
 {
-    private string inputFieldBrewMethodName = "brew_method";
-    private string inputFieldGrindname = "grind_setting";
-    private string inputFieldBrandName = "brand";
-    private string inputFieldRoastname = "roast";
-    private string Beantypename = "bean_type";
-    private string Coffeeweightname = "coffee_weight";
-    private string extweightName = "ext_weight";
-    private string Tagsname = "tags";
-    private string NotesName = "Notes";
-    private string Submitbutton = "submit";
-
-    public InputField inputFieldBrewMethod;
-    public InputField inputFieldGrind;
-    public InputField inputFieldbrand;
-    public InputField inputFieldroast;
-    public InputField inputFieldbeanType;
-    public InputField inputFieldcoffeeweight;
-    public InputField inputFieldextweight;
-    public InputField inputFieldNotes;
-
-
-
-    public Button Submit;
+    public InputField brewMethodInputField;
+    public InputField grindSettingInputField;
+    public InputField brandInputField;
+    public InputField roastInputField;
+    public InputField BeantypeInputField;
+    public InputField coffeeeWeightInputField;
+    public InputField exitWeightInputField;
+    public InputField notesInputField;
 
     public Dropdown tags;
 
+    public NotificationManager popup;
+    public NotificationManager popupSuccess;
+    public string afterSceneName;
+    public GameObject stopWatchPanel;
+    public Timer_log timer;
 
-    private string brewMethod;
-    private string grind;
-    private string brand;
-    private string roast;
-    private string beanType;
-    private string coffeeweight;
-    private string extweight;
-    private string notes;
+    private string brewMethod = "";
+    private string grindSetting = "";
+    private string brand = "";
+    private string roast = "";
+    private string beanType = "";
+    private string coffeeWeight = "";
+    private string tagId = "";
+    private string exitWeight = "";
+    private string notes = "";
+
+    private string exitTime = "0";
+
+    private RecipeData selectedRecipe = RecipeItem.SelectedRecipe;
 
     // Start is called before the first frame update
     void Start()
     {
-     
-
-
-    inputFieldBrewMethod = GameObject.FindGameObjectWithTag(inputFieldBrewMethodName).GetComponent<InputField>();
-    inputFieldGrind = GameObject.FindGameObjectWithTag(inputFieldGrindname).GetComponent<InputField>();
-    inputFieldbrand = GameObject.FindGameObjectWithTag(inputFieldBrandName).GetComponent<InputField>();
- 
-    inputFieldroast = GameObject.FindGameObjectWithTag(inputFieldRoastname).GetComponent<InputField>();
-    inputFieldbeanType = GameObject.FindGameObjectWithTag(Beantypename).GetComponent<InputField>();
-    inputFieldcoffeeweight = GameObject.FindGameObjectWithTag(Coffeeweightname).GetComponent<InputField>();
-    inputFieldextweight = GameObject.FindGameObjectWithTag(extweightName).GetComponent<InputField>();
-    inputFieldNotes = GameObject.FindGameObjectWithTag(NotesName).GetComponent<InputField>();
-
-    Submit = GameObject.FindGameObjectWithTag(Submitbutton).GetComponent<Button>();
-
-
-
-}
-
-
-    /*void OnSubmitPress()
-    {
+        if (selectedRecipe == null)
         {
-            WWWForm form = new WWWForm();
-            form.AddField("username", username);
-            form.AddField("email", email);
-            form.AddField("password", password);
-            form.AddField("confirm", confirmPassword); // confirm password
-            form.AddField("private_profile", "True"); // no poner en front end
-            form.AddField("birth_date", Birthdate);
-            form.AddField("gender", gender.options[gender.value].text);
-            form.AddField("location", location); // verificar si se puede coger location 
+            Debug.LogError("No recipe selected!");
+            return;
+        }
+        else if (selectedRecipe != null)
+        {
+            brandInputField.text = selectedRecipe.brand;
+            roastInputField.text = selectedRecipe.roast;
+            BeantypeInputField.text = selectedRecipe.bean_type;
+            brewMethodInputField.text = selectedRecipe.brew_method;
+            coffeeeWeightInputField.text = selectedRecipe.coffee_weight.ToString();
+            grindSettingInputField.text = selectedRecipe.grind_setting.ToString();
 
-            StartCoroutine(PostRequest("http://127.0.0.1:5000/signup", form));
+            brand = brandInputField.text;
+            roast = roastInputField.text;
+            beanType = BeantypeInputField.text;
+            brewMethod = brewMethodInputField.text;
+            coffeeWeight = coffeeeWeightInputField.text;
+            grindSetting = grindSettingInputField.text;
         }
 
-        IEnumerator PostRequest(string uri, WWWForm postData)
+        brandInputField.onValueChanged.AddListener(onBrandInputChange);
+        roastInputField.onValueChanged.AddListener(onRoastchange);
+        BeantypeInputField.onValueChanged.AddListener(onBeantpChange);
+        brewMethodInputField.onValueChanged.AddListener(onbrewmethchange);
+        coffeeeWeightInputField.onValueChanged.AddListener(oncoffeeweightchange);
+        grindSettingInputField.onValueChanged.AddListener(onGrindchange);
+
+        exitWeightInputField.onValueChanged.AddListener(onExitWeightChange);
+        notesInputField.onValueChanged.AddListener(onNoteschange);
+        tags.onValueChanged.AddListener( delegate { onTagchange(); });
+    }
+
+    public void OpenTimer()
+    {
+        stopWatchPanel.SetActive(true);
+    }
+
+    public void closeTimer()
+    {
+        stopWatchPanel.SetActive(false);
+        exitTime = ((int) timer.val).ToString();
+    }
+
+    public void onSubmit()
+    {
+        string validFieldsError = validFields();
+        if (validFieldsError == "")
         {
-            using (UnityWebRequest webRequest = UnityWebRequest.Post(uri, postData))
+            WWWForm form = new WWWForm();
+            form.AddField("brand", brand);
+            form.AddField("roast", roast);
+            form.AddField("bean_type", beanType);
+            form.AddField("brew_method", brewMethod);
+            form.AddField("coffee_weight", coffeeWeight);
+            form.AddField("grind_setting", grindSetting);
+
+            form.AddField("ext_time", exitTime);
+            form.AddField("ext_weight", exitWeight);
+            form.AddField("notes", notes);
+            form.AddField("tagid", tagId);
+
+            Debug.Log(form.ToString());
+            StartCoroutine(PostRequest(form));
+        }
+        else
+        {
+            popup.description = validFieldsError;
+            popup.UpdateUI();
+            popup.Open();
+        }
+
+        IEnumerator PostRequest(WWWForm form)
+        {
+            using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1:5000/" + PostInformation.userid + "/"+ selectedRecipe.recipeid + "/add", form))
+
             {
+                webRequest.method = "POST";
                 yield return webRequest.SendWebRequest();
                 if (webRequest.result == UnityWebRequest.Result.ConnectionError)
                 {
-                    Debug.Log("Error: " + webRequest.error);
+                    popup.description = webRequest.error;
+                    popup.UpdateUI();
+                    popup.Open();
                 }
                 else
                 {
-                    Debug.Log(webRequest.downloadHandler.text);
+                    popupSuccess.description = "";
+                    popupSuccess.UpdateUI();
+                    popupSuccess.Open();
+
+                    yield return new WaitForSecondsRealtime(popupSuccess.timer);
+                    new SceneChanger().changeScene(afterSceneName);
                 }
             }
         }
-
-
-
-      
     }
-}*/
-// Update is called once per frame
-void Update()
+
+
+        void onBrandInputChange(string newvalue)
     {
-        
+        brand = newvalue;
     }
+
+    void onRoastchange(string newvalue)
+    {
+        roast = newvalue;
+    }
+
+    void onBeantpChange(string newvalue)
+    {
+        beanType = newvalue;
+    }
+
+    void onbrewmethchange(string newvalue)
+    {
+        brewMethod = newvalue;
+    }
+    void oncoffeeweightchange(string newvalue)
+    {
+        coffeeWeight = newvalue;
+    }
+
+    void onGrindchange(string newvalue)
+    {
+        grindSetting = newvalue;
+    }
+
+    void onExitWeightChange(string newvalue)
+    {
+        exitWeight = newvalue;
+    }
+
+    void onNoteschange(string newvalue)
+    {
+        notes = newvalue;
+    }
+    void onTagchange()
+    {
+        tagId = tags.value.ToString();
+    }
+
+    private string validFields()
+    {
+        if (brand == "" || roast == "" || beanType == "" || brewMethod == "" || coffeeWeight == "" || grindSetting == "" || tagId == "" || exitWeight == "" || notes == "")
+        {
+            return "Complete all fields.";
+        }
+
+        return "";
+    }
+
 }
+

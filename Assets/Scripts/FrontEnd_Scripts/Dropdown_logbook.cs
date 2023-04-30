@@ -28,6 +28,7 @@ public class Dropdown_logbook : MonoBehaviour
                 RootObject root = JsonUtility.FromJson<RootObject>(jsonData);
 
                 List<string> options = new List<string>();
+                options.Add("");
                 foreach (var attempt in root.Attempts)
                 {
                     string innerSection = attempt.inner_section;
