@@ -111,17 +111,34 @@ def register():
 
     return jsonify(Error="Missing Information", userId=-1), 400
 
+@app.route("/signup/<userid>/verify/resend", methods=['POST', 'GET'])
+def OTPresend(userid):
+    salt = bcrypt.gensalt()
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    password = 'j x s y g g q w m f g n b f v h'
+    server.login('alchemy.coffee.brew@gmail.com', password)
+    OTP = ''.join([str(random.randint(0, 9)) for i in range(4)])
+    OTPencode = OTP.encode(encoding='UTF-8', errors='strict')
+    hashOTP = bcrypt.hashpw(OTPencode, salt)
+    storedOTP = hashOTP.decode(encoding='UTF-8', errors='strict')
+    msg = 'Hello, Your OTP is ' + str(OTP)
+    sender = 'alchemy.coffee.brew@gmail.com'  # write email id of sender
+    user = Session.query(tables.users.email).filter_by(userid=userid).first()
+    server.sendmail(sender, user[0], msg)
+    Session.execute(update(tables.confirmations).filter_by(userid=userid).values(
+        confirmation_code=storedOTP))
+    server.quit()
+    Session.commit()
+    Session.flush()
+    return jsonify(Error="OTP sent check your email", userId=userid[0]), 201
+
 @app.route("/signup/<userid>/verify", methods=['POST', 'GET'])
 def account_verification(userid):
     result_list = []
     if request.method == "POST":
         confirmation_code = request.form.get('confirmation_code')
         verification_code = Session.query(tables.confirmations.confirmation_code).filter_by(userid=userid).first()
-        # for i in verification_code:
-        #     result = encoders.encoder_temp_user(i)
-        #     result_list.append(result)
-        # print(result_list[0].get('confirmation_code'), confirmation_code)
-        # print(result_list[0].get('confirmation_code') == int(confirmation_code))
         if(bcrypt.checkpw(confirmation_code.encode(encoding='UTF-8', errors='strict'),
                           verification_code[0].encode(encoding='UTF-8', errors='strict'))):
             Session.execute(update(tables.confirmations).filter_by(userid=userid).values(
@@ -130,8 +147,6 @@ def account_verification(userid):
             Session.flush()
             return jsonify("Email Verified")
         return jsonify(Error="Wrong code")
-
-
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
@@ -347,7 +362,7 @@ def new_brew(userid, recipeid):
 def get_brew_attempts(userid):
     result_list = []
     if request.method == "GET":
-        attempt = Session.query(tables.brews).filter_by(userid=userid).all()
+        attempt = Session.query(tables.brews).filter_by(userid=userid).order_by(tables.brews.date.desc())
 
         for i in attempt:
             result = encoders.encoder_brews(i)
@@ -434,6 +449,22 @@ def get_espresso_scores(userid):
             result = encoders.encoder_score(i)
             result_list.append(result)
         return jsonify(Attempts=result_list), 200
+
+@app.route("/<userid>/espresso_highscore", methods=["POST", "GET"])
+def get_espresso_highscore(userid):
+    result_list = []
+    if request.method == "GET":
+        espresso = Session.execute(text("select * "
+                                        "from espresso_scores "
+                                        "where userid = "+userid+" and grade=  "
+                                        "(select max(grade) "
+                                        "from espresso_scores "
+                                        "group by userid "
+                                        "having userid="+userid+")"))
+        for i in espresso:
+            result = encoders.encoder_espresso_score(i)
+            result_list.append(result)
+        return jsonify(Attempts=result_list), 200
 @app.route("/<userid>/drip_scores", methods=["POST", "GET"])
 def get_drip_scores(userid):
     result_list = []
@@ -442,6 +473,22 @@ def get_drip_scores(userid):
 
         for i in drip:
             result = encoders.encoder_score(i)
+            result_list.append(result)
+        return jsonify(Attempts=result_list), 200
+
+@app.route("/<userid>/drip_highscore", methods=["POST", "GET"])
+def get_drip_highscore(userid):
+    result_list = []
+    if request.method == "GET":
+        drip = Session.execute(text("select * "
+                                        "from drip_scores "
+                                        "where userid = "+userid+" and grade=  "
+                                        "(select max(grade) "
+                                        "from drip_scores "
+                                        "group by userid "
+                                        "having userid="+userid+")"))
+        for i in drip:
+            result = encoders.encoder_drip_score(i)
             result_list.append(result)
         return jsonify(Attempts=result_list), 200
 
@@ -456,6 +503,22 @@ def get_mokapot_scores(userid):
             result_list.append(result)
         return jsonify(Attempts=result_list), 200
 
+@app.route("/<userid>/mokapot_highscore", methods=["POST", "GET"])
+def get_mokapot_highscore(userid):
+    result_list = []
+    if request.method == "GET":
+        mokapot = Session.execute(text("select * "
+                                        "from mokapot_scores "
+                                        "where userid = "+userid+" and grade=  "
+                                        "(select max(grade) "
+                                        "from mokapot_scores "
+                                        "group by userid "
+                                        "having userid="+userid+")"))
+        for i in mokapot:
+            result = encoders.encoder_mokapot_score(i)
+            result_list.append(result)
+        return jsonify(Attempts=result_list), 200
+
 @app.route("/<userid>/chemex_scores", methods=["POST", "GET"])
 def get_chemex_scores(userid):
     result_list = []
@@ -464,6 +527,22 @@ def get_chemex_scores(userid):
 
         for i in chemex:
             result = encoders.encoder_score(i)
+            result_list.append(result)
+        return jsonify(Attempts=result_list), 200
+
+@app.route("/<userid>/chemex_highscore", methods=["POST", "GET"])
+def get_chemex_highscore(userid):
+    result_list = []
+    if request.method == "GET":
+        chemex = Session.execute(text("select * "
+                                        "from chemex_scores "
+                                        "where userid = "+userid+" and grade=  "
+                                        "(select max(grade) "
+                                        "from chemex_scores "
+                                        "group by userid "
+                                        "having userid="+userid+")"))
+        for i in chemex:
+            result = encoders.encoder_chemex_score(i)
             result_list.append(result)
         return jsonify(Attempts=result_list), 200
 

@@ -30,7 +30,7 @@ def encoder_brews(brew):
 
 def encoder_score(record):
     if isinstance(record, tables.espresso_scores):
-        return {'espreso_scoreid': record.espreso_scoreid, 'userid': record.userid, 'weightScore': record.weightScore,
+        return {'espresso_scoreid': record.espresso_scoreid, 'userid': record.userid, 'weightScore': record.weightScore,
                 'weightScoreTotal': record.weightScoreTotal, 'reservoirScore': record.reservoirScore, 'reservoirScoreTotal': record.reservoirScoreTotal,
                 'powerOnScore': record.powerOnScore, 'powerOnScoreTotal': record.powerOnScoreTotal, 'grindScore': record.grindScore,
                 'grindScoreTotal': record.grindScoreTotal, 'tampScore': record.tampScore, 'tampScoreTotal': record.tampScoreTotal, 'brewScore': record.brewScore,
@@ -78,6 +78,59 @@ def encoder_score(record):
 
     raise TypeError(f'Object{record} is not any type to score.')
 
+def encoder_espresso_score(record):
+    return {'espresso_scoreid': record.espresso_scoreid, 'userid': record.userid, 'weightScore': record.weightScore,
+            'weightScoreTotal': record.weightScoreTotal, 'reservoirScore': record.reservoirScore,
+            'reservoirScoreTotal': record.reservoirScoreTotal,
+            'powerOnScore': record.powerOnScore, 'powerOnScoreTotal': record.powerOnScoreTotal,
+            'grindScore': record.grindScore,
+            'grindScoreTotal': record.grindScoreTotal, 'tampScore': record.tampScore,
+            'tampScoreTotal': record.tampScoreTotal, 'brewScore': record.brewScore,
+            'brewScoreTotal': record.brewScoreTotal, 'serveScore': record.serveScore,
+            'serveScoreTotal': record.serveScoreTotal,
+            'scoreTotal': record.scoreTotal, 'evalTotal': record.evalTotal, 'grade': record.grade,
+            'dateObtained': record.date}
+
+
+def encoder_drip_score(record):
+    return {'drip_scoreid': record.drip_scoreid, 'userid': record.userid, 'weightScore': record.weightScore,
+            'weightScoreTotal': record.weightScoreTotal, 'reservoirScore': record.reservoirScore,
+            'reservoirScoreTotal': record.reservoirScoreTotal, 'grindScore': record.grindScore,
+            'grindScoreTotal': record.grindScoreTotal,
+            'chooseFilterScore': record.chooseFilterScore,
+            'chooseFilterScoreTotal': record.chooseFilterScoreTotal,
+            'refillReservoirScore': record.refillReservoirScore,
+            'refillReservoirScoreTotal': record.refillReservoirScoreTotal,
+            'brewScore': record.brewScore, 'brewScoreTotal': record.brewScoreTotal,
+            'serveScore': record.serveScore, 'serveScoreTotal': record.serveScoreTotal,
+            'scoreTotal': record.scoreTotal, 'evalTotal': record.evalTotal, 'grade': record.grade,
+            'dateObtained': record.date}
+
+def encoder_mokapot_score(record):
+    return {'mokapot_scoreid': record.mokapot_scoreid, 'userid': record.userid, 'weightScore': record.weightScore,
+            'weightScoreTotal': record.weightScoreTotal, 'grindScore': record.grindScore,
+            'grindScoreTotal': record.grindScoreTotal, 'chooseWaterScore': record.chooseWaterScore,
+            'chooseWaterScoreTotal': record.chooseWaterScoreTotal,
+            'addCoffeeScore': record.addCoffeeScore,
+            'addCoffeeScoreTotal': record.addCoffeeScoreTotal,
+            'putTogetherScore': record.putTogetherScore,
+            'putTogetherScoreTotal': record.putTogetherScoreTotal,
+            'stoveScore': record.stoveScore, 'stoveScoreTotal': record.stoveScoreTotal,
+            'serveScore': record.serveScore, 'serveScoreTotal': record.serveScoreTotal,
+            'scoreTotal': record.scoreTotal, 'evalTotal': record.evalTotal, 'grade': record.grade,
+            'dateObtained': record.date}
+
+def encoder_chemex_score(record):
+    return {'chemex_scoreid': record.chemex_scoreid, 'userid': record.userid, 'weightScore': record.weightScore,
+            'weightScoreTotal': record.weightScoreTotal, 'grindScore': record.grindScore,
+            'grindScoreTotal': record.grindScoreTotal, 'wetGroundsScore': record.wetGroundsScore,
+            'wetGroundsScoreTotal': record.wetGroundsScoreTotal,
+            'addWaterScore': record.addWaterScore,
+            'addWaterScoreTotal': record.addWaterScoreTotal,
+            'serveScore': record.serveScore, 'serveScoreTotal': record.serveScoreTotal,
+            'scoreTotal': record.scoreTotal, 'evalTotal': record.evalTotal, 'grade': record.grade,
+            'dateObtained': record.date}
+
 def encoder_tag(tag):
     # if isinstance(tag, tables.tags):
     return {'tagid': tag.tagid, 'inner_section': tag.inner_section, 'middle_section': tag.middle_section,
@@ -96,11 +149,3 @@ def encoder_confirmation(confirmation):
         return {'userid': confirmation.userid, 'email': confirmation.email,
                 'confirmation_code': confirmation.confirmation_code, 'confirmation': confirmation.confirmation}
     raise TypeError(f'Object{confirmation} is not of type users.')
-
-def tags_dict(row):
-    result = {}
-    result['tagid'] = row[0]
-    result['inner_section'] = row[1]
-    result['middle_section'] = row[2]
-    result['outer_section'] = row[3]
-    return  result
