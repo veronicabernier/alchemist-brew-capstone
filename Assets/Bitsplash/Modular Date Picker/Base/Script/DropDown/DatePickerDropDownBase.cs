@@ -96,7 +96,7 @@ namespace Bitsplash.DatePicker
         /// <summary>
         /// called when the date picker selection has changed
         /// </summary>
-        void SelectionChanged()
+        public void SelectionChanged()
         {
             var d = GetSelectedDate(); // get the selected date
             string t = NoSelectionPrompt;

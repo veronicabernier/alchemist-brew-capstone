@@ -92,7 +92,7 @@ def encoder_user(user):
     raise TypeError(f'Object{user} is not of type users.')
 
 def encoder_confirmation(confirmation):
-    if isinstance(confirmation, tables.temp_users):
+    if isinstance(confirmation, tables.confirmations):
         return {'userid': confirmation.userid, 'email': confirmation.email,
                 'confirmation_code': confirmation.confirmation_code, 'confirmation': confirmation.confirmation}
     raise TypeError(f'Object{confirmation} is not of type users.')

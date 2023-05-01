@@ -53,4 +53,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AddRecipe.unity
     guid: 27af18979aef5c14cac975b727d0c47e
+  - enabled: 1
+    path: Assets/Scenes/EditProfile.unity
+    guid: e83f7f9e1df66c14a87aad99fb5166c1
   m_configObjects: {}

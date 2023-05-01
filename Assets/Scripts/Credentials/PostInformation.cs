@@ -5,9 +5,10 @@ using UnityEngine.Networking;
 
 public class PostInformation : MonoBehaviour
 {
-    public static int userid = 1;
+    public static int userid = 15;
     public static string address = "http://127.0.0.1:5000/";
 
+    public static ProfileInfo ProfileInfo;
 
     public static IEnumerator PostRequest(string uri, WWWForm postData)
     {

@@ -48,10 +48,10 @@ namespace Bitsplash.DatePicker
         private bool allowEmptySelection = false;
 
         [SerializeField]
-        private DateTime startDate = new DateTime(1960,1,1);
+        public DateTime startDate = new DateTime(1960,1,1);
 
         [SerializeField]
-        private DateTime endDate = new DateTime(2030, 12, 31);
+        public DateTime endDate = new DateTime(2030, 12, 31);
 
         void ValidateYear()
         {

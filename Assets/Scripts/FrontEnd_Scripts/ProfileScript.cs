@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using TMPro;
-
+using System;
 
 public class ProfileScript : MonoBehaviour
 
@@ -13,11 +13,13 @@ public class ProfileScript : MonoBehaviour
     public TextMeshProUGUI genderText;
     public TextMeshProUGUI locationText;
     public TextMeshProUGUI usernameText;
+    public TextMeshProUGUI birthDate;
+
+    public static ProfileInfo profileInfo;
 
     void Start()
     {
         StartCoroutine(GetUserData());
-       
     }
 
 
@@ -34,30 +36,27 @@ public class ProfileScript : MonoBehaviour
         else
         {
             string json = request.downloadHandler.text;
-            UserData userData = JsonUtility.FromJson<UserData>(json);
+            ProfileInfo profileInfo = JsonUtility.FromJson<ProfileInfoReceiver>(json).ProfileInfo;
 
-            Debug.Log("Received data from server: " + json);
-            /*emailText.text = userData.email;
-            genderText.text = userData.gender;
-            locationText.text = userData.location;*/
-            usernameText.text = userData.Recepies[0].username;
-            emailText.text = userData.Recepies[0].email;
-            genderText.text = userData.Recepies[0].gender;
-            locationText.text = userData.Recepies[0].location;
+            usernameText.text = profileInfo.username;
+            emailText.text = profileInfo.email;
+            genderText.text = profileInfo.gender;
+            locationText.text = profileInfo.location;
+            birthDate.text = DateTime.Parse(profileInfo.birth_date).ToString("yyyy-MM-dd");
+
+            PostInformation.ProfileInfo = profileInfo;
         }
     }
 }
 
-
-
 [System.Serializable]
-public class UserData
+public class ProfileInfoReceiver
 {
-    public Recipe[] Recepies;
+    public ProfileInfo ProfileInfo;
 }
 
 [System.Serializable]
-public class Recipe
+public class ProfileInfo
 {
     public int userid;
     public string username;
@@ -67,9 +66,8 @@ public class Recipe
     public string birth_date;
     public string password;
     public bool private_profile;
+    public bool confirmation;
 }
-
-
 
 
 

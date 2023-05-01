@@ -162,13 +162,17 @@ def login():
 @app.route("/<userid>/profile", methods=["POST", "GET"])
 def get_user_profile(userid):
     result_list = []
+    confirmation = []
     if request.method == "GET":
         profile = Session.query(tables.users).filter_by(userid=userid).all()
+        verified = Session.query(tables.confirmations).filter_by(userid=userid).first()
 
         for i in profile:
             result = encoders.encoder_user(i)
             result_list.append(result)
-        return jsonify(Recepies=result_list), 200
+        result_list[0]['confirmation'] = encoders.encoder_confirmation(verified).get('confirmation')
+
+        return jsonify(ProfileInfo=result_list[0]), 200
 
 @app.route("/<userid>/profile/edit", methods=["PUT"])
 def edit_user_profile(userid):
@@ -200,7 +204,7 @@ def edit_user_profile(userid):
             location = result_list[0].get('location')
 
         Session.execute(update(tables.users).filter_by(userid=userid).values(
-            username=username, email=email, private_profile=private_profile, birth_date=birth_date,
+            username=username, email=email, private_profile=eval(private_profile), birth_date=birth_date,
             gender=gender, location=location))
 
         Session.commit()
