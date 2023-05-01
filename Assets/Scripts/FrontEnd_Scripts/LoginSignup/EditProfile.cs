@@ -21,12 +21,16 @@ public class EditProfile : MonoBehaviour
     public Bitsplash.DatePicker.DatePickerContent datepickerBirthDate;
     public Bitsplash.DatePicker.DatePickerDropDownBase datepickerDropdown;
 
+    public InputField inputFieldOTP;
+
     public Dropdown gender;
     //public GameObject popup;
     public NotificationManager popup;
     public NotificationManager popupSuccess;
+    public NotificationManager popupSuccessOTP;
     public string afterSceneName;
 
+    public GameObject isVerifiedText;
     public GameObject verifyButton;
     public GameObject verifyPanel;
 
@@ -69,6 +73,15 @@ public class EditProfile : MonoBehaviour
             username = inputFieldUsername.text;
             email = inputFieldEmail.text;
             location = inputFieldLocation.text;
+
+            if (profileInfo.confirmation)
+            {
+                isVerifiedText.SetActive(true);
+            }
+            else
+            {
+                verifyButton.SetActive(true);
+            }
         }
 
 
@@ -83,6 +96,64 @@ public class EditProfile : MonoBehaviour
         });
 
     }
+
+    public void OpenOTPConfirmation()
+    {
+        verifyPanel.SetActive(true);
+    }
+
+    public void CloseOTPConfirmation()
+    {
+        verifyPanel.SetActive(false);
+    }
+
+    public void OnSubmitOTP()
+    {
+        if (inputFieldOTP.text != "")
+        {
+            WWWForm form = new WWWForm();
+            form.AddField("confirmation_code", inputFieldOTP.text);
+
+            StartCoroutine(PostRequest(PostInformation.address + "/signup/" + PostInformation.userid + "/verify", form));
+        }
+        else
+        {
+            popup.description = "No code written.";
+            popup.UpdateUI();
+            popup.Open();
+        }
+
+        IEnumerator PostRequest(string uri, WWWForm postData)
+        {
+            using (UnityWebRequest webRequest = UnityWebRequest.Post(uri, postData))
+            {
+                webRequest.method = "POST";
+                yield return webRequest.SendWebRequest();
+                if (webRequest.result != UnityWebRequest.Result.Success || webRequest.result == UnityWebRequest.Result.ConnectionError)
+                {
+                    popup.description = webRequest.error;
+                    popup.UpdateUI();
+                    popup.Open();
+                }
+                else
+                {
+                    if(webRequest.downloadHandler.text.Contains("Wrong code"))
+                    {
+                        popup.description = "Wrong";
+                        popup.UpdateUI();
+                        popup.Open();
+                    }
+                    else
+                    {
+                        popupSuccessOTP.Open();
+                        yield return new WaitForSecondsRealtime(popupSuccess.timer);
+                        new SceneChanger().changeScene(afterSceneName);
+                    }
+                }
+            }
+        }
+    }
+
     public void GenderValueChangedHappened(Dropdown sender)
     {
         Debug.Log(" You have selected  " + gender.options[gender.value].text);
@@ -138,7 +209,7 @@ public class EditProfile : MonoBehaviour
             {
                 webRequest.method = "PUT";
                 yield return webRequest.SendWebRequest();
-                if (webRequest.result != UnityWebRequest.Result.Success)
+                if (webRequest.result != UnityWebRequest.Result.Success || webRequest.result == UnityWebRequest.Result.ConnectionError)
                 {
                     popup.description = webRequest.error;
                     popup.UpdateUI();
