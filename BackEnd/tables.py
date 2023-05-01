@@ -9,43 +9,46 @@ from flask import Flask, request
 from flask_cors import CORS
 from flask import jsonify
 import json
+import app
 
 Base = declarative_base()
 
-def get_engine(user, passwd, host, port, db):
-    url = f"postgresql://{user}:{passwd}@{host}:{port}/{db}"
-    if not database_exists(url):
-        create_database(url)
-    engine = create_engine(url, pool_size=50, echo=False)
-    return engine
+# def get_engine(user, passwd, host, port, db):
+#     url = f"postgresql://{user}:{passwd}@{host}:{port}/{db}"
+#     if not database_exists(url):
+#         create_database(url)
+#     engine = create_engine(url, pool_size=50, echo=False)
+#     return engine
+#
+# engine = get_engine(settings['User'],
+#           settings['Password'],
+#           settings['Host'],
+#           settings['Port'],
+#           settings['Database'])
+#
+#
+# def get_engine_from_settings():
+#     keys = ['User', 'Password', 'Host', 'Port', 'Database']
+#     if not all(key in keys for key in settings.keys()):
+#         raise Exception('Bad config file')
+#
+#     return get_engine(settings['User'],
+#           settings['Password'],
+#           settings['Host'],
+#           settings['Port'],
+#           settings['Database'])
+#
+# def get_session():
+#     engine = get_engine_from_settings()
+#     session = sessionmaker(bind=engine)()
+#     return session
+#
+# Session = get_session()
+#
+# engine = Session.get_bind()
+# # Base.metadata.create_all(engine)
+appEngine = app.engine
 
-engine = get_engine(settings['User'],
-          settings['Password'],
-          settings['Host'],
-          settings['Port'],
-          settings['Database'])
-
-
-def get_engine_from_settings():
-    keys = ['User', 'Password', 'Host', 'Port', 'Database']
-    if not all(key in keys for key in settings.keys()):
-        raise Exception('Bad config file')
-
-    return get_engine(settings['User'],
-          settings['Password'],
-          settings['Host'],
-          settings['Port'],
-          settings['Database'])
-
-def get_session():
-    engine = get_engine_from_settings()
-    session = sessionmaker(bind=engine)()
-    return session
-
-Session = get_session()
-
-engine = Session.get_bind()
-# Base.metadata.create_all(engine)
 
 
 class users(Base):
@@ -149,7 +152,7 @@ class brews(Base):
 
 class espresso_scores(Base):
     __tablename__ = "espresso_scores"
-    espreso_scoreid = Column("espreso_scoreid", Integer, autoincrement=True, primary_key=True)
+    espresso_scoreid = Column("espresso_scoreid", Integer, autoincrement=True, primary_key=True)
     userid = Column("userid", Integer)
     weightScore = Column("weightScore", Integer)
     weightScoreTotal = Column("weightScoreTotal", Integer)
@@ -168,7 +171,7 @@ class espresso_scores(Base):
     scoreTotal = Column("scoreTotal", Integer)
     evalTotal = Column("evalTotal", Integer)
     grade = Column("grade", Integer)
-    dateObtained = Column("date", DateTime)
+    dateObtained = Column("dateObtained", DateTime)
 
 
     def __init__(self, userid, weightScore, weightScoreTotal, reservoirScore, reservoirScoreTotal,
@@ -221,7 +224,7 @@ class drip_scores(Base):
     scoreTotal = Column("scoreTotal", Integer)
     evalTotal = Column("evalTotal", Integer)
     grade = Column("grade", Integer)
-    dateObtained = Column("date", DateTime)
+    dateObtained = Column("dateObtained", DateTime)
 
 
     def __init__(self, userid, weightScore, weightScoreTotal, reservoirScore, reservoirScoreTotal,
@@ -275,7 +278,7 @@ class mokapot_scores(Base):
     scoreTotal = Column("scoreTotal", Integer)
     evalTotal = Column("evalTotal", Integer)
     grade = Column("grade", Integer)
-    dateObtained = Column("date", DateTime)
+    dateObtained = Column("dateObtained", DateTime)
 
 
     def __init__(self, userid, weightScore, weightScoreTotal,grindScore, grindScoreTotal,
@@ -325,7 +328,7 @@ class chemex_scores(Base):
     scoreTotal = Column("scoreTotal", Integer)
     evalTotal = Column("evalTotal", Integer)
     grade = Column("grade", Integer)
-    dateObtained = Column("date", DateTime)
+    dateObtained = Column("dateObtained", DateTime)
 
 
     def __init__(self, userid, weightScore, weightScoreTotal,grindScore, grindScoreTotal,
@@ -394,4 +397,4 @@ class confirmations(Base):
     def __repr__(self):
         return f"({self.userid} {self.email} {self.confirmation_code} {self.confirmation} )"
 
-Base.metadata.create_all(engine)
+Base.metadata.create_all(appEngine)
