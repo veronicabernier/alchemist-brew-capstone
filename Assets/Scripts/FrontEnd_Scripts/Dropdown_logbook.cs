@@ -13,7 +13,7 @@ public class Dropdown_logbook : MonoBehaviour
     IEnumerator Start()
     {
         // Replace the URL with your Flask route URL
-        using (UnityWebRequest www = UnityWebRequest.Get("http://127.0.0.1:5000/basic_tags"))
+        using (UnityWebRequest www = UnityWebRequest.Get(PostInformation.address + "basic_tags"))
         {
             yield return www.SendWebRequest();
 

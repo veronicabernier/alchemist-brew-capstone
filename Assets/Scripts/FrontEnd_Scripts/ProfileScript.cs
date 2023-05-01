@@ -26,7 +26,7 @@ public class ProfileScript : MonoBehaviour
 
     IEnumerator GetUserData()
     {
-        UnityWebRequest request = UnityWebRequest.Get("http://127.0.0.1:5000/" + PostInformation.userid + "/profile");
+        UnityWebRequest request = UnityWebRequest.Get(PostInformation.address + PostInformation.userid + "/profile");
         yield return request.SendWebRequest();
 
         if (request.result != UnityWebRequest.Result.Success)

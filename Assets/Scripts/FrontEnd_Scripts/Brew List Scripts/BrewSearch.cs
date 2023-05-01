@@ -37,7 +37,7 @@ public class BrewSearch : MonoBehaviour
 
     IEnumerator GetBrews()
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get("http://127.0.0.1:5000/" + PostInformation.userid + "/search/" + tags.value))
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(PostInformation.address + PostInformation.userid + "/search/" + tags.value))
         {
             yield return webRequest.SendWebRequest();
 

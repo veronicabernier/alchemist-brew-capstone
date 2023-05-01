@@ -9,7 +9,7 @@ public class Show_Recipes : MonoBehaviour
     // Start is called before the first frame update
     IEnumerator Start()
     {
-        string url = "http://127.0.0.1:5000/" + PostInformation.userid + "/brew list";
+        string url = PostInformation.address + PostInformation.userid + "/brew list";
 
             UnityWebRequest ww = UnityWebRequest.Get(url);
         

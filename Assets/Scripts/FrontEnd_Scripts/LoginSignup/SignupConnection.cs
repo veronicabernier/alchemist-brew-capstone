@@ -107,7 +107,7 @@ public class SignupConnection : MonoBehaviour
             form.AddField("gender", gender.options[gender.value].text);
             form.AddField("location", location); // verificar si se puede coger location 
 
-            StartCoroutine(PostRequest("http://127.0.0.1:5000/signup", form));
+            StartCoroutine(PostRequest(PostInformation.address + "signup", form));
         }
         else
         {
