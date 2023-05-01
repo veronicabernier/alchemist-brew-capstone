@@ -8,12 +8,14 @@ public class ServeController : MonoBehaviour
 
     public GameObject progressBar;
     public GameObject timer;
+    public GameObject dripCoffee;
 
 
     public void ObjectPlaced()
     {
         timer.SetActive(false);
         progressBar.SetActive(true);
+        dripCoffee.SetActive(true);
     }
 
     public void ProgressDone()
