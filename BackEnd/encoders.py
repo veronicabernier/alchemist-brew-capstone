@@ -89,7 +89,7 @@ def encoder_espresso_score(record):
             'brewScoreTotal': record.brewScoreTotal, 'serveScore': record.serveScore,
             'serveScoreTotal': record.serveScoreTotal,
             'scoreTotal': record.scoreTotal, 'evalTotal': record.evalTotal, 'grade': record.grade,
-            'dateObtained': record.date}
+            'dateObtained': record.dateObtained}
 
 
 def encoder_drip_score(record):
@@ -104,7 +104,7 @@ def encoder_drip_score(record):
             'brewScore': record.brewScore, 'brewScoreTotal': record.brewScoreTotal,
             'serveScore': record.serveScore, 'serveScoreTotal': record.serveScoreTotal,
             'scoreTotal': record.scoreTotal, 'evalTotal': record.evalTotal, 'grade': record.grade,
-            'dateObtained': record.date}
+            'dateObtained': record.dateObtained}
 
 def encoder_mokapot_score(record):
     return {'mokapot_scoreid': record.mokapot_scoreid, 'userid': record.userid, 'weightScore': record.weightScore,
@@ -118,7 +118,7 @@ def encoder_mokapot_score(record):
             'stoveScore': record.stoveScore, 'stoveScoreTotal': record.stoveScoreTotal,
             'serveScore': record.serveScore, 'serveScoreTotal': record.serveScoreTotal,
             'scoreTotal': record.scoreTotal, 'evalTotal': record.evalTotal, 'grade': record.grade,
-            'dateObtained': record.date}
+            'dateObtained': record.dateObtained}
 
 def encoder_chemex_score(record):
     return {'chemex_scoreid': record.chemex_scoreid, 'userid': record.userid, 'weightScore': record.weightScore,
@@ -129,7 +129,7 @@ def encoder_chemex_score(record):
             'addWaterScoreTotal': record.addWaterScoreTotal,
             'serveScore': record.serveScore, 'serveScoreTotal': record.serveScoreTotal,
             'scoreTotal': record.scoreTotal, 'evalTotal': record.evalTotal, 'grade': record.grade,
-            'dateObtained': record.date}
+            'dateObtained': record.dateObtained}
 
 def encoder_tag(tag):
     # if isinstance(tag, tables.tags):
