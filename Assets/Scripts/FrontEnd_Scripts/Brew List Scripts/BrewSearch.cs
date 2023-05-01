@@ -19,7 +19,7 @@ public class BrewSearch : MonoBehaviour
     {
         tags.onValueChanged.AddListener(delegate { onTagchange(); });
 ;
-        StartCoroutine(GetBrews());
+        StartCoroutine(GetBrews(PostInformation.address + PostInformation.userid + "/search/" + tags.value));
     }
 
     public void onTagchange()
@@ -27,17 +27,17 @@ public class BrewSearch : MonoBehaviour
         if(tags.value == 0)
         {
             //return all
-            StartCoroutine(GetBrews());
+            StartCoroutine(GetBrews(PostInformation.address + PostInformation.userid + "/search/" + tags.value));
         }
         else
         {
-            StartCoroutine(GetBrews());
+            StartCoroutine(GetBrews(PostInformation.address + PostInformation.userid + "/search/" + tags.value));
         }
     }
 
-    IEnumerator GetBrews()
+    IEnumerator GetBrews(string url)
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(PostInformation.address + PostInformation.userid + "/search/" + tags.value))
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
         {
             yield return webRequest.SendWebRequest();
 
