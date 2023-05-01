@@ -1,52 +1,8 @@
-import datetime
-import bcrypt
-from sqlalchemy import create_engine, ForeignKey, Column, Text, Integer, Boolean, Date, Float, DateTime, String, \
-    DateTime, update, Null, null
-from sqlalchemy_utils import database_exists, create_database
-from sqlalchemy.orm import sessionmaker, declarative_base
-from BackEnd.config.dbconfig import pg_config as settings
-from flask import Flask, request
-from flask_cors import CORS
-from flask import jsonify
-import json
+from sqlalchemy import ForeignKey, Column, Integer, Boolean, Date, Float, String, DateTime
+from sqlalchemy.orm import declarative_base
 import app
 
 Base = declarative_base()
-
-# def get_engine(user, passwd, host, port, db):
-#     url = f"postgresql://{user}:{passwd}@{host}:{port}/{db}"
-#     if not database_exists(url):
-#         create_database(url)
-#     engine = create_engine(url, pool_size=50, echo=False)
-#     return engine
-#
-# engine = get_engine(settings['User'],
-#           settings['Password'],
-#           settings['Host'],
-#           settings['Port'],
-#           settings['Database'])
-#
-#
-# def get_engine_from_settings():
-#     keys = ['User', 'Password', 'Host', 'Port', 'Database']
-#     if not all(key in keys for key in settings.keys()):
-#         raise Exception('Bad config file')
-#
-#     return get_engine(settings['User'],
-#           settings['Password'],
-#           settings['Host'],
-#           settings['Port'],
-#           settings['Database'])
-#
-# def get_session():
-#     engine = get_engine_from_settings()
-#     session = sessionmaker(bind=engine)()
-#     return session
-#
-# Session = get_session()
-#
-# engine = Session.get_bind()
-# # Base.metadata.create_all(engine)
 appEngine = app.engine
 
 

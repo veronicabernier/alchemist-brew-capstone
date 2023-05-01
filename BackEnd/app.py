@@ -362,7 +362,7 @@ def new_brew(userid, recipeid):
 def get_brew_attempts(userid):
     result_list = []
     if request.method == "GET":
-        attempt = Session.query(tables.brews).filter_by(userid=userid).order_by(tables.brews.date.desc())
+        attempt = Session.query(tables.brews).filter_by(userid=userid, brew_visibility=True).order_by(tables.brews.date.desc())
 
         for i in attempt:
             result = encoders.encoder_brews(i)
@@ -373,7 +373,7 @@ def get_brew_attempts(userid):
 def get_brew_attempt(userid, brewid):
     result_list = []
     if request.method == "GET":
-        attempt = Session.query(tables.brews).filter_by(userid=userid, brewid=brewid).all()
+        attempt = Session.query(tables.brews).filter_by(userid=userid, brewid=brewid).order_by(tables.brews.date.desc()).all()
 
         for i in attempt:
             result = encoders.encoder_brews(i)
@@ -384,7 +384,17 @@ def get_brew_attempt(userid, brewid):
 def search_brews_by_tag(userid, tagid):
     result_list = []
     if request.method == "GET":
-        attempt = Session.query(tables.brews).filter_by(tagid=tagid).all()
+        attempt = Session.query(tables.brews).filter_by(tagid=tagid, brew_visibility=True).order_by(tables.brews.date.desc()).all()
+
+        for i in attempt:
+            result = encoders.encoder_brews(i)
+            result_list.append(result)
+        return jsonify(Attempts=result_list), 200
+@app.route("/<userid>/search_all_brews", methods=["POST", "GET"])
+def search_all_public_brews(userid):
+    result_list = []
+    if request.method == "GET":
+        attempt = Session.query(tables.brews).filter_by(brew_visibility=True).order_by(tables.brews.date.desc()).all()
 
         for i in attempt:
             result = encoders.encoder_brews(i)
@@ -397,11 +407,11 @@ def search_brews_by_flavor(userid):
     result_list = []
     if request.method == "GET":
         inner = Session.query(tables.brews).order_by(tables.brews.date.desc()).filter_by(inner_section=flavor).\
-            filter(tables.brews.userid != userid).all()
+            filter(tables.brews.userid != userid).filter(tables.brews.brew_visibility == True).all()
         middle = Session.query(tables.brews).order_by(tables.brews.date.desc()).filter_by(middle_section=flavor).\
-            filter(tables.brews.userid != userid).all()
+            filter(tables.brews.userid != userid).filter(tables.brews.brew_visibility == True).all()
         outer = Session.query(tables.brews).order_by(tables.brews.date.desc()).filter_by(outer_section=flavor).\
-            filter(tables.brews.userid != userid).all()
+            filter(tables.brews.userid != userid).filter(tables.brews.brew_visibility == True).all()
 
         for i in inner:
             result = encoders.encoder_brews(i)
