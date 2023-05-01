@@ -6,6 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="266002ff-1caa-40c7-b9ab-dfe7d493c776" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Brew_List.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Brew_List.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main_Screen.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main_Screen.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FrontEnd_Scripts/Brew List Scripts/BrewList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/FrontEnd_Scripts/Brew List Scripts/BrewList.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FrontEnd_Scripts/Recipe List/RecipeList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/FrontEnd_Scripts/Recipe List/RecipeList.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ViewResultsManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ViewResultsManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +119,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/dbconfig_cpython_310_pyc$dbconfig.coverage" NAME="dbconfig Coverage Results" MODIFIED="1681768034250" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackEnd/config" />
-    <SUITE FILE_PATH="coverage/dbconfig_cpython_310_pyc$app.coverage" NAME="app Coverage Results" MODIFIED="1682959162369" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackEnd" />
+    <SUITE FILE_PATH="coverage/dbconfig_cpython_310_pyc$app.coverage" NAME="app Coverage Results" MODIFIED="1682974018334" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackEnd" />
     <SUITE FILE_PATH="coverage/temp_capstone_practice$dbconfig.coverage" NAME="dbconfig Coverage Results" MODIFIED="1680023692842" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackEnd/config" />
     <SUITE FILE_PATH="coverage/temp_capstone_practice$app.coverage" NAME="app Coverage Results" MODIFIED="1680052866903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackEnd" />
     <SUITE FILE_PATH="coverage/temp_capstone_practice$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1680022014145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />

@@ -42,6 +42,8 @@ public class RecipeList : MonoBehaviour
             if (webRequest.result != UnityWebRequest.Result.Success)
             {
                 Debug.Log("Error retrieving recipe data: " + webRequest.error);
+                emptyText.GetComponent<TextMeshProUGUI>().text = webRequest.error;
+                emptyText.SetActive(true);
             }
             else
             {
@@ -70,10 +72,10 @@ public class RecipeList : MonoBehaviour
                    /* recipeItem.GetComponent<Button>().onClick.AddListener(() => recipeItem.GetComponent<RecipeItem>().OnClickRecipeItem());*/
                 }
 
-                float newHeight = recipeItemPrefab.GetComponent<RectTransform>().sizeDelta.y * recipes.Length;
+                GridLayoutGroup glg = contentTransform.GetComponent<GridLayoutGroup>();
+                float newHeight = (glg.cellSize.y + glg.padding.top + glg.padding.bottom + glg.spacing.y) * recipes.Length;
                 contentTransform.sizeDelta = new Vector2(contentTransform.sizeDelta.x, newHeight);
                 contentTransform.anchoredPosition = new Vector2(contentTransform.anchoredPosition.x, 0);
-
             }    
         }
     }
