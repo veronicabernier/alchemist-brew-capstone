@@ -66,6 +66,8 @@ public class EditProfile : MonoBehaviour
             Birthdate = profileInfo.birth_date;
             //datepickerBirthDate.startDate = DateTime.Parse(profileInfo.birth_date);
             datepickerBirthDate.endDate = DateTime.Parse(profileInfo.birth_date);
+            
+            datepickerDropdown.NoSelectionPrompt = DateTime.Parse(profileInfo.birth_date).ToString("yyyy-MM-dd");
             datepickerDropdown.SelectionChanged();
             //datepickerBirthDate.startDate = new DateTime(1960, 1, 1);
             //datepickerBirthDate.endDate = new DateTime(2030, 12, 31);
