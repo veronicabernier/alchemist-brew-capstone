@@ -27,7 +27,7 @@ public class EditProfile : MonoBehaviour
     //public GameObject popup;
     public NotificationManager popup;
     public NotificationManager popupSuccess;
-    public NotificationManager popupSuccessOTP;
+
     public string afterSceneName;
 
     public GameObject isVerifiedText;
@@ -145,10 +145,41 @@ public class EditProfile : MonoBehaviour
                     }
                     else
                     {
-                        popupSuccessOTP.Open();
+                        popupSuccess.title = "Verified Email!";
+                        popupSuccess.UpdateUI();
+                        popupSuccess.Open();
                         yield return new WaitForSecondsRealtime(popupSuccess.timer);
                         new SceneChanger().changeScene(afterSceneName);
                     }
+                }
+            }
+        }
+    }
+
+    public void OnResendOTP()
+    {
+        WWWForm form = new WWWForm();
+
+        StartCoroutine(PostRequest(PostInformation.address + "/signup/" + PostInformation.userid + "/verify/resend", form));
+
+
+        IEnumerator PostRequest(string uri, WWWForm postData)
+        {
+            using (UnityWebRequest webRequest = UnityWebRequest.Post(uri, postData))
+            {
+                webRequest.method = "POST";
+                yield return webRequest.SendWebRequest();
+                if (webRequest.result != UnityWebRequest.Result.Success || webRequest.result == UnityWebRequest.Result.ConnectionError)
+                {
+                    popup.description = webRequest.error;
+                    popup.UpdateUI();
+                    popup.Open();
+                }
+                else
+                {
+                    popupSuccess.title = "Resent Code.";
+                    popupSuccess.UpdateUI();
+                    popupSuccess.Open();  
                 }
             }
         }
@@ -217,6 +248,8 @@ public class EditProfile : MonoBehaviour
                 }
                 else
                 {
+                    popupSuccess.title = "Changes Saved!";
+                    popupSuccess.UpdateUI();
                     popupSuccess.Open();
                     yield return new WaitForSecondsRealtime(popupSuccess.timer);
                     new SceneChanger().changeScene(afterSceneName);
