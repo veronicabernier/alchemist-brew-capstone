@@ -19,7 +19,7 @@ public class BrewSearch : MonoBehaviour
     {
         tags.onValueChanged.AddListener(delegate { onTagchange(); });
 ;
-        StartCoroutine(GetBrews(PostInformation.address + PostInformation.userid + "/search/" + tags.value));
+        StartCoroutine(GetBrews(PostInformation.address + PostInformation.userid + "/search_all_brews"));
     }
 
     public void onTagchange()
@@ -27,7 +27,7 @@ public class BrewSearch : MonoBehaviour
         if(tags.value == 0)
         {
             //return all
-            StartCoroutine(GetBrews(PostInformation.address + PostInformation.userid + "/search/" + tags.value));
+            StartCoroutine(GetBrews(PostInformation.address + PostInformation.userid + "/search_all_brews"));
         }
         else
         {
