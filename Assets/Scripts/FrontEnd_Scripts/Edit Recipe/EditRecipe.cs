@@ -23,6 +23,7 @@ public class EditRecipe : MonoBehaviour
     public GameObject spinner;
     public NotificationManager popup;
     public NotificationManager popupSuccess;
+    public string afterSceneName;
 
     private RecipeData selectedRecipe = RecipeItem.SelectedRecipe;
 
@@ -45,12 +46,6 @@ public class EditRecipe : MonoBehaviour
             grindSettingInputField.text = selectedRecipe.grind_setting.ToString();
         }
 
-        brandInputField.onValueChanged.AddListener(onBrandInputChange);
-        roastInputField.onValueChanged.AddListener(onRoastchange);
-        BeantypeInputField.onValueChanged.AddListener(onBeantpChange);
-        brewMethodInputField.onValueChanged.AddListener(onbrewmethchange);
-        coffeeeWeightInputField.onValueChanged.AddListener(oncoffeeweightchange);
-        grindSettingInputField.onValueChanged.AddListener(onGrindchange);
 
     }
     public void onSubmit()
@@ -99,6 +94,8 @@ public class EditRecipe : MonoBehaviour
                     popupSuccess.description = "";
                     popupSuccess.UpdateUI();
                     popupSuccess.Open();
+                    yield return new WaitForSecondsRealtime(popupSuccess.timer);
+                    new SceneChanger().changeScene(afterSceneName);
                 }
             }
         }
@@ -107,57 +104,6 @@ public class EditRecipe : MonoBehaviour
 
     }
 
-
-    void onBrandInputChange(string newvalue)
-    {
-        brandInputField.text = newvalue;
-        Debug.Log("username input: " + brandInputField.text);
-    }
-
-    void onRoastchange(string newvalue)
-    {
-        roastInputField.text = newvalue;
-    }
-
-    void onBeantpChange(string newvalue)
-    {
-        BeantypeInputField.text = newvalue;
-    }
-
-    void onbrewmethchange(string newvalue)
-    {
-        brewMethodInputField.text = newvalue;
-    }
-    void oncoffeeweightchange(string newvalue)
-    {
-        RecipeData selectedRecipe = RecipeItem.SelectedRecipe;
-        coffeeeWeightInputField.text = newvalue;
-        
-        if (newvalue == "")
-        {
-            selectedRecipe.grind_setting = 0;
-        }
-        else
-        {
-            selectedRecipe.coffee_weight = int.Parse(coffeeeWeightInputField.text);
-        }
-    }
-
-    void onGrindchange(string newvalue)
-    {
-        RecipeData selectedRecipe = RecipeItem.SelectedRecipe;
-        grindSettingInputField.text = newvalue;
-
-        if(newvalue == "")
-        {
-            selectedRecipe.grind_setting = 0;
-        }
-        else
-        {
-            selectedRecipe.grind_setting = int.Parse(grindSettingInputField.text);
-        }
-
-    }
 
     private string validFields()
     {

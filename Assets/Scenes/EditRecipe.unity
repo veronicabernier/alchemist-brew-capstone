@@ -1474,6 +1474,7 @@ MonoBehaviour:
   spinner: {fileID: 1945728944}
   popup: {fileID: 88816422}
   popupSuccess: {fileID: 79388201}
+  afterSceneName: Recipe_List
 --- !u!1 &620087941
 GameObject:
   m_ObjectHideFlags: 0
