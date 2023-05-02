@@ -3540,6 +3540,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1378434004}
     m_Modifications:
+    - target: {fileID: 9094681133558283008, guid: 4e745c9f0afefe94ea675f1839721d99, type: 3}
+      propertyPath: m_ContentType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094681133558283008, guid: 4e745c9f0afefe94ea675f1839721d99, type: 3}
+      propertyPath: m_KeyboardType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094681133558283008, guid: 4e745c9f0afefe94ea675f1839721d99, type: 3}
+      propertyPath: m_CharacterValidation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 9094681133558283009, guid: 4e745c9f0afefe94ea675f1839721d99, type: 3}
       propertyPath: MainScroll
       value: 

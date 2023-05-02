@@ -261,7 +261,6 @@ def edit_recipe(userid, recipeid):
         for i in prebrew:
             result = encoders.encoder_recipes(i)
             result_list.append(result)
-            print(result.get('brew_method'))
         if(new_brew_method == None or len(new_brew_method) == 0):
             new_brew_method = result_list[0].get('brew_method')
         if (new_grind_setting == None or len(new_grind_setting) == 0):
@@ -346,8 +345,6 @@ def new_brew(userid, recipeid):
         inner_section = tag_list[0].get('inner_section')
         middle_section = tag_list[0].get('middle_section')
         outer_section = tag_list[0].get('outer_section')
-        print(inner_section, middle_section, outer_section)
-
         Session.add(
             tables.brews(recipeid=recipeid, brew_method=brew_method, grind_setting=grind_setting, brand=brand, roast=roast,
                         bean_type=bean_type, coffee_weight=coffee_weight, userid=userid, ext_time=ext_time,
@@ -734,7 +731,6 @@ def get_advanced_tags():
                                       "order by tagid"))
         for i in flavorWheel:
             result = encoders.encoder_tag(i)
-            print(result)
             result_list.append(result)
         return jsonify(Attempts=result_list), 200
 

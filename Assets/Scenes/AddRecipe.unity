@@ -226,6 +226,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1629757966}
     m_Modifications:
+    - target: {fileID: 9094681133558283008, guid: 4e745c9f0afefe94ea675f1839721d99, type: 3}
+      propertyPath: m_ContentType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094681133558283008, guid: 4e745c9f0afefe94ea675f1839721d99, type: 3}
+      propertyPath: m_KeyboardType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094681133558283008, guid: 4e745c9f0afefe94ea675f1839721d99, type: 3}
+      propertyPath: m_CharacterValidation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 9094681133704512040, guid: 4e745c9f0afefe94ea675f1839721d99, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -313,6 +325,14 @@ PrefabInstance:
     - target: {fileID: 9094681133704512041, guid: 4e745c9f0afefe94ea675f1839721d99, type: 3}
       propertyPath: m_Name
       value: Recipe Fields
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094681133780648955, guid: 4e745c9f0afefe94ea675f1839721d99, type: 3}
+      propertyPath: m_Text
+      value: (e.g. light, medium, etc.)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094681134777173109, guid: 4e745c9f0afefe94ea675f1839721d99, type: 3}
+      propertyPath: m_Text
+      value: (e.g. robusta, arabica, etc.)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e745c9f0afefe94ea675f1839721d99, type: 3}

@@ -76,7 +76,7 @@ public class BrewData
     public float coffee_weight;
     public string date;
     public int ext_time;
-    public int ext_weight;
+    public float ext_weight;
     public int grind_setting;
     public string inner_section;
     public string middle_section;

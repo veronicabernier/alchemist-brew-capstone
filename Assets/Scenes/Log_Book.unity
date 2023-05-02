@@ -2253,6 +2253,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -789.95
       objectReference: {fileID: 0}
+    - target: {fileID: 9094681133558283008, guid: 4e745c9f0afefe94ea675f1839721d99, type: 3}
+      propertyPath: m_ContentType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094681133558283008, guid: 4e745c9f0afefe94ea675f1839721d99, type: 3}
+      propertyPath: m_KeyboardType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094681133558283008, guid: 4e745c9f0afefe94ea675f1839721d99, type: 3}
+      propertyPath: m_CharacterValidation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 9094681133704512040, guid: 4e745c9f0afefe94ea675f1839721d99, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6446,13 +6458,13 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1661154641}
   m_TextComponent: {fileID: 2125398292}
   m_Placeholder: {fileID: 257860203}
-  m_ContentType: 2
+  m_ContentType: 3
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 4
+  m_KeyboardType: 2
   m_LineType: 0
   m_HideMobileInput: 0
-  m_CharacterValidation: 1
+  m_CharacterValidation: 2
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
