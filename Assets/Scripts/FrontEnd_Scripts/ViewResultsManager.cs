@@ -19,21 +19,25 @@ public class ViewResultsManager : MonoBehaviour
     public RectTransform espressoParent;
     public TextMeshProUGUI espressoHighScore;
     public GameObject emptyTextEspresso;
+    public GameObject spinnerEspresso;
 
     [Header("Drip")]
     public RectTransform dripParent;
     public TextMeshProUGUI dripHighScore;
     public GameObject emptyTextDrip;
+    public GameObject spinnerDrip;
 
     [Header("Mokapot")]
     public RectTransform mokapotParent;
     public TextMeshProUGUI mokapotHighScore;
     public GameObject emptyTextMokapot;
+    public GameObject spinnerMokapot;
 
     [Header("Chemex")]
     public RectTransform chemexParent;
     public TextMeshProUGUI chemexHighScore;
     public GameObject emptyTextChemex;
+    public GameObject spinnerChemex;
 
     private EspressoScoreData[] espressoScores;
     private DripScoreData[] dripScores;
@@ -60,7 +64,9 @@ public class ViewResultsManager : MonoBehaviour
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(PostInformation.address + PostInformation.userid + "/espresso_scores"))
         {
+            spinnerEspresso.SetActive(true);
             yield return webRequest.SendWebRequest();
+            spinnerEspresso.SetActive(false);
 
             if (webRequest.result != UnityWebRequest.Result.Success)
             {
@@ -131,7 +137,9 @@ public class ViewResultsManager : MonoBehaviour
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(PostInformation.address + PostInformation.userid + "/drip_scores"))
         {
+            spinnerDrip.SetActive(true);
             yield return webRequest.SendWebRequest();
+            spinnerDrip.SetActive(false);
 
             if (webRequest.result != UnityWebRequest.Result.Success)
             {
@@ -202,7 +210,9 @@ public class ViewResultsManager : MonoBehaviour
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(PostInformation.address + PostInformation.userid + "/mokapot_scores"))
         {
+            spinnerMokapot.SetActive(true);
             yield return webRequest.SendWebRequest();
+            spinnerMokapot.SetActive(false);
 
             if (webRequest.result != UnityWebRequest.Result.Success)
             {
@@ -273,7 +283,9 @@ public class ViewResultsManager : MonoBehaviour
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(PostInformation.address + PostInformation.userid + "/chemex_scores"))
         {
+            spinnerChemex.SetActive(true);
             yield return webRequest.SendWebRequest();
+            spinnerChemex.SetActive(false);
 
             if (webRequest.result != UnityWebRequest.Result.Success)
             {

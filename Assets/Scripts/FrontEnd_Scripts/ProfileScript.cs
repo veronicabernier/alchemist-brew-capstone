@@ -9,11 +9,16 @@ using System;
 public class ProfileScript : MonoBehaviour
 
 { 
+    [Header("TextFields")]
     public TextMeshProUGUI emailText;
     public TextMeshProUGUI genderText;
     public TextMeshProUGUI locationText;
     public TextMeshProUGUI usernameText;
     public TextMeshProUGUI birthDate;
+
+    [Header("Other")]
+    public GameObject emptyText;
+    public GameObject spinner;
 
     public static ProfileInfo profileInfo;
 
@@ -26,12 +31,18 @@ public class ProfileScript : MonoBehaviour
 
     IEnumerator GetUserData()
     {
+        
+
+        spinner.SetActive(true);
         UnityWebRequest request = UnityWebRequest.Get(PostInformation.address + PostInformation.userid + "/profile");
         yield return request.SendWebRequest();
+        spinner.SetActive(false);
 
         if (request.result != UnityWebRequest.Result.Success)
         {
             Debug.Log(request.error);
+            emptyText.GetComponent<TextMeshProUGUI>().text = request.error;
+            emptyText.SetActive(true);
         }
         else
         {

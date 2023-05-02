@@ -10,9 +10,11 @@ public class BrewSearch : MonoBehaviour
     public GameObject BrewItemPrefab;
     public RectTransform contentTransform;
     public GameObject emptyText;
-    private BrewData[] brews;
+    public GameObject spinner;
 
     public Dropdown tags;
+
+    private BrewData[] brews;
 
 
     void Start()
@@ -39,7 +41,9 @@ public class BrewSearch : MonoBehaviour
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
         {
+            spinner.SetActive(true);
             yield return webRequest.SendWebRequest();
+            spinner.SetActive(false);
 
             if (webRequest.result != UnityWebRequest.Result.Success)
             {

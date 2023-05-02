@@ -16,6 +16,7 @@ public class RecipeList : MonoBehaviour
     public RectTransform contentTransform;
     private RecipeData[] recipes;
     public GameObject emptyText;
+    public GameObject spinner;
 
     public static RecipeData SelectedRecipe;
 
@@ -37,7 +38,9 @@ public class RecipeList : MonoBehaviour
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(PostInformation.address + PostInformation.userid + "/recipe%20list"))
         {
+            spinner.SetActive(true);
             yield return webRequest.SendWebRequest();
+            spinner.SetActive(false);
 
             if (webRequest.result != UnityWebRequest.Result.Success)
             {

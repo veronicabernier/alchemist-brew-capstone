@@ -10,6 +10,7 @@ using Michsky.MUIP;
 
 public class AddRecipe : MonoBehaviour
 {
+    [Header("Input Fields")]
     public InputField brandInputField;
     public InputField roastInputField;
     public InputField BeantypeInputField;
@@ -17,6 +18,9 @@ public class AddRecipe : MonoBehaviour
     public InputField coffeeeWeightInputField;
     public InputField grindSettingInputField;
 
+    [Header("Other")]
+    public ButtonManager submitButton;
+    public GameObject spinner;
     public NotificationManager popup;
     public NotificationManager popupSuccess;
     public string afterSceneName;
@@ -69,7 +73,13 @@ public class AddRecipe : MonoBehaviour
 
             {
                 webRequest.method = "POST";
+
+                submitButton.isInteractable = false;
+                spinner.SetActive(true);
                 yield return webRequest.SendWebRequest();
+                submitButton.isInteractable = true;
+                spinner.SetActive(false);
+
                 if (webRequest.result == UnityWebRequest.Result.ConnectionError)
                 {
                     popup.description = webRequest.error;

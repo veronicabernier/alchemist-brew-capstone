@@ -10,6 +10,7 @@ using Michsky.MUIP;
 
 public class EditRecipe : MonoBehaviour
 {
+    [Header("Input Fields")]
     public InputField brandInputField;
     public InputField roastInputField;
     public InputField BeantypeInputField;
@@ -17,6 +18,9 @@ public class EditRecipe : MonoBehaviour
     public InputField coffeeeWeightInputField;
     public InputField grindSettingInputField;
 
+    [Header("Other")]
+    public ButtonManager submitButton;
+    public GameObject spinner;
     public NotificationManager popup;
     public NotificationManager popupSuccess;
 
@@ -77,7 +81,13 @@ public class EditRecipe : MonoBehaviour
             using (UnityWebRequest webRequest = UnityWebRequest.Post(PostInformation.address + PostInformation.userid + "/" + selectedRecipe.recipeid + " /edit", form))
             {
                 webRequest.method = "PUT";
+
+                submitButton.isInteractable = false;
+                spinner.SetActive(true);
                 yield return webRequest.SendWebRequest();
+                submitButton.isInteractable = true;
+                spinner.SetActive(false);
+
                 if (webRequest.result == UnityWebRequest.Result.ConnectionError)
                 {
                     popup.description = webRequest.error;
@@ -122,16 +132,31 @@ public class EditRecipe : MonoBehaviour
     {
         RecipeData selectedRecipe = RecipeItem.SelectedRecipe;
         coffeeeWeightInputField.text = newvalue;
-        selectedRecipe.coffee_weight = int.Parse(coffeeeWeightInputField.text);
-        Debug.Log("coffee weight input: " + selectedRecipe.coffee_weight);
+        
+        if (newvalue == "")
+        {
+            selectedRecipe.grind_setting = 0;
+        }
+        else
+        {
+            selectedRecipe.coffee_weight = int.Parse(coffeeeWeightInputField.text);
+        }
     }
 
     void onGrindchange(string newvalue)
     {
         RecipeData selectedRecipe = RecipeItem.SelectedRecipe;
         grindSettingInputField.text = newvalue;
-        selectedRecipe.grind_setting = int.Parse(grindSettingInputField.text);
-        Debug.Log("coffee grind input: " + selectedRecipe.grind_setting);
+
+        if(newvalue == "")
+        {
+            selectedRecipe.grind_setting = 0;
+        }
+        else
+        {
+            selectedRecipe.grind_setting = int.Parse(grindSettingInputField.text);
+        }
+
     }
 
     private string validFields()

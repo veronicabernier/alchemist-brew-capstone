@@ -12,6 +12,7 @@ using System;
 
 public class EditProfile : MonoBehaviour
 {
+    [Header("Input Fields")]
     public InputField inputFieldUsername;
     public InputField inputFieldEmail;
     public InputField inputFieldLocation;
@@ -25,7 +26,12 @@ public class EditProfile : MonoBehaviour
     public InputField inputFieldOTP;
 
     public Dropdown gender;
-    //public GameObject popup;
+
+    [Header("Other")]
+    public ButtonManager submitButton;
+    public ButtonManager saveButton;
+    public ButtonManager resendButton;
+    public GameObject spinner;
     public NotificationManager popup;
     public NotificationManager popupSuccess;
 
@@ -127,7 +133,15 @@ public class EditProfile : MonoBehaviour
             using (UnityWebRequest webRequest = UnityWebRequest.Post(uri, postData))
             {
                 webRequest.method = "POST";
+
+                submitButton.isInteractable = false;
+                resendButton.isInteractable = false;
+                spinner.SetActive(true);
                 yield return webRequest.SendWebRequest();
+                submitButton.isInteractable = true;
+                resendButton.isInteractable = true;
+                spinner.SetActive(false);
+
                 if (webRequest.result != UnityWebRequest.Result.Success || webRequest.result == UnityWebRequest.Result.ConnectionError)
                 {
                     popup.description = webRequest.error;
@@ -167,7 +181,15 @@ public class EditProfile : MonoBehaviour
             using (UnityWebRequest webRequest = UnityWebRequest.Post(uri, postData))
             {
                 webRequest.method = "POST";
+
+                submitButton.isInteractable = false;
+                resendButton.isInteractable = false;
+                spinner.SetActive(true);
                 yield return webRequest.SendWebRequest();
+                submitButton.isInteractable = true;
+                resendButton.isInteractable = true;
+                spinner.SetActive(false);
+
                 if (webRequest.result != UnityWebRequest.Result.Success || webRequest.result == UnityWebRequest.Result.ConnectionError)
                 {
                     popup.description = webRequest.error;
@@ -238,7 +260,13 @@ public class EditProfile : MonoBehaviour
             using (UnityWebRequest webRequest = UnityWebRequest.Post(uri, postData))
             {
                 webRequest.method = "PUT";
+
+                saveButton.isInteractable = false;
+                spinner.SetActive(true);
                 yield return webRequest.SendWebRequest();
+                saveButton.isInteractable = true;
+                spinner.SetActive(false);
+
                 if (webRequest.result != UnityWebRequest.Result.Success || webRequest.result == UnityWebRequest.Result.ConnectionError)
                 {
                     popup.description = webRequest.error;

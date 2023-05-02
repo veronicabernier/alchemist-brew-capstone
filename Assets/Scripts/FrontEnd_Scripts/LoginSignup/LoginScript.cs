@@ -8,10 +8,14 @@ using Michsky.MUIP;
 
 public class LoginScript : MonoBehaviour
 {
+    [Header("Input Fields")]
     public InputField inputFieldEmail;
     public InputField inputFieldPassword;
     public string afterLoginSceneName;
 
+    [Header("Other")]
+    public ButtonManager submitButton;
+    public GameObject spinner;
     public NotificationManager popup;
     public NotificationManager popupSuccess;
     public GameObject showPasswordButton;
@@ -59,7 +63,12 @@ public class LoginScript : MonoBehaviour
         {
             using (UnityWebRequest webRequest = UnityWebRequest.Post(PostInformation.address + "login", form))
             {
+                submitButton.isInteractable = false;
+                spinner.SetActive(true);
                 yield return webRequest.SendWebRequest();
+                submitButton.isInteractable = true;
+                spinner.SetActive(false);
+
                 if (webRequest.result == UnityWebRequest.Result.ConnectionError)
                 {
                     popup.description = webRequest.error;

@@ -12,6 +12,7 @@ using System;
 
 public class SignupConnection : MonoBehaviour
 { 
+    [Header("Input Fields")]
     public InputField inputFieldUsername;
     public InputField inputFieldPassword;
     public InputField inputFieldEmail;
@@ -22,7 +23,10 @@ public class SignupConnection : MonoBehaviour
     public Bitsplash.DatePicker.DatePickerDropDownBase datepickerDropdown;
 
     public Dropdown gender;
-    //public GameObject popup;
+
+    [Header("Other")]
+    public ButtonManager submitButton;
+    public GameObject spinner;
     public NotificationManager popup;
     public NotificationManager popupSuccess;
     public string afterLoginSceneName;
@@ -120,7 +124,12 @@ public class SignupConnection : MonoBehaviour
         {
             using (UnityWebRequest webRequest = UnityWebRequest.Post(uri, postData))
             {
+                submitButton.isInteractable = false;
+                spinner.SetActive(true);
                 yield return webRequest.SendWebRequest();
+                submitButton.isInteractable = true;
+                spinner.SetActive(false);
+
                 if (webRequest.result == UnityWebRequest.Result.ConnectionError)
                 {
                     popup.description = webRequest.error;

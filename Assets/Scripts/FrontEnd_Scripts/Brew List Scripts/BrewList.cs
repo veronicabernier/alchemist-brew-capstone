@@ -10,11 +10,10 @@ public class BrewList : MonoBehaviour
     public GameObject BrewItemPrefab;
     public RectTransform contentTransform;
     public GameObject emptyText;
+    public GameObject spinner;
+
     private BrewData[] brews;
 
-    private List<string> brands = new List<string>() { "All" };
-    private List<string> roast = new List<string>() { "All" };
-    private List<string> tag = new List<string>() { "All" };
 
     void Start()
     {
@@ -25,7 +24,9 @@ public class BrewList : MonoBehaviour
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(PostInformation.address + PostInformation.userid + "/brew%20list"))
         {
+            spinner.SetActive(true);
             yield return webRequest.SendWebRequest();
+            spinner.SetActive(false);
 
             if (webRequest.result != UnityWebRequest.Result.Success)
             {
