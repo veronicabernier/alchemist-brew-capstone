@@ -20,6 +20,7 @@ public class EditProfile : MonoBehaviour
 
     public Bitsplash.DatePicker.DatePickerContent datepickerBirthDate;
     public Bitsplash.DatePicker.DatePickerDropDownBase datepickerDropdown;
+    public Bitsplash.DatePicker.DatePickerSettings datepickerSettings;
 
     public InputField inputFieldOTP;
 
@@ -64,13 +65,9 @@ public class EditProfile : MonoBehaviour
             }
 
             Birthdate = profileInfo.birth_date;
-            //datepickerBirthDate.startDate = DateTime.Parse(profileInfo.birth_date);
-            datepickerBirthDate.endDate = DateTime.Parse(profileInfo.birth_date);
-            
-            datepickerDropdown.NoSelectionPrompt = DateTime.Parse(profileInfo.birth_date).ToString("yyyy-MM-dd");
+
+            datepickerBirthDate.Selection.SelectOne(DateTime.Parse(profileInfo.birth_date));
             datepickerDropdown.SelectionChanged();
-            //datepickerBirthDate.startDate = new DateTime(1960, 1, 1);
-            //datepickerBirthDate.endDate = new DateTime(2030, 12, 31);
 
             username = inputFieldUsername.text;
             email = inputFieldEmail.text;
