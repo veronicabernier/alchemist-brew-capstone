@@ -47,3 +47,5 @@ crashlytics-build.properties
 
 #DB credentials
 dbconfig.py
+#server key
+alchemist_brew_key.pem
