@@ -324,19 +324,6 @@ class tags(Base):
     def __repr__(self):
         return f"({self.inner_section} {self.middle_section} {self.outer_section})"
 
-class tagsbackup(Base):
-    __tablename__ = "tagsbackup"
-    tagid = Column("tagid", Integer, autoincrement=True, primary_key=True)
-    inner_section = Column("inner_section", String)
-    middle_section = Column("middle_section", String)
-    outer_section = Column("outer_section", String)
-    def __init__(self, inner_section, middle_section, outer_section):
-        self.inner_section = inner_section
-        self.middle_section = middle_section
-        self.outer_section = outer_section
-    def __repr__(self):
-        return f"({self.inner_section} {self.middle_section} {self.outer_section})"
-
 class confirmations(Base):
     __tablename__ = "confirmations"
     userid = Column("userid", Integer, primary_key=True)

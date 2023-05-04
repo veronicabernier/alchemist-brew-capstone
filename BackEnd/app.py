@@ -11,6 +11,7 @@ from BackEnd.config.dbconfig import pg_config as settings
 from flask import Flask, request
 from flask_cors import CORS
 from flask import jsonify
+import psycopg2
 
 import tables
 import encoders
@@ -81,25 +82,25 @@ def register():
                 passencode = password.encode(encoding='UTF-8', errors='strict')
                 hashpass = bcrypt.hashpw(passencode, salt)
                 storedpass = hashpass.decode(encoding='UTF-8', errors='strict')
-                server = smtplib.SMTP('smtp.gmail.com', 587)
-                server.starttls()
-                password = 'j x s y g g q w m f g n b f v h'
-                server.login('alchemy.coffee.brew@gmail.com', password)
-                OTP = ''.join([str(random.randint(0, 9)) for i in range(4)])
-                OTPencode = OTP.encode(encoding='UTF-8', errors='strict')
-                hashOTP = bcrypt.hashpw(OTPencode, salt)
-                storedOTP = hashOTP.decode(encoding='UTF-8', errors='strict')
-                msg = 'Hello, Your OTP is ' + str(OTP)
-                sender = 'alchemy.coffee.brew@gmail.com'  # write email id of sender
-                server.sendmail(sender, email, msg)
+                # server = smtplib.SMTP('smtp.gmail.com', 587)
+                # server.starttls()
+                # password = 'j x s y g g q w m f g n b f v h'
+                # server.login('alchemy.coffee.brew@gmail.com', password)
+                # OTP = ''.join([str(random.randint(0, 9)) for i in range(4)])
+                # OTPencode = OTP.encode(encoding='UTF-8', errors='strict')
+                # hashOTP = bcrypt.hashpw(OTPencode, salt)
+                # storedOTP = hashOTP.decode(encoding='UTF-8', errors='strict')
+                # msg = 'Hello, Your OTP is ' + str(OTP)
+                # sender = 'alchemy.coffee.brew@gmail.com'  # write email id of sender
+                # server.sendmail(sender, email, msg)
                 Session.add(tables.users(username=username, email=email, password=storedpass,
                                               private_profile=True, birth_date=birth_date, gender=gender,
                                               location=location))
                 Session.commit()
                 userid=Session.query(tables.users.userid).filter_by(email=email).first()
-                Session.add(tables.confirmations(userid=userid[0], email=email, confirmation_code=storedOTP, confirmation=False))
-                server.quit()
-                Session.commit()
+                # Session.add(tables.confirmations(userid=userid[0], email=email, confirmation_code=storedOTP, confirmation=False))
+                # server.quit()
+                # Session.commit()
                 Session.flush()
                 return jsonify(Error="No error.", userId=userid[0]), 201
             else:
