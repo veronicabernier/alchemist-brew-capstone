@@ -48,12 +48,13 @@ public class ProfileScript : MonoBehaviour
         {
             string json = request.downloadHandler.text;
             ProfileInfo profileInfo = JsonUtility.FromJson<ProfileInfoReceiver>(json).ProfileInfo;
-
+            TimeSpan ts = new TimeSpan(10, 30, 0);
+            profileInfo.birth_date = (DateTime.Parse(profileInfo.birth_date) + ts).ToString("yyyy-MM-dd");
             usernameText.text = profileInfo.username;
             emailText.text = profileInfo.email;
             genderText.text = profileInfo.gender;
             locationText.text = profileInfo.location;
-            birthDate.text = DateTime.Parse(profileInfo.birth_date).ToString("yyyy-MM-dd");
+            birthDate.text = profileInfo.birth_date;
 
             PostInformation.ProfileInfo = profileInfo;
         }

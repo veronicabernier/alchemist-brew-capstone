@@ -48,7 +48,7 @@ public class ChooseWaterController : MonoBehaviour
         coldButton.SetActive(false);
 
         Color oldColor = chamber.GetComponent<SpriteRenderer>().color;
-        chamber.GetComponent<SpriteRenderer>().color = new Color(oldColor.r, oldColor.g, oldColor.b, 0.5f);
+        chamber.GetComponent<SpriteRenderer>().color = new Color(oldColor.r, oldColor.g, oldColor.b, 0.8f);
         chamber.GetComponent<AddLiquid>().enabled = true;
     }
 
