@@ -7,7 +7,7 @@ using TMPro;
 
     public class BrewSearchItem : MonoBehaviour
 {
-    public TextMeshProUGUI userIdText;
+    //public TextMeshProUGUI userIdText;
     public TextMeshProUGUI tagText;
     public TextMeshProUGUI beanTypeText;
     public TextMeshProUGUI brandText;
@@ -35,7 +35,7 @@ using TMPro;
         notesText.text = "Notes: " + brew.notes;
         roastText.text = "Roast: " + brew.roast;
 
-        userIdText.text = "User id: " + brew.userid;
-        tagText.text = "Tag: " + brew.tagid;
+        //userIdText.text = "User id: " + brew.userid;
+        tagText.text = "Tag Id: " + brew.tagid;
     }
 }

@@ -100,7 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cabbc0587cd37541958c4b1270bc916, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  userIdText: {fileID: 581130688744531829}
   tagText: {fileID: 2717204425718929657}
   beanTypeText: {fileID: 7104609462482218046}
   brandText: {fileID: 6106869406536031536}
@@ -129,7 +128,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2443047765078119930
 RectTransform:
   m_ObjectHideFlags: 0

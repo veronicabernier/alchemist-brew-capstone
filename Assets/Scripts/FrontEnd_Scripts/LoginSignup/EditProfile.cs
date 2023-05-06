@@ -246,7 +246,7 @@ public class EditProfile : MonoBehaviour
             form.AddField("gender", gender.options[gender.value].text);
             form.AddField("location", location); // verificar si se puede coger location 
 
-            StartCoroutine(PostRequest("http://127.0.0.1:5000/" + PostInformation.userid + "/profile/edit", form));
+            StartCoroutine(PostRequest(PostInformation.address + PostInformation.userid + "/profile/edit", form));
         }
         else
         {
