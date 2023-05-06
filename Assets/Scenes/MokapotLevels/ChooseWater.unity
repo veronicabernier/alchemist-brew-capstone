@@ -284,16 +284,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1557216491}
     - target: {fileID: 1478886683478463664, guid: 124f93fa76c2c9842b5d51afa0c96ee2, type: 3}
-      propertyPath: m_Color.a
-      value: 0.7372549
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478886683478463664, guid: 124f93fa76c2c9842b5d51afa0c96ee2, type: 3}
       propertyPath: m_ShapeTexture
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478886683478463664, guid: 124f93fa76c2c9842b5d51afa0c96ee2, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1478886683478463664, guid: 124f93fa76c2c9842b5d51afa0c96ee2, type: 3}
       propertyPath: m_DynamicOccludee
