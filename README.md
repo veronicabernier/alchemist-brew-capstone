@@ -4,18 +4,18 @@ but redefined to fit the coffee and barista theme.
 The app also contains a recipe section where you can add a recipe filling certain parameters.
 And a brew list section where the user can see their previous attemps and learn from their previous attempts.
 
-**Members:
+**Members**:
           -Fernando Agosto Quinones
           -Veronica Bernier Ortiz
           -Raynell Gonzalez Garcia
           
-**Unity version:
+**Unity version**:
           -Unity 2020.3.11f1
           
-**Python Version:
+**Python Version**:
           -Python 3.10
           
-**Pyton packeges:
+**Pyton packeges**:
           -bcrypt==4.0.1
           -click==8.1.3
           -colorama==0.4.6
