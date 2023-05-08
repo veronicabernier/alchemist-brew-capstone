@@ -15,7 +15,7 @@ And a brew list section where the user can see their previous attemps and learn 
 **Python Version**:  
           Python 3.10  
   
-**Pyton packeges**:  
+**Python packeges**:  
           bcrypt==4.0.1  
           click==8.1.3  
           colorama==0.4.6  
